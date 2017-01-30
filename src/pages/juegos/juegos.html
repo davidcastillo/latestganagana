@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Juegos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let game of games" (click)="gamesTapped($event, game)">
+      {{game.title}}
+    </button>
+  </ion-list>
+  <div *ngIf="selectedGame" padding>
+    You navigated here from <b>{{selectedGame.title}}</b>
+  </div>
+</ion-content>
