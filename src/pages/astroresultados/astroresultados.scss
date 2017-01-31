@@ -1,0 +1,29 @@
+page-astroresultados{
+  p {
+    margin: 20px 0;
+    line-height: 22px;
+    font-size: 16px;
+  }
+}
+
+page-astroresultados{
+  .numero {
+    margin: 0;
+    line-height: 100px;
+    box-sizing: content-box;
+    font-size: 5.5rem;
+    color:black;
+    opacity: 1;
+    max-width: 200px;
+    text-align: center;
+ }
+}
+.container {
+    height: 2000px; }
+.numerologia {
+    height: 200px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

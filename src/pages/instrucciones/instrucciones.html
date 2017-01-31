@@ -1,18 +1,16 @@
-<!--
-  Generated template for the Instrucciones page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>instrucciones</ion-title>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Instrucciones Armar parejas</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+<p>1- Al principio de la partida, todas las cartas tendrán que estar boca abajo.</p>
+<p>2- El jugador voltea 2 cartas, en caso de ser diferentes el juego las vuelve a esconder.</p>
+<p>3- Ahora el jugador debe voltear otras 2 cartas, sí son iguales, el jugador ha hecho una pareja.</p>
+<p>4- El jugador gana la opción de volver a jugar volteando otras 2 cartas.</p>
+<p>4- El jugador gana cuando haya encontrado todas las parejas.</p>
 </ion-content>

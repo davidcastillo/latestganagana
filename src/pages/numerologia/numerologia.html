@@ -3,16 +3,31 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Numerologia</ion-title>
+    <ion-title>Gana Gana App</ion-title>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div>
+    <ion-row class=numerologia>
+        <ion-col width-50>
+            PONGA SU INDICE SOBRE EL RECUADRO PARA CALCULAR SU NUMERO DE LA SUERTE
+        </ion-col>
+        <ion-col width-50>
+          <img src="assets/images/fingerprint1.png"  (click)='activateButtons();'  /> 
+        </ion-col>
+    </ion-row>
+  </div>
+  <div>
+        <button ion-button block type="button" disabled="{{isPushed}}"
+          [navPush]="numresultsPage">Para el Chance
+        </button>
+        <button ion-button block type="button" disabled="{{isPushed}}" 
+          [navPush]="numresultsPage">Para la Loteria
+        </button>
+        <button ion-button block type="button" disabled="{{isPushed}}" 
+          [navPush]="numresultsPage">Para el numero de la suerte
+        </button>
+  </div>
 </ion-content>

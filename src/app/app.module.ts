@@ -9,6 +9,9 @@ import { NumerologiaPage } from '../pages/numerologia/numerologia';
 import { AstrologiaPage } from '../pages/astrologia/astrologia';
 import { ResultadosPage } from '../pages/resultados/resultados';
 import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
+import { InstruccionesPage } from '../pages/instrucciones/instrucciones';
+import { NumresultadosPage } from '../pages/numresultados/numresultados';
+import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
     AstrologiaPage,
     ResultadosPage,
     SimuladorgirosPage,
+    InstruccionesPage,
+    NumresultadosPage,
+    AstroresultadosPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,7 +41,10 @@ import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
     NumerologiaPage,
     AstrologiaPage,
     ResultadosPage,
-    SimuladorgirosPage,    
+    SimuladorgirosPage, 
+    InstruccionesPage,
+    NumresultadosPage,
+    AstroresultadosPage,
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

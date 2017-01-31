@@ -1,3 +1,24 @@
-page-simuladorgiros {
+simuladorgiros-page {
 
+  .title {
+    text-align: center;
+ }
+}
+
+simuladorgiros-page {
+
+  .citycontent {
+  right: 0px; 
+  }
+
+  .numero {
+    margin: 0;
+    line-height: 100px;
+    box-sizing: content-box;
+    font-size: 5.5rem;
+    color:black;
+    opacity: 1;
+    max-width: 200px;
+    text-align: center;
+ }
 }
