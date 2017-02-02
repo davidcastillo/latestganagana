@@ -15,9 +15,9 @@
 
 
 <div class='selector'>
-  <select type="number" [(ngModel)]="selectedOption" (ngModelChange)="toCost()">
-      <option *ngFor="let option of options" [ngValue]="option.cost">{{option.range}}</option>
-  </select>
+  <ion-select type="number" [(ngModel)]="selectedOption" >
+      <ion-option *ngFor="let option of options" [value]="option.cost">{{option.range}}</ion-option>
+  </ion-select>
 </div>
 
 

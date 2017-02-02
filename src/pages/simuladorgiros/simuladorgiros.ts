@@ -24,8 +24,5 @@ export class SimuladorgirosPage {
       {cost: '$13.000', range: "Desde $450.001 a $500.000"},
       {cost: '2.7%', range: "Desde $500.001 en adelante"},
   ];
-
-  toCost(){
-    this.selectedOption = this.selectedOption;
-  }
+  
 }
