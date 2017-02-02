@@ -1,0 +1,26 @@
+<ion-header>
+<ion-title class='headerlogin'>Gana Gana App</ion-title>
+</ion-header>
+
+
+
+<ion-content padding> 
+    <ion-card>
+        <img src="assets/images/logo2.png"/>
+    </ion-card>
+        <p>Bienvenido a la app de Gana Gana, ingresa o registrate para empezar a disfrutar todos nuestros beneficios para ti</p> 
+
+  <form>
+    <ion-item>
+      <ion-input type="email" name="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
+    </ion-item>
+ 
+    <ion-item>
+      <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
+    </ion-item>
+ 
+
+      <button ion-button block (click)="login(l)">Ingresar</button>
+      <button ion-button block (click)="registerUser()">Crear una cuenta</button>
+  </form>
+</ion-content>

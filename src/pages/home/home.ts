@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { FirebaseService } from '../../app/services/firebase.service';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Home page.
@@ -9,14 +11,15 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [FirebaseService],
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+  ngOnInit(){
+    this._firebaseService.loginvalidation();
   }
-
+  
 }
