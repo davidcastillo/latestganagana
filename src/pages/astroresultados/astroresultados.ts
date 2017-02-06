@@ -12,11 +12,9 @@ export class AstroresultadosPage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ngOnInit(){
-    console.log('se esta ejecutando el metodo');
-    this.generatePIN();    
+    this.generatePIN(4);    
   }
-  generatePIN(){
-        console.log('se esta ejecutando el metodo');
-        this.numrandom = Math.floor(Math.random() * 9999) + 1000;
+  generatePIN(length){
+        this.numrandom = Math.floor(Math.pow(10, length-1) + Math.random() * 9 * Math.pow(10, length-1));
   }
 }

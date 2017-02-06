@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseService } from '../../app/services/firebase.service';
 import { LoginPage } from '../login/login';
+import { ViewChild } from '@angular/core';
 
 /*
   Generated class for the Home page.
@@ -21,5 +22,10 @@ export class HomePage implements OnInit{
   ngOnInit(){
     this._firebaseService.loginvalidation();
   }
-  
+
+  startAutoplay(){
+
+  }
+
+
 }

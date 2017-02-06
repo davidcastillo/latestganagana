@@ -14,14 +14,15 @@
 <h4 class='title'>Ingrese el valor a enviar</h4> 
 
 
-<div class='selector'>
-  <ion-select type="number" [(ngModel)]="selectedOption" >
-      <ion-option *ngFor="let option of options" [value]="option.cost">{{option.range}}</ion-option>
-  </ion-select>
-</div>
+<ion-item class='selector'>
+  <ion-label>Seleccione el monto</ion-label>
+    <ion-select type="number" [(ngModel)]="selectedOption" >
+        <ion-option *ngFor="let option of options" [value]="option.cost">{{option.range}}</ion-option>
+    </ion-select>
+</ion-item>
 
 
-<div>
+<ion-item>
     <ion-card>
         <ion-row>
             <ion-col width-100>
@@ -31,4 +32,4 @@
             </ion-col>
         </ion-row>
     </ion-card>
-</div>
+</ion-item>

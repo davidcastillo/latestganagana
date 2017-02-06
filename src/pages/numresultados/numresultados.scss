@@ -16,6 +16,8 @@ page-numresultados {
     opacity: 1;
     max-width: 200px;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
  }
 }
 .container {
