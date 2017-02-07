@@ -12,5 +12,9 @@ export class AstrologiaPage {
   astroresultadosPage = AstroresultadosPage
 
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
+
+
 }

@@ -47,7 +47,7 @@ export class LoginPage {
         method: AuthMethods.Password,
     }).then((authData) => {
         this.localStorage()
-       //  this.FirebaseService.isAlreadyloggedin
+       //this.FirebaseService.isAlreadyloggedin
        this.loader.dismiss();
        console.log("antes de enviar a home");
        this.nav.setRoot(HomePage);

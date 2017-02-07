@@ -23,9 +23,5 @@ export class HomePage implements OnInit{
     this._firebaseService.loginvalidation();
   }
 
-  startAutoplay(){
-
-  }
-
 
 }
