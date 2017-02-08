@@ -8,9 +8,19 @@
 </ion-header>
 
 
-<ion-content padding>
+
+
+
+
+
+
+
+<ion-content>
+
+
   <img class="logo" src="assets/images/logo2.png"/>
-    <ion-slides speed="2000" autoplay="1000" loop="true">
+    
+      <ion-slides class= "myslides" speed="2000" autoplay="1000" loop="true">
       <ion-slide>
         <img src="assets/images/bannerganagana.png"/>
       </ion-slide>
@@ -30,4 +40,28 @@
         <img src="assets/images/yo_quiero_migiroseguro.jpg"/>
       </ion-slide>
   </ion-slides>
+
+<ion-grid>
+  <ion-row>
+    <ion-col width-50 class= "mycol">
+      <ion-icon name="star" class= "myicon"></ion-icon>
+      <button ion-button icon-left>
+      <ion-icon name="home"></ion-icon>
+      Left Icon
+      </button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button icon-left>
+      <ion-icon name="home"></ion-icon>
+      Left Icon
+      </button>
+    </ion-col>
+  </ion-row>
+    <ion-row>
+    <ion-col width-50>This column will take 10% of space</ion-col>
+    <ion-col width-50>This column will take 10% of space</ion-col>
+  </ion-row>
+</ion-grid>
+
+
  </ion-content>

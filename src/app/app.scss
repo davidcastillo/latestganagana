@@ -16,7 +16,7 @@
 // automatically applied to the <body> element in the app.
 
 .toolbar-background{
-    background: #F8CD04;
+    background: #FFED00; 
 }
 
 ion-app.md{
@@ -24,17 +24,18 @@ ion-app.md{
 }
 
 .button-md{
-    background-color: #F8CD04;
+    background-color: #FFED00;
+    color: #015643
 }
 
 .button-{
-    background-color: #F8CD04;
+    background-color: #FFED00;
 }
 
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
-    color: white;
+    color: #015643;
 }
 
 .toolbar-title-md{
-   color: white;
+   color: #015643;
 }
