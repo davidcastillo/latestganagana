@@ -8,9 +8,15 @@
 
 
 <ion-content padding>
-      <ion-card>
-      <ion-card-content>
-        Bienvenido al juego del kit de la suerte, empieza a capturar amuletos en nuestros puntos Gana Gana, cuando los completes todos recibiras fabulosos premios
-      </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <ion-header>
+      Escanea el codigo QR y valida tus puntos
+    </ion-header>
+    <ion-card-content>
+        <ion-button ion-buttom (click)="validarQR()">Escanear Ahora</ion-button>
+        <ion-list *ngIf="data">
+          <ion-item>data.result</ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
