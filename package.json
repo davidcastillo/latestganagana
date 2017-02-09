@@ -7,7 +7,7 @@
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve && webpack"
   },
   "dependencies": {
     "@angular/common": "2.2.1",
@@ -27,11 +27,23 @@
     "ionicons": "3.0.0",
     "rxjs": "5.0.0-beta.12",
     "sw-toolbox": "3.4.0",
-    "zone.js": "0.6.26"
+    "zone.js": "0.6.26",
+    "core-js": "^2.4.1",
+    "ng2-redux": "^5.1.2",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",
-    "typescript": "2.0.9"
+    "typescript": "2.0.9",
+    "@types/node": "^7.0.5",
+    "file-loader": "^0.10.0",
+    "html-webpack-plugin": "^2.28.0",
+    "ts-loader": "^2.0.0",
+    "tslint": "^4.4.2",
+    "tslint-loader": "^3.3.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0",
+    "webpack-merge": "^2.6.1"
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",

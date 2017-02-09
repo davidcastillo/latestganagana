@@ -16,6 +16,9 @@ import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';
 import { FormsModule} from '@angular/forms';
 
+import { GameModule } from '../pages/armaparejas/ts/game/index'; 
+import { MemoryGameComponent } from '../pages/armaparejas/ts/game/memory.game.co';
+
 export const firebaseConfig = {
 
     apiKey: "AIzaSyDfi3aeYqUL-I1pC_kR5l7es7Sd9t_nsyQ",
@@ -43,9 +46,11 @@ export const firebaseConfig = {
   ],
 
   imports: [
+    GameModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     FormsModule
+    
   ],
 
   bootstrap: [IonicApp],
