@@ -44,22 +44,70 @@
 <ion-grid>
   <ion-row>
     <ion-col width-50 class= "mycol">
-      <ion-icon name="star" class= "myicon"></ion-icon>
-      <button ion-button icon-left>
-      <ion-icon name="home"></ion-icon>
-      Left Icon
+      <button ion-button icon-only class= "ion-buttonic" block type="button" 
+      [navPush]="juegosPage">
+         <ion-icon name="star" class= "myicon"></ion-icon>
       </button>
+        <button ion-button block type="button" 
+      [navPush]="juegosPage">
+          Juegos
+        </button>
     </ion-col>
-    <ion-col width-50>
-      <button ion-button icon-left>
-      <ion-icon name="home"></ion-icon>
-      Left Icon
+
+    <ion-col width-50 class= "mycol">
+      <button ion-button icon-only class= "ion-buttonic" block type="button" 
+      [navPush]="numerologiaPage">
+         <ion-icon name="grid" class= "myicon"></ion-icon>
       </button>
+        <button ion-button block type="button" 
+      [navPush]="numerologiaPage">
+          Numerologia
+        </button>
     </ion-col>
   </ion-row>
+
+
+  <ion-row>
+  <ion-col width-50 class= "mycol">
+      <button ion-button icon-only class= "ion-buttonic" block type="button" 
+      [navPush]="astrologiaPage">
+         <ion-icon name="planet" class= "myicon"></ion-icon>
+      </button>
+        <button ion-button block type="button" 
+      [navPush]="astrologiaPage">
+          Astrologia
+        </button>
+    </ion-col>
+
+    <ion-col width-50 class= "mycol">
+      <button ion-button icon-only class= "ion-buttonic" block type="button" 
+      onclick="window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos')">
+         <ion-icon name="pulse" class= "myicon"></ion-icon>
+      </button>
+        <button ion-button block type="button" 
+      onclick="window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos')">
+          Resultados
+        </button>
+    </ion-col>
+  </ion-row>
+
     <ion-row>
-    <ion-col width-50>This column will take 10% of space</ion-col>
-    <ion-col width-50>This column will take 10% of space</ion-col>
+      <ion-col width-30 class= "mycol">
+      </ion-col>
+      <ion-col width-40 class= "mycol">
+         <button ion-button icon-only class= "ion-buttonic" block type="button" 
+      [navPush]="simuladorgirosPage">
+          <ion-icon name="logo-usd" class= "myicon"></ion-icon>
+         </button>
+         <button ion-button block type="button" 
+      [navPush]="simuladorgirosPage">
+          Simulador giros
+        </button>
+    </ion-col>
+
+    <ion-col width-30 class= "mycol">
+
+    </ion-col>
   </ion-row>
 </ion-grid>
 

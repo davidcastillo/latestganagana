@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /*
   Generated class for the Resultados page.
@@ -9,14 +10,17 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-resultados',
-  templateUrl: 'resultados.html'
+  templateUrl: 'resultados.html',
+  
 })
-export class ResultadosPage {
+
+export class ResultadosPage implements OnInit{
+  homePage : HomePage
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ResultadosPage');
+  ngOnInit(){
+   window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos');
   }
 
 }

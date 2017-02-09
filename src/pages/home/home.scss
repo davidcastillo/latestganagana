@@ -22,11 +22,27 @@ page-home {
         margin-right: auto;
         text-align: center;
         color: gold;
-        font-size: 120px;
+        font-size: 80px;
+        background-color: transparent
     }
 
     .mycol{
         text-align: center;
     }
+
+    .ion-buttontx{
+        margin: 0rem
+    }
+
+        .ion-buttonic{
+        text-align: center;
+        background-color: transparent;
+        height: 85px;
+        box-shadow: none;
+        margin: 0rem
+    }
+
+
+
 
 }
