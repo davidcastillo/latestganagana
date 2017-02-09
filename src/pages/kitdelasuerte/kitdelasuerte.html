@@ -13,10 +13,9 @@
       Escanea el codigo QR y valida tus puntos
     </ion-header>
     <ion-card-content>
-        <ion-button ion-buttom (click)="validarQR()">Escanear Ahora</ion-button>
+        <button ion-buttom (click)="validarQR()">Escanear Ahora</button>
         <ion-list *ngIf="data">
           <ion-item>data.result</ion-item>
-          hola
         </ion-list>
     </ion-card-content>
   </ion-card>
