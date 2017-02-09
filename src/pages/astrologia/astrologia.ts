@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, NgModule } from '@angular/core';
+import { NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+
+import { Validators, FormBuilder } from '@angular/forms';
+
+
 
 import { AstroresultadosPage } from '../astroresultados/astroresultados';
 
@@ -10,11 +15,21 @@ import { AstroresultadosPage } from '../astroresultados/astroresultados';
 })
 export class AstrologiaPage {
   astroresultadosPage = AstroresultadosPage
+   todo = {}
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navParams: NavParams, private formBuilder: FormBuilder, public navCtrl: NavController)  {
+  
+      this.todo = this.formBuilder.group({
+      name: ['', Validators.required],
+      date_of_birth: ['',Validators.required],
+      time: ['',Validators.required],
+      city: ['',Validators.required],
+    });
+}
 
 
 
 }
+
