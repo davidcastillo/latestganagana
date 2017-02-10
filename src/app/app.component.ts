@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+
+//pages
 import { HomePage } from '../pages/home/home';
 import { JuegosPage } from '../pages/juegos/juegos';
 import { NumerologiaPage } from '../pages/numerologia/numerologia';

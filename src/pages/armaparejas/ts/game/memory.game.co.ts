@@ -4,7 +4,7 @@ import { GameActions } from '../store/action';
 import { STATUS } from '../store/model/status';
 import { NavController, NavParams } from 'ionic-angular';
 
-
+//height: 670px;
 @Component({
     selector: 'memory-game',
     template: `
@@ -14,8 +14,8 @@ import { NavController, NavParams } from 'ionic-angular';
     `,
     styles: [`
     :host {
-        width: 450px;
-        height: 670px;
+        width: 100%;
+        height: 100%;      
         border: 4px solid #BDBDBD;
         border-radius: 2px;
         background-color: #faf8ef;

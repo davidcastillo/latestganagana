@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+//pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -14,10 +16,12 @@ import { InstruccionesPage } from '../pages/instrucciones/instrucciones';
 import { NumresultadosPage } from '../pages/numresultados/numresultados';
 import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';
-import { FormsModule} from '@angular/forms';
+import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
 
+//Modules 
+import { FormsModule} from '@angular/forms';
 import { GameModule } from '../pages/armaparejas/ts/game/index'; 
-import { MemoryGameComponent } from '../pages/armaparejas/ts/game/memory.game.co';
+
 
 export const firebaseConfig = {
 
@@ -43,6 +47,7 @@ export const firebaseConfig = {
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
+    ArmaparejasgamePage
   ],
 
   imports: [
@@ -68,6 +73,7 @@ export const firebaseConfig = {
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
+    ArmaparejasgamePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

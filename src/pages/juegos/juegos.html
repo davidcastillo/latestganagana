@@ -8,12 +8,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let game of games" (click)="gamesTapped($event, game)">
+  <ion-card>
+    <ion-list>
+      <ion-list-header color="ganagana">
+        Selecciona y a jugar!
+      </ion-list-header>
+      <button ion-item *ngFor="let game of games" (click)="gamesTapped($event, game)">
       {{game.title}}
+      <ion-icon name="arrow-forward" item-right></ion-icon>
     </button>
-  </ion-list>
-  <div *ngIf="selectedGame" padding>
-    You navigated here from <b>{{selectedGame.title}}</b>
-  </div>
+    </ion-list>
+    <div *ngIf="selectedGame" padding>
+      You navigated here from <b>{{selectedGame.title}}</b>
+    </div>
+  </ion-card>
 </ion-content>

@@ -4,12 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-
-<ion-content>
-      <button ion-button icon-only  
-           [navPush]="instruccionesPage"> 
-              <ion-icon name="help-circle"></ion-icon>
-      </button>
-      <ion-nav [root]="gameRoot" #content swipeBackEnabled="false"></ion-nav>
-</ion-content>
-
+<ion-tabs>
+  <ion-tab [root]="instruccionesPage" tabTitle="Instrucciones" tabIcon="help"></ion-tab>
+  <ion-tab [root]="armaparejagamePage" tabTitle="Jugar" tabIcon="play"></ion-tab>
+</ion-tabs>

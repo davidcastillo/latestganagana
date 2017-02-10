@@ -1,10 +1,21 @@
-item-details-page {
+instrucciones-page {
 
   div.selection {
     font-size: 22px;
     display: block;
     text-align: center;
     padding-top: 5%;
+  }
+
+  ion-card-header ion-item{
+    text-align: center !important; 
+  }
+  p{
+    padding: 0em;
+    text-align: justify
+  }
+  ul li {
+    margin-left: 0;
   }
 
 }
