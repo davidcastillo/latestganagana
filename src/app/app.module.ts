@@ -23,17 +23,10 @@ import { FormsModule} from '@angular/forms';
 import { GameModule } from '../pages/armaparejas/ts/game/index'; 
 
 //services
+import { FirebaseService, firebaseConfig } from './services/firebase.service';
 import { GamecontrolService } from './services/gamecontrol.service';
 
-//firebaseConfig
-export const firebaseConfig = {
 
-    apiKey: "AIzaSyDfi3aeYqUL-I1pC_kR5l7es7Sd9t_nsyQ",
-    authDomain: "ganaganadb.firebaseapp.com",
-    databaseURL: "https://ganaganadb.firebaseio.com",
-    storageBucket: "ganaganadb.appspot.com",
-    messagingSenderId: "928922388579"
-};
 
 @NgModule({
   declarations: [
@@ -80,6 +73,7 @@ export const firebaseConfig = {
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseService,
     GamecontrolService
   ]
 })

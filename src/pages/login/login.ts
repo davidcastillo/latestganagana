@@ -1,27 +1,39 @@
-import {Component} from '@angular/core';
-import {NavController, AlertController, LoadingController} from 'ionic-angular';
-import {AngularFireAuth, AuthProviders, AuthMethods} from 'angularfire2';
-import {HomePage} from '../home/home';
-import {FirebaseService} from '../../app/services/firebase.service';
+import { Component, OnInit } from '@angular/core';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { HomePage } from '../home/home';
+import { FirebaseService } from '../../app/services/firebase.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
- 
+import 'rxjs/add/operator/map';
+
 @Component({
   selector: 'login-page',
   templateUrl: 'login.html',
+  providers: [FirebaseService]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   loader: any;
-  user = {email: '', password: ''};
+  user = { email: '', password: '' };
   isAlreadyloggedin = {};
 
 
- 
-  constructor(public nav: NavController, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {}
- 
+
+  constructor(public nav: NavController,
+    public auth: AngularFireAuth,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private http: Http,
+    private firebaseService: FirebaseService) {
+  }
+
+  ngOnInit() {
+    this.isCurrentlyLogged();
+
+  }
+
   public registerUser() {
     this.showLoading()
     this.auth.createUser(this.user).then((authData) => {
@@ -43,15 +55,15 @@ export class LoginPage {
   public login() {
     this.showLoading()
     this.auth.login(this.user, {
-        provider: AuthProviders.Password,
-        method: AuthMethods.Password,
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password,
     }).then((authData) => {
-        this.localStorage()
-       //this.FirebaseService.isAlreadyloggedin
-       this.loader.dismiss();
-       console.log("antes de enviar a home");
-       this.nav.setRoot(HomePage);
-    }).catch((error) => {this.showError(error);});
+      this.localStorage()
+      //this.FirebaseService.isAlreadyloggedin
+      this.loader.dismiss();
+      console.log("antes de enviar a home");
+      this.nav.setRoot(HomePage);
+    }).catch((error) => { this.showError(error); });
   }
 
 
@@ -61,11 +73,11 @@ export class LoginPage {
     });
     this.loader.present();
   }
- 
- 
+
+
   showError(text) {
-        setTimeout(() => {
-        this.loader.dismiss();
+    setTimeout(() => {
+      this.loader.dismiss();
     });
     let prompt = this.alertCtrl.create({
       title: 'Fail',
@@ -75,13 +87,28 @@ export class LoginPage {
     prompt.present();
   }
 
-localStorage() {
+  localStorage() {
     localStorage.setItem('currentUser', JSON.stringify(this.user));
-              }
+  }
 
 
- logout() {
+  logout() {
     //  remove user from local storage to log user out
-  localStorage.removeItem('currentUser');
- }
+    localStorage.removeItem('currentUser');
+  }
+
+  isCurrentlyLogged() {
+    if (localStorage.getItem('currentUser') != null) {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.auth.login(this.user, {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password,
+      }).then((authData) => {
+        console.log("ya estaba logeado");
+        this.nav.setRoot(HomePage);
+      }).catch((error) => { this.showError(error); });
+    }
+
+  }
+
 }

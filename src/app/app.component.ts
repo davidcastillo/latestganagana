@@ -10,19 +10,26 @@ import { NumerologiaPage } from '../pages/numerologia/numerologia';
 import { AstrologiaPage } from '../pages/astrologia/astrologia';
 import { ResultadosPage } from '../pages/resultados/resultados';
 import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
+import { LoginPage } from '../pages/login/login';
 
+//services
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [FirebaseService]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(
+    public platform: Platform,
+    private firebaseService: FirebaseService
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -50,5 +57,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  cerrarSesion() {
+    this.firebaseService.logout();
+    this.nav.setRoot(LoginPage);
   }
 }

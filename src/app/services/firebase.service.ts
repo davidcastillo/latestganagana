@@ -1,20 +1,33 @@
-import {Injectable} from '@angular/core';
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
-import {AngularFireAuth, AuthProviders, AuthMethods, FirebaseAuthState} from 'angularfire2';
+import { Injectable } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
 import 'rxjs/add/operator/map';
 import { Players } from '../entities/Players';
-import { NavController, NavParams } from 'ionic-angular';
+import { Nav, NavParams } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
+import { HomePage } from '../../pages/home/home';
+
+//firebaseConfig
+export const firebaseConfig = {
+
+  apiKey: "AIzaSyDfi3aeYqUL-I1pC_kR5l7es7Sd9t_nsyQ",
+  authDomain: "ganaganadb.firebaseapp.com",
+  databaseURL: "https://ganaganadb.firebaseio.com",
+  storageBucket: "ganaganadb.appspot.com",
+  messagingSenderId: "928922388579"
+};
 
 
 @Injectable()
-export class FirebaseService{
+export class FirebaseService {
   private authState: FirebaseAuthState;
   players: FirebaseListObservable<any>;
   player = {};
-  status= {}
+  status = {}
+  isLogged: boolean = false;
 
-  constructor(public navCtrl: NavController, private angFire: AngularFire, public auth: AngularFireAuth) {
+
+  constructor(private angFire: AngularFire, public auth: AngularFireAuth) {
     this.authState = auth.getAuth();
     auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
@@ -40,23 +53,41 @@ export class FirebaseService{
     return this.authState !== null;
   }
 
-loginvalidation(){
-  if (this.authState == null) {
-    this.navCtrl.push(LoginPage);
-  }
-}
 
- isAlreadyLoggedIn(){
-      var user = this.angFire.auth.subscribe();
-      console.log(user)
-      let isAuthenticated = false
-      let how = {}
-      if (how == isAuthenticated){
-        return true;
+/*  loginvalidation() {
+    /*
+    auth.js:104 WARNING: the getAuth() API has changed behavior since adding support for Firebase 3.
+        This will return null for the initial value when the page loads, even if the user is actually logged in.
+        Please observe the actual authState asynchronously by subscribing to the auth service: af.auth.subscribe().
+        The getAuth method will be removed in future releases
+        
+    // console.log(this.auth.getAuth()); //en efecto es nulo
+
+    if (this.authState != null) {
+      this.navCtrl.push(HomePage);
+    }
+  }*/
+
+  isAlreadyLoggedIn() {
+    var user = this.angFire.auth.subscribe();
+    console.log(user)
+    let isAuthenticated = false
+    let how = {}
+    if (how == isAuthenticated) {
+      return true;
+    }
+    else {
+      return false;
+    }
+
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.auth.logout().then(
+      () =>{
+        console.log("Ha cerrado sesion");
       }
-      else{
-        return false;
-      }
-      
+    );
   }
 }

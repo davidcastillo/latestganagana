@@ -10,12 +10,6 @@ import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
 
 
-/*
-  Generated class for the Home page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -32,8 +26,11 @@ export class HomePage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
 
   ngOnInit(){
-    this._firebaseService.loginvalidation();
   }
+
+  /*ionViewCanEnter(){
+    return this._firebaseService.authenticated;
+  }*/
 
 
 }
