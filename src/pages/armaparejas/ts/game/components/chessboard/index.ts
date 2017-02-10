@@ -8,11 +8,14 @@ import { ICard } from '../../../store/model/card';
 @Component({
     selector: 'chessboard',
     template: `
+    
     <card *ngFor="let card of cards$ | async; trackBy:trackByCards" [info]="card" (flipped)="actions.flipCard($event)"></card>
+    
     `,
     styles: [`
     :host {
-        margin-top: 20px;
+        margin-top: 5%;
+        margin-bottom: 5%;
         width: 100%;
         background-color: #fff;
         height: 530px;

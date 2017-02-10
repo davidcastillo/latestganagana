@@ -22,7 +22,10 @@ import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
 import { FormsModule} from '@angular/forms';
 import { GameModule } from '../pages/armaparejas/ts/game/index'; 
 
+//services
+import { GamecontrolService } from './services/gamecontrol.service';
 
+//firebaseConfig
 export const firebaseConfig = {
 
     apiKey: "AIzaSyDfi3aeYqUL-I1pC_kR5l7es7Sd9t_nsyQ",
@@ -75,6 +78,9 @@ export const firebaseConfig = {
     AstroresultadosPage,
     ArmaparejasgamePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GamecontrolService
+  ]
 })
 export class AppModule {}

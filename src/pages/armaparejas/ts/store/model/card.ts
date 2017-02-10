@@ -60,7 +60,7 @@ export const CARDS: ICard[] = [{
 {
     name: 'back',
     flipped: false,
-    url: '../../../../../assets/img/back.png'
+    url: '../../../../../assets/images/signointerrogacion.jpg'
 }];
 
 const CARDS_WITHOUT_BACK = CARDS.filter(c => c.name !== 'back');

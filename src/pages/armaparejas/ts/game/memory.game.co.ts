@@ -8,15 +8,14 @@ import { NavController, NavParams } from 'ionic-angular';
 @Component({
     selector: 'memory-game',
     template: `
-    <dashboard></dashboard>
-    <chessboard></chessboard>
     <status></status>
+    <chessboard></chessboard>
     `,
     styles: [`
     :host {
         width: 100%;
         height: 100%;      
-        border: 4px solid #BDBDBD;
+        
         border-radius: 2px;
         background-color: #faf8ef;
         padding: 10px;

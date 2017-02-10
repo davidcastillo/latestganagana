@@ -6,12 +6,15 @@ import { GameActions } from '../../../store/action';
 import { stop } from '../../../core/helper/event';
 import { STATUS } from '../../../store/model/status';
 
+//service 
+import { GamecontrolService } from '../../../../../../app/services/gamecontrol.service';
+
 @Component({
     selector: 'status',
     template: `
     <span *ngIf="(status$ | async) === status.READY">Ready</span>
     <span *ngIf="(status$ | async) === status.PLAYING">Playing</span>
-    <span class="hand" *ngIf="(status$ | async) === status.PASS" (click)="reset($event)">Play again</span>
+    <span class="hand" *ngIf="(status$ | async) === status.PASS"  (click)="win()">Has Terminado! Toca aqui para continuar</span>
     <span class="elapsed">{{ elapsedMs$ | async }} s</span>
     `,
     styles: [`
@@ -40,13 +43,17 @@ export class StatusComponent {
     @select() elapsedMs$: Observable<Number>;
 
     status: any;
-
-    constructor(private actions: GameActions) {
+    flag: boolean = true;
+    constructor(private actions: GameActions, private gamecontrolService: GamecontrolService) {
         this.status = STATUS;
     }
 
     reset(e: Event) {
         stop(e);
         this.actions.reset();
+    }
+
+    win(){
+        this.gamecontrolService.armaParejasWin();
     }
 }
