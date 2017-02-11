@@ -1,26 +1,50 @@
 <ion-header>
-<ion-title class='headerlogin'>Gana Gana App</ion-title>
+  <ion-title class='headerlogin'>Gana Gana App</ion-title>
 </ion-header>
 
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-10></ion-col>
+      <ion-col width-80><img src="assets/images/logo2.png"></ion-col>
+    </ion-row>
+    <ion-row>
+      <p>Bienvenido a la app de Gana Gana, ingresa o registrate para empezar a disfrutar todos nuestros beneficios para ti.</p>
+    </ion-row>
+  </ion-grid>
 
+  <form [formGroup]="register" (ngSubmit)="registerUser()">
 
-<ion-content padding> 
-
-        <img src="assets/images/logo2.png"/>
-
-        <p>Bienvenido a la app de Gana Gana, ingresa o registrate para empezar a disfrutar todos nuestros beneficios para ti</p> 
-
-  <form>
     <ion-item>
-      <ion-input type="email" name="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
+      <ion-label color="dark" fixed>Correo electronico</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="newUser.email" formControlName="email" focus></ion-input>
     </ion-item>
- 
-    <ion-item>
-      <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
-    </ion-item>
- 
 
-      <button ion-button block (click)="login(l)">Ingresar</button>
-      <button ion-button block (click)="registerUser()">Crear una cuenta</button>
+    <ion-item>
+      <ion-label color="dark" fixed>Contraseña</ion-label>
+      <ion-input type="password" name="password" [(ngModel)]="newUser.password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark" fixed>Fecha de Nacimiento</ion-label>
+      <ion-input type="date" name="date" [(ngModel)]="newUser.date_of_birth" formControlName="date_of_birth"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark" fixed>Nombre</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="newUser.name" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark" fixed>Telefono</ion-label>
+      <ion-input type="number" name="mobile" [(ngModel)]="newUser.mobile" formControlName="mobile"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark" fixed>Ciudad</ion-label>
+      <ion-input type="text" name="city" [(ngModel)]="newUser.city" formControlName="city"></ion-input>
+    </ion-item>
+    <button ion-button block type="submit" [disabled]="!register.valid">Crear una cuenta</button>
   </form>
+  <button ion-button block (click)="loginAlert()">Ya tengo una cuenta!</button>
 </ion-content>

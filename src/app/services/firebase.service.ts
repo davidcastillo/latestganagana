@@ -54,19 +54,19 @@ export class FirebaseService {
   }
 
 
-/*  loginvalidation() {
-    /*
-    auth.js:104 WARNING: the getAuth() API has changed behavior since adding support for Firebase 3.
-        This will return null for the initial value when the page loads, even if the user is actually logged in.
-        Please observe the actual authState asynchronously by subscribing to the auth service: af.auth.subscribe().
-        The getAuth method will be removed in future releases
-        
-    // console.log(this.auth.getAuth()); //en efecto es nulo
-
-    if (this.authState != null) {
-      this.navCtrl.push(HomePage);
-    }
-  }*/
+  /*  loginvalidation() {
+      /*
+      auth.js:104 WARNING: the getAuth() API has changed behavior since adding support for Firebase 3.
+          This will return null for the initial value when the page loads, even if the user is actually logged in.
+          Please observe the actual authState asynchronously by subscribing to the auth service: af.auth.subscribe().
+          The getAuth method will be removed in future releases
+          
+      // console.log(this.auth.getAuth()); //en efecto es nulo
+  
+      if (this.authState != null) {
+        this.navCtrl.push(HomePage);
+      }
+    }*/
 
   isAlreadyLoggedIn() {
     var user = this.angFire.auth.subscribe();
@@ -85,9 +85,24 @@ export class FirebaseService {
   logout() {
     localStorage.removeItem('currentUser');
     this.auth.logout().then(
-      () =>{
+      () => {
         console.log("Ha cerrado sesion");
       }
     );
   }
+}
+
+export interface IUser {
+  email: string,
+  password?: string,
+  name?: string,
+  mobile?: string,
+  city?: string,
+  date_of_birth?: string,
+  amulet_0?: string,
+  amulet_1?: string,
+  amulet_2?: string,
+  amulet_3?: string,
+  amulet_4?: string,
+  amulet_5?: string,
 }

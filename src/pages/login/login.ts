@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomePage } from '../home/home';
-import { FirebaseService } from '../../app/services/firebase.service';
+import { FirebaseService, IUser } from '../../app/services/firebase.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
+//formulario de registro
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'login-page',
@@ -15,10 +18,27 @@ import 'rxjs/add/operator/map';
   providers: [FirebaseService]
 })
 export class LoginPage implements OnInit {
-  loader: any;
-  user = { email: '', password: '' };
-  isAlreadyloggedin = {};
 
+  //declaracion de variables
+  private loader: any;
+  private user: IUser = { email: '', password: '' };
+  private isAlreadyloggedin = {};
+  private register;
+  private newUser: IUser = {
+    name: '',
+    mobile: '',
+    email: '',
+    password: '',
+    city: '',
+    date_of_birth: null,
+    amulet_0: '123',
+    amulet_1: '',
+    amulet_2: '',
+    amulet_3: '',
+    amulet_4: '',
+    amulet_5: ''
+  };
+  //Fin
 
 
   constructor(public nav: NavController,
@@ -26,7 +46,16 @@ export class LoginPage implements OnInit {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private http: Http,
-    private firebaseService: FirebaseService) {
+    private firebaseService: FirebaseService,
+    private formBuilder: FormBuilder) {
+    this.register = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      name: ['', Validators.required],
+      mobile: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+      city: ['', Validators.required],
+    })
   }
 
   ngOnInit() {
@@ -34,9 +63,13 @@ export class LoginPage implements OnInit {
 
   }
 
-  public registerUser() {
-    this.showLoading()
-    this.auth.createUser(this.user).then((authData) => {
+  registerUser(): void {
+    //La variable newUser queda lista para almacenar en la base de datos con los correspondientes datos.
+    console.log(this.newUser);
+    this.showLoading();
+    let user = {email: this.newUser.email, password: this.newUser.password}
+    //Por ahora sigo creando la cuenta con email y password para satisfacer la credencial.
+    this.auth.createUser(user).then((authData) => {
       setTimeout(() => {
         this.loader.dismiss();
       });
@@ -52,9 +85,9 @@ export class LoginPage implements OnInit {
   }
 
 
-  public login() {
+  login(userData): void {
     this.showLoading()
-    this.auth.login(this.user, {
+    this.auth.login(userData, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password,
     }).then((authData) => {
@@ -66,8 +99,44 @@ export class LoginPage implements OnInit {
     }).catch((error) => { this.showError(error); });
   }
 
+  loginAlert(): void {
+    let prompt = this.alertCtrl.create({
+      title: 'login',
+      message: "Digita un usuario y contraseña.",
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'example@mail.com',
+          type: 'text'
 
-  showLoading() {
+        },
+        {
+          name: 'password',
+          placeholder: '****',
+          type: 'password'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Entrar',
+          handler: data => {
+            this.login(data);
+          }
+        }
+
+      ]
+    });
+    prompt.present();
+  }
+
+
+  showLoading(): void {
     this.loader = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -75,10 +144,8 @@ export class LoginPage implements OnInit {
   }
 
 
-  showError(text) {
-    setTimeout(() => {
-      this.loader.dismiss();
-    });
+  showError(text): void {
+
     let prompt = this.alertCtrl.create({
       title: 'Fail',
       subTitle: text,
@@ -87,20 +154,21 @@ export class LoginPage implements OnInit {
     prompt.present();
   }
 
-  localStorage() {
+  localStorage(): void {
     localStorage.setItem('currentUser', JSON.stringify(this.user));
   }
 
 
-  logout() {
+  logout(): void {
     //  remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
 
-  isCurrentlyLogged() {
+  isCurrentlyLogged(): void {
     if (localStorage.getItem('currentUser') != null) {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
-      this.auth.login(this.user, {
+      let user = { email: this.user.email, password: this.user.password }
+      this.auth.login(user, {
         provider: AuthProviders.Password,
         method: AuthMethods.Password,
       }).then((authData) => {
