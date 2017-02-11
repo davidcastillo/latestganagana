@@ -3,10 +3,6 @@ simuladorgiros-page {
   .title {
     text-align: center;
  }
-}
-
-simuladorgiros-page {
-
   .citycontent {
   right: 0px; 
   }
@@ -24,4 +20,12 @@ simuladorgiros-page {
     padding-left: 50px;
     padding-right: 50px;
  }
+
+ ion-card-header{
+   text-align: center;
+   background: color($colors, ganagana, primary);
+
+ }
+
+ 
 }
