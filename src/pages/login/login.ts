@@ -91,7 +91,7 @@ export class LoginPage implements OnInit {
       provider: AuthProviders.Password,
       method: AuthMethods.Password,
     }).then((authData) => {
-      this.localStorage()
+      this.localStorage(userData)
       //this.FirebaseService.isAlreadyloggedin
       this.loader.dismiss();
       console.log("antes de enviar a home");
@@ -154,14 +154,8 @@ export class LoginPage implements OnInit {
     prompt.present();
   }
 
-  localStorage(): void {
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
-  }
-
-
-  logout(): void {
-    //  remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+  localStorage(userData): void {
+    localStorage.setItem('currentUser', JSON.stringify(userData));
   }
 
   isCurrentlyLogged(): void {
