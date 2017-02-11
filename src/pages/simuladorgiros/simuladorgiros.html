@@ -15,7 +15,7 @@
 
 
 <ion-item class='selector'>
-  <ion-label>Seleccione el monto</ion-label>
+  <ion-label>Desde</ion-label>
   <p> </p>
     <ion-select type="number" [(ngModel)]="selectedOption" >
         <ion-option *ngFor="let option of options" [value]="option.cost">{{option.range}}</ion-option>
@@ -32,3 +32,5 @@
             </ion-col>
         </ion-row>
 </ion-item>
+
+</ion-content>
