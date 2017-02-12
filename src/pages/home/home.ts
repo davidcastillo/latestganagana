@@ -12,8 +12,7 @@ import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
-  providers: [FirebaseService],
+  templateUrl: 'home.html'
 })
 export class HomePage implements OnInit{
   juegosPage = JuegosPage

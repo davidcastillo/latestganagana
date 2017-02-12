@@ -28,6 +28,7 @@ export class FirebaseService {
 
 
   constructor(private angFire: AngularFire, public auth: AngularFireAuth) {
+    console.log("se ha instanciado firebaseservice");
     this.authState = auth.getAuth();
     auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;

@@ -16,8 +16,7 @@ import { LoginPage } from '../pages/login/login';
 import { FirebaseService } from './services/firebase.service';
 
 @Component({
-  templateUrl: 'app.html',
-  providers: [FirebaseService]
+  templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

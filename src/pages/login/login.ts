@@ -14,8 +14,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'login-page',
-  templateUrl: 'login.html',
-  providers: [FirebaseService]
+  templateUrl: 'login.html'
 })
 export class LoginPage implements OnInit {
 
