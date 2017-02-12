@@ -19,9 +19,16 @@
       <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
     </ion-item>
  
+   <span class="error" *ngIf="error">{{ error }}</span>
 
-      <button ion-button block (click)="login(l)">Ingresar</button>
-      <button ion-button block (click)="registerUser()">Crear una cuenta</button>
+  <button (click)="loginFb()" id="fb">Login With Facebook</button><br>
+  <button (click)="loginGoogle()" id="google">Login With Google</button>
+  <button routerLink="/login-email" id="email">Email</button>
+  <button ion-button outline (click)="signInWithFacebook()">Facebook</button>
 
+
+  <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
+
+  
   </form>
 </ion-content>

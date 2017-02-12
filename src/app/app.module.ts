@@ -15,6 +15,10 @@ import { NumresultadosPage } from '../pages/numresultados/numresultados';
 import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';
 import { FormsModule} from '@angular/forms';
+import { SignupComponent } from '../pages/signup/signup'
+import { EmailComponent } from '../pages/email/email'
+import { AuthGuard } from './auth.service';
+
 
 export const firebaseConfig = {
 
@@ -40,6 +44,8 @@ export const firebaseConfig = {
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
+    SignupComponent,
+    EmailComponent,
   ],
 
   imports: [
@@ -63,7 +69,9 @@ export const firebaseConfig = {
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
+    SignupComponent,
+    EmailComponent,
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [AuthGuard]
 })
 export class AppModule {}

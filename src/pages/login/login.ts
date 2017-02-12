@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import {NavController, AlertController, LoadingController} from 'ionic-angular';
-import {AngularFireAuth, AuthProviders, AuthMethods} from 'angularfire2';
-import {HomePage} from '../home/home';
-import {FirebaseService} from '../../app/services/firebase.service';
+import { HomePage } from '../home/home';
+
+import {NativeStorage} from 'ionic-native'
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -12,76 +13,58 @@ import 'rxjs/add/operator/map'
 @Component({
   selector: 'login-page',
   templateUrl: 'login.html',
+
+  
 })
-export class LoginPage {
-  loader: any;
+export class LoginPage implements OnInit{
   user = {email: '', password: ''};
-  isAlreadyloggedin = {};
 
+  error: any;
+  constructor(public af: AngularFire, private navCtrl: NavController,) {
 
- 
-  constructor(public nav: NavController, public auth: AngularFireAuth, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {}
- 
-  public registerUser() {
-    this.showLoading()
-    this.auth.createUser(this.user).then((authData) => {
-      setTimeout(() => {
-        this.loader.dismiss();
-      });
-      let prompt = this.alertCtrl.create({
-        title: 'Success',
-        subTitle: 'Your new Account was created!',
-        buttons: ['OK']
-      });
-      prompt.present();
-    }).catch((error) => {
-      this.showError(error);
+      this.af.auth.subscribe(auth => { 
+      if(auth) {
+        this.navCtrl.push(HomePage);
+      }
     });
+
+  }
+
+  loginFb() {
+    this.af.auth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Popup,
+    }).then(
+        (success) => {
+        this.navCtrl.push(HomePage);
+      }).catch(
+        (err) => {
+        this.error = err;
+      })
+  }
+
+  loginGoogle() {
+    this.af.auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup,
+    });
+    
+        NativeStorage.setItem('user', {
+        email: this.user.email,
+
+      })
+
+    .then(
+        (success) => {
+        this.navCtrl.push(HomePage);
+      }).catch(
+        (err) => {
+        this.error = err;
+      })
   }
 
 
-  public login() {
-    this.showLoading()
-    this.auth.login(this.user, {
-        provider: AuthProviders.Password,
-        method: AuthMethods.Password,
-    }).then((authData) => {
-        this.localStorage()
-       //this.FirebaseService.isAlreadyloggedin
-       this.loader.dismiss();
-       console.log("antes de enviar a home");
-       this.nav.setRoot(HomePage);
-    }).catch((error) => {this.showError(error);});
+  ngOnInit() {
   }
 
-
-  showLoading() {
-    this.loader = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loader.present();
-  }
- 
- 
-  showError(text) {
-        setTimeout(() => {
-        this.loader.dismiss();
-    });
-    let prompt = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    prompt.present();
-  }
-
-localStorage() {
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
-              }
-
-
- logout() {
-    //  remove user from local storage to log user out
-  localStorage.removeItem('currentUser');
- }
 }

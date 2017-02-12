@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { FirebaseService } from '../../app/services/firebase.service';
 import { LoginPage } from '../login/login';
 import { ViewChild } from '@angular/core';
 import { JuegosPage } from '../juegos/juegos';
@@ -8,6 +7,10 @@ import { NumerologiaPage } from '../numerologia/numerologia';
 import { AstrologiaPage } from '../astrologia/astrologia';
 import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
+
+import { GooglePlus, NativeStorage } from 'ionic-native';
+
+import { HomeModel } from './home.model';
 
 
 /*
@@ -19,20 +22,28 @@ import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [FirebaseService],
 })
-export class HomePage implements OnInit{
+export class HomePage {
   juegosPage = JuegosPage
   numerologiaPage = NumerologiaPage
   astrologiaPage = AstrologiaPage
   resultadosPage = ResultadosPage
   simuladorgirosPage = SimuladorgirosPage
+  user: HomeModel = new HomeModel();
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ngOnInit(){
-    this._firebaseService.loginvalidation();
+   ionViewCanEnter(){
+    let env = this;
+    NativeStorage.getItem('user')
+    .then(function (data){
+      env.user = {
+        email: data.email,
+      };
+    }, function(error){
+      console.log(error);
+    });
   }
 
 
