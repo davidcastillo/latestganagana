@@ -20,11 +20,11 @@ export class LoginPage implements OnInit{
   user = {email: '', password: ''};
 
   error: any;
-  constructor(public af: AngularFire, private navCtrl: NavController,) {
+  constructor(public af: AngularFire, private nav: NavController,) {
 
       this.af.auth.subscribe(auth => { 
       if(auth) {
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
       }
     });
 
@@ -34,9 +34,15 @@ export class LoginPage implements OnInit{
     this.af.auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
-    }).then(
+    });
+
+        NativeStorage.setItem('user', {
+        email: this.user.email,
+      })
+      
+    .then(
         (success) => {
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
       }).catch(
         (err) => {
         this.error = err;
@@ -56,7 +62,7 @@ export class LoginPage implements OnInit{
 
     .then(
         (success) => {
-        this.navCtrl.push(HomePage);
+         this.nav.setRoot(HomePage);
       }).catch(
         (err) => {
         this.error = err;

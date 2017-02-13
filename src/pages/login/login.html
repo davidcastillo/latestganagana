@@ -21,10 +21,10 @@
  
    <span class="error" *ngIf="error">{{ error }}</span>
 
-  <button (click)="loginFb()" id="fb">Login With Facebook</button><br>
-  <button (click)="loginGoogle()" id="google">Login With Google</button>
-  <button routerLink="/login-email" id="email">Email</button>
-  <button ion-button outline (click)="signInWithFacebook()">Facebook</button>
+  <button ion-button block outline (click)="loginFb()" id="fb">Login With Facebook</button><br>
+  <button ion-button block outline (click)="loginGoogle()" id="google">Login With Google</button>
+  <button ion-button block outline routerLink="/login-email" id="email">Email</button>
+  <button ion-button block outline (click)="signInWithFacebook()">Facebook</button>
 
 
   <a routerLink="/signup" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
