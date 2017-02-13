@@ -1,9 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { IonicModule } from 'ionic-angular';
-
-import { NavController, NavParams } from 'ionic-angular';
-
 
 @Component({
   selector: 'simuladorgiros-page',

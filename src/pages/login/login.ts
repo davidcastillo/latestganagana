@@ -4,9 +4,7 @@ import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomePage } from '../home/home';
 import { FirebaseService, IUser } from '../../app/services/firebase.service';
 
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 
 //formulario de registro
@@ -21,7 +19,6 @@ export class LoginPage implements OnInit {
   //declaracion de variables
   private loader: any;
   private user: IUser = { email: '', password: '' };
-  private isAlreadyloggedin = {};
   private register;
   private newUser: IUser = {
     name: '',
@@ -44,7 +41,6 @@ export class LoginPage implements OnInit {
     public auth: AngularFireAuth,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private http: Http,
     private firebaseService: FirebaseService,
     private formBuilder: FormBuilder) {
     this.register = this.formBuilder.group({

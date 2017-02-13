@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireAuth, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
 import 'rxjs/add/operator/map';
-import { Players } from '../entities/Players';
-import { Nav, NavParams } from 'ionic-angular';
-import { LoginPage } from '../../pages/login/login';
-import { HomePage } from '../../pages/home/home';
+
 
 //firebaseConfig
 export const firebaseConfig = {

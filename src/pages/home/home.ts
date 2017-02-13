@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseService } from '../../app/services/firebase.service';
-import { LoginPage } from '../login/login';
-import { ViewChild } from '@angular/core';
 import { JuegosPage } from '../juegos/juegos';
 import { NumerologiaPage } from '../numerologia/numerologia';
 import { AstrologiaPage } from '../astrologia/astrologia';
