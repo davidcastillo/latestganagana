@@ -6,8 +6,6 @@ import { GameActions } from '../../../store/action';
 import { stop } from '../../../core/helper/event';
 import { STATUS } from '../../../store/model/status';
 
-//pages to redirect
-import { JuegosPage } from '../../../../../juegos/juegos';
 //service 
 import { GamecontrolService } from '../../../../../../app/services/gamecontrol.service';
 
