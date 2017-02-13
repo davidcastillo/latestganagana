@@ -18,7 +18,6 @@ export class ArmaparejasgamePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
     gameRoot = MemoryGameComponent;
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArmaparejasgamePage');
   }

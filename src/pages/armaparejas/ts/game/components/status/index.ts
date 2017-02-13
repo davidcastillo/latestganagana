@@ -6,15 +6,17 @@ import { GameActions } from '../../../store/action';
 import { stop } from '../../../core/helper/event';
 import { STATUS } from '../../../store/model/status';
 
+//pages to redirect
+import { JuegosPage } from '../../../../../juegos/juegos';
 //service 
 import { GamecontrolService } from '../../../../../../app/services/gamecontrol.service';
 
 @Component({
     selector: 'status',
     template: `
-    <span *ngIf="(status$ | async) === status.READY">Ready</span>
-    <span *ngIf="(status$ | async) === status.PLAYING">Playing</span>
-    <span class="hand" *ngIf="(status$ | async) === status.PASS"  (click)="win()">Has Terminado! Toca aqui para continuar</span>
+    <span *ngIf="(status$ | async) === status.READY">¿Estas Listo?</span>
+    <span *ngIf="(status$ | async) === status.PLAYING">Jugando</span>
+    <span class="hand" *ngIf="(status$ | async) === status.PASS"  (click)="win()">¡Has Terminado! Toca aqui para continuar</span>
     <span class="elapsed">{{ elapsedMs$ | async }} s</span>
     `,
     styles: [`
@@ -22,13 +24,14 @@ import { GamecontrolService } from '../../../../../../app/services/gamecontrol.s
         position: relative;
         margin-top: 10px;
         width: 100%;
-        height: 20px;
+        height: 100%;
         text-align: center;
         font-size: 18px;
         font-weight: bold;
     }
     .hand {
         cursor: pointer;
+        font-size: 12px;
     }
     .elapsed {
         position: absolute;
@@ -55,5 +58,6 @@ export class StatusComponent {
 
     win(){
         this.gamecontrolService.armaParejasWin();
+        this.gamecontrolService.armaParejasFlag= true;
     }
 }

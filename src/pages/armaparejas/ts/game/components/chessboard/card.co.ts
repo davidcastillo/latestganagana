@@ -12,7 +12,7 @@ import { ICard, CARDS } from '../../../store/model/card';
     `,
     styles: [`
     :host {
-        width: 100px;
+        width: 120px;
         height: 121px;
         margin-right: 3px;
         cursor: pointer;

@@ -14,11 +14,11 @@ import { ICard } from '../../../store/model/card';
     `,
     styles: [`
     :host {
-        margin-top: 5%;
+        margin-top: 50px;
         margin-bottom: 5%;
         width: 100%;
         background-color: #fff;
-        height: 530px;
+        height: 100%;
         border-radius: 4px;
         padding: 10px 5px;
         display: flex;
@@ -26,19 +26,22 @@ import { ICard } from '../../../store/model/card';
         justify-content: center;
         align-items: center;
         align-content: space-around;
+        position: absolute;
+        padding-bottom: 40px;
     }
     card:nth-child(4n) {
-        margin-right: 0px;
+        
     }
     @media screen and (max-width: 450px) {
         :host {
-            height: 480px;
-            padding: 10px 0px;
+            height: 100%;
+            
         }
     }
     @media screen and (max-width: 370px) {
         :host {
-            height: 450px;
+            height: 100%;
+            
         }
     }
     `]

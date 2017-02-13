@@ -20,47 +20,47 @@ import * as URL_BACK from '../../../img/back.png';
 export const CARDS: ICard[] = [{
     name: '8-ball',
     flipped: false,
-    url: '../../../../../assets/img/8-ball.png'
+    url: 'assets/images/1bannertranajre.jpg'
 },
 {
     name: 'baked-potato',
     flipped: false,
-    url: '../../../../../assets/img/baked-potato.png'
+    url: 'assets/images/bancobogota.jpg'
 },
 {
     name: 'dinosaur',
     flipped: false,
-    url: '../../../../../assets/img/dinosaur.png'
+    url: 'assets/images/logo2.png'
 },
 {
     name: 'kronos',
     flipped: false,
-    url: '../../../../../assets/img/kronos.png'
+    url: 'assets/images/recargas.jpg'
 },
 {
     name: 'rocket',
     flipped: false,
-    url: '../../../../../assets/img/rocket.png'
+    url: 'assets/images/yo_quiero_migiroseguro.jpg'
 },
 {
     name: 'skinny-unicorn',
     flipped: false,
-    url: '../../../../../assets/img/skinny-unicorn.png'
+    url: 'assets/images/bannerganagana.png'
 },
 {
     name: 'that-guy',
     flipped: false,
-    url: '../../../../../assets/img/that-guy.png'
+    url: 'assets/images/banner_liga14.jpg'
 },
 {
     name: 'zeppelin',
     flipped: false,
-    url: '../../../../../assets/img/zeppelin.png'
+    url: 'assets/images/todoenunsololugar.jpg'
 },
 {
     name: 'back',
     flipped: false,
-    url: '../../../../../assets/images/signointerrogacion.jpg'
+    url: 'assets/images/signointerrogacion.jpg'
 }];
 
 const CARDS_WITHOUT_BACK = CARDS.filter(c => c.name !== 'back');

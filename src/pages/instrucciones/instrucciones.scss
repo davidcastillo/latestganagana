@@ -12,10 +12,13 @@ instrucciones-page {
   }
   p{
     padding: 0em;
-    text-align: justify
+    text-align: center
   }
-  ul li {
-    margin-left: 0;
+  ol {
+    text-align: center;
+  }
+  ol li {
+    text-align: center;
   }
 
 }

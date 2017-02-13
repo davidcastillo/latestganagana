@@ -3,14 +3,16 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class GamecontrolService {
 
+    armaParejasFlag: boolean = false;;
+
     constructor(public alertCtrl: AlertController) {
 
     }
 
     armaParejasWin() {
         let alert = this.alertCtrl.create({
-            title: 'New Friend!',
-            subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+            title: '¡Ganaste!',
+            subTitle: 'Has completado exitosamente el juego de armar parejas',
             buttons: ['OK']
         });
         alert.present();
