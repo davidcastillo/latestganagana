@@ -13,8 +13,10 @@ export class SignupComponent implements OnInit {
 
   state: string = '';
   error: any;
+  signupComponent = SignupComponent
 
-  constructor(public af: AngularFire, private navCtrl: NavController,) {
+
+  constructor(public af: AngularFire, private nav: NavController,) {
 
   }
 
@@ -26,7 +28,7 @@ export class SignupComponent implements OnInit {
         password: formData.value.password
       }).then(
         (success) => {
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
       }).catch(
         (err) => {
         this.error = err;

@@ -13,10 +13,10 @@ export class EmailComponent implements OnInit {
     state: string = '';
     error: any;
 
-    constructor(public af: AngularFire, private navCtrl: NavController,) {
+    constructor(public af: AngularFire, private nav: NavController,) {
       this.af.auth.subscribe(auth => { 
         if(auth) {
-          this.navCtrl.push(HomePage);
+          this.nav.setRoot(HomePage);
         }
       });
   }
@@ -35,7 +35,7 @@ export class EmailComponent implements OnInit {
       }).then(
         (success) => {
         console.log(success);
-        this.navCtrl.push(HomePage);
+        this.nav.setRoot(HomePage);
       }).catch(
         (err) => {
         console.log(err);

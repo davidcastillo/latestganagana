@@ -10,6 +10,6 @@
       <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
 
       <button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
-      <a routerLink="/signup" class="alc">Don't have an account?</a>
+      <a [navPush]="signupComponent" class="alc">Don't have an account?</a>
   </form>
 </div>

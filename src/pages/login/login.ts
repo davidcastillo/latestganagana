@@ -2,6 +2,8 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { SignupComponent } from '../signup/signup';
+import { EmailComponent } from '../email/email';
 
 import {NativeStorage} from 'ionic-native'
 
@@ -18,6 +20,8 @@ import 'rxjs/add/operator/map'
 })
 export class LoginPage implements OnInit{
   user = {email: '', password: ''};
+  signupComponent = SignupComponent;
+  emailComponent = EmailComponent
 
   error: any;
   constructor(public af: AngularFire, private nav: NavController,) {
