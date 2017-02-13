@@ -45,6 +45,11 @@ export class FirebaseService {
       amulet_5: 0,
     }
     this.players = angFire.database.list('/Players');
+    angFire.database.list('/Players').subscribe(
+      (ress) =>{
+        console.log('la cantidad de players son: ' + ress.length);
+      }
+    );
   }
 
   get authenticated(): boolean {
@@ -88,10 +93,27 @@ export class FirebaseService {
       }
     );
   }
+
+  displayData(){
+    return this.auth;
+  }
+
+  getSpecificPersonalInfo(id: string){
+    let person: FirebaseListObservable<IUser[]>;
+    return person = this.angFire.database.list('personalInfo',{
+      query:{
+        orderByChild: 'id',
+        equalTo: id
+      }
+    });
+
+  }
+
 }
 
 export interface IUser {
   email: string,
+  uid?: string,
   password?: string,
   name?: string,
   mobile?: string,

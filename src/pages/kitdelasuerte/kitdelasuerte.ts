@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { FirebaseService } from '../../app/services/firebase.service';
+/*
+//pages 
+import { CompleteInfoPage } from './complete-info/complete-info';
+*/
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
 
@@ -10,12 +15,18 @@ import { BarcodeScanner } from 'ionic-native';
 })
 export class KitdelasuertePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private firebaseService: FirebaseService
+  ) { }
 
   private data;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad KitdelasuertePage');
+    
+
   }
 
   validarQR() {
@@ -32,8 +43,8 @@ export class KitdelasuertePage {
 }
 
 const barcodeScannerParams = {
-          preferFrontCamera : true,
-          showFlipCameraButton : true,
-          prompt : "Suerte!",
-          formats : "QR_CODE",
-      }
+  preferFrontCamera: true,
+  showFlipCameraButton: true,
+  prompt: "Suerte!",
+  formats: "QR_CODE",
+}

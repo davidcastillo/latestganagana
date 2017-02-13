@@ -17,6 +17,7 @@ import { NumresultadosPage } from '../pages/numresultados/numresultados';
 import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';
 import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
+import { CompleteInfoPage } from '../pages/kitdelasuerte/complete-info/complete-info';
 
 //Modules 
 import { FormsModule} from '@angular/forms';
@@ -43,7 +44,8 @@ import { GamecontrolService } from './services/gamecontrol.service';
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
-    ArmaparejasgamePage
+    ArmaparejasgamePage,
+    CompleteInfoPage
   ],
 
   imports: [
@@ -69,7 +71,8 @@ import { GamecontrolService } from './services/gamecontrol.service';
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
-    ArmaparejasgamePage
+    ArmaparejasgamePage,
+    CompleteInfoPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
