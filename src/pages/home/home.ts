@@ -24,7 +24,7 @@ import { HomeModel } from './home.model';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
+export class HomePage implements OnInit{
   juegosPage = JuegosPage
   numerologiaPage = NumerologiaPage
   astrologiaPage = AstrologiaPage
