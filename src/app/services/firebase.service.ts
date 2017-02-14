@@ -125,7 +125,25 @@ export class FirebaseService {
 
   }
 
+
+  getAmulets(id?: string){
+    let amulets: FirebaseListObservable<any>;
+    if(id != null || id != undefined){
+      return amulets = this.angFire.database.list(amuletsDb, {
+        query: {
+          orderByChild: 'code',
+          equalTo: id
+        }
+      })
+    }else{
+      return amulets = this.angFire.database.list(amuletsDb);
+    }
+  }
+
 }
+
+
+
 
 export interface IUser {
   email?: string,
@@ -142,3 +160,5 @@ export interface IUser {
   amulet_4?: string,
   amulet_5?: string,
 }
+
+export const amuletsDb: string = 'Amulets';

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+//services
 import { FirebaseService } from '../../app/services/firebase.service';
+import { kitsuerteService } from '../../app/services/kitsuerte.service';
 
+//pages
+import { InstruccionesKitSuertePage } from './instrucciones-kit-suerte/instrucciones-kit-suerte';
 
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
@@ -12,18 +16,20 @@ import { BarcodeScanner } from 'ionic-native';
   templateUrl: 'kitdelasuerte.html'
 })
 export class KitdelasuertePage {
-
+  private instructionsRoot = InstruccionesKitSuertePage;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private firebaseService: FirebaseService
-  ) { }
+    private firebaseService: FirebaseService,
+    private kitService: kitsuerteService
+  ) { 
+  }
 
   private data;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad KitdelasuertePage');
-    
+    this.kitService.copyDbAmulets();
 
   }
 

@@ -18,6 +18,8 @@ import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';
 import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
 import { CompleteInfoPage } from '../pages/kitdelasuerte/complete-info/complete-info';
+import { InstruccionesKitSuertePage } from '../pages/kitdelasuerte/instrucciones-kit-suerte/instrucciones-kit-suerte';
+
 
 //Modules 
 import { FormsModule} from '@angular/forms';
@@ -26,7 +28,7 @@ import { GameModule } from '../pages/armaparejas/ts/game/index';
 //services
 import { FirebaseService, firebaseConfig } from './services/firebase.service';
 import { GamecontrolService } from './services/gamecontrol.service';
-
+import { kitsuerteService } from './services/kitsuerte.service';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { GamecontrolService } from './services/gamecontrol.service';
     NumresultadosPage,
     AstroresultadosPage,
     ArmaparejasgamePage,
-    CompleteInfoPage
+    CompleteInfoPage,
+    InstruccionesKitSuertePage
   ],
 
   imports: [
@@ -72,12 +75,14 @@ import { GamecontrolService } from './services/gamecontrol.service';
     NumresultadosPage,
     AstroresultadosPage,
     ArmaparejasgamePage,
-    CompleteInfoPage
+    CompleteInfoPage,
+    InstruccionesKitSuertePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseService,
-    GamecontrolService
+    GamecontrolService,
+    kitsuerteService
   ]
 })
 export class AppModule {}

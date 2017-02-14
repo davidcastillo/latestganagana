@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Kit de la Suerte</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="instructionsRoot">
+        <ion-icon name="help" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -10,10 +15,10 @@
       Escanea el codigo QR y valida tus puntos
     </ion-card-header>
     <ion-card-content>
-        <button ion-button block color="ganagana" (click)="validarQR()">Escanear Ahora</button>
-        <ion-list *ngIf="data">
-          <ion-item>data.result</ion-item>
-        </ion-list>
+      <button ion-button block color="ganagana" (click)="validarQR()">Escanear Ahora</button>
+      <ion-list *ngIf="data">
+        <ion-item>data.result</ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
