@@ -39,24 +39,12 @@ export class LoginPage implements OnInit{
   }
 
   loginFb() {
-    return this.af.auth.login({
-      provider: AuthProviders.Facebook,
-      method: AuthMethods.Popup,
-    })
-    .then(
-      (success) => {
-        this.nav.setRoot(HomePage);
-      }
-    ).catch(
-      (err) => {
-        this.error = err;
-      }
-    );
-    /*
     if (this.platform.is('cordova')) {
       return Facebook.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        return firebase.auth().signInWithCredential(facebookCredential);
+        if(firebase.auth().signInWithCredential(facebookCredential)){
+          this.nav.setRoot(HomePage);
+        }
       });
     }
     else {
@@ -73,7 +61,7 @@ export class LoginPage implements OnInit{
           this.error = err;
         }
       );
-    }*/
+    }
   }
 
   loginGoogle() {
