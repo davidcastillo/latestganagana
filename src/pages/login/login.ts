@@ -21,18 +21,9 @@ export class LoginPage implements OnInit {
   private user: IUser = { email: '', password: '' };
   private register;
   private newUser: IUser = {
-    name: '',
-    mobile: '',
     email: '',
     password: '',
-    city: '',
-    date_of_birth: null,
-    amulet_0: '123',
-    amulet_1: '',
-    amulet_2: '',
-    amulet_3: '',
-    amulet_4: '',
-    amulet_5: ''
+
   };
   //Fin
 
@@ -45,11 +36,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder) {
     this.register = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', Validators.required],
-      name: ['', Validators.required],
-      mobile: ['', Validators.required],
-      date_of_birth: ['', Validators.required],
-      city: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 

@@ -24,26 +24,7 @@
       <ion-label color="dark" fixed>Contraseña</ion-label>
       <ion-input type="password" name="password" [(ngModel)]="newUser.password" formControlName="password"></ion-input>
     </ion-item>
-
-    <ion-item>
-      <ion-label color="dark" fixed>Fecha de Nacimiento</ion-label>
-      <ion-input type="date" name="date" [(ngModel)]="newUser.date_of_birth" formControlName="date_of_birth"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="dark" fixed>Nombre</ion-label>
-      <ion-input type="text" name="name" [(ngModel)]="newUser.name" formControlName="name"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="dark" fixed>Telefono</ion-label>
-      <ion-input type="number" name="mobile" [(ngModel)]="newUser.mobile" formControlName="mobile"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="dark" fixed>Ciudad</ion-label>
-      <ion-input type="text" name="city" [(ngModel)]="newUser.city" formControlName="city"></ion-input>
-    </ion-item>
+    
     <button ion-button block type="submit" [disabled]="!register.valid">Crear una cuenta</button>
   </form>
   <button ion-button block (click)="loginAlert()">Ya tengo una cuenta!</button>

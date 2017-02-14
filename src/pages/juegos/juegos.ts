@@ -15,15 +15,16 @@ import { FirebaseService } from '../../app/services/firebase.service';
 export class JuegosPage {
   selectedItem: any;
   icons: string[];
-  items: Array<{title: string, icon: string}>;
-  games: Array<{title: string, gameId: string, descripcion: string,}>;
+  items: Array<{ title: string, icon: string }>;
+  games: Array<{ title: string, gameId: string, descripcion: string, }>;
+  private tamaño;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService
-    
-    ) {
+
+  ) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -37,38 +38,45 @@ export class JuegosPage {
         title: 'Kit de la Suerte',
         gameId: 'kitdelasuerte',
         descripcion: 'este juego se parece a capturar pokemones'
-      },      
+      },
     ];
+
+    this.getLenght();
   }
 
   gamesTapped(event, game) {
-    let gametoShow : any;
-      switch(game.gameId) {
-        case 'armaparejas':
-             gametoShow = ArmaparejasPage;
-             break;
-        case 'kitdelasuerte':
-
-             gametoShow = this.validDatos();
-             break;
-        default:
-            console.log("none item selected");
-      }
+    let gametoShow: any;
+    switch (game.gameId) {
+      case 'armaparejas':
+        gametoShow = ArmaparejasPage;
+        break;
+      case 'kitdelasuerte':
+        
+        gametoShow = this.validDatos();
+        break;
+      default:
+        console.log("none item selected");
+    }
     this.navCtrl.push(gametoShow, {
       item: game
     });
   }
 
-  validDatos(): any{
-    let uid;
-    this.firebaseService.displayData().subscribe((result) => {uid = result.auth.uid})
-    let length;
-    this.firebaseService.getSpecificPersonalInfo(uid).subscribe((ress) => {length = ress.length});
-    console.log(length);
-    if(length == undefined){
-      return CompleteInfoPage;
-    }
-    return KitdelasuertePage;
+  validDatos(): any {
+    if (this.tamaño == 1) {
+      return KitdelasuertePage;
+    } else 
+    return CompleteInfoPage;
+    
+
+
+
+  }
+
+  getLenght() {
+    console.log(this.firebaseService.displayData().uid);
+    this.firebaseService.getSpecificPersonalInfo(this.firebaseService.displayData().uid)
+      .subscribe(result => this.tamaño = result.length);
   }
 
 }

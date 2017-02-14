@@ -46,7 +46,7 @@ export class FirebaseService {
     }
     this.players = angFire.database.list('/Players');
     angFire.database.list('/Players').subscribe(
-      (ress) =>{
+      (ress) => {
         console.log('la cantidad de players son: ' + ress.length);
       }
     );
@@ -94,25 +94,41 @@ export class FirebaseService {
     );
   }
 
-  displayData(){
-    return this.auth;
+  displayData() {
+    var data;
+    this.angFire.auth.subscribe((ress)=>{
+      data = ress;
+      console.log('esto es data: '+ data);
+    });
+    return data;
   }
 
-  getSpecificPersonalInfo(id: string){
+
+  updatePersonalInfo(personalInfo) {
+    return this.getSpecificPersonalInfo().push(personalInfo);
+  }
+
+  getSpecificPersonalInfo(uid?: string) {
     let person: FirebaseListObservable<IUser[]>;
-    return person = this.angFire.database.list('personalInfo',{
-      query:{
-        orderByChild: 'id',
-        equalTo: id
-      }
-    });
+    let nameSpaceDb: string = 'personalInfo';
+    if (uid != null || uid != undefined) {
+      return person = this.angFire.database.list(nameSpaceDb, {
+        query: {
+          orderByChild: 'uid',
+          equalTo: uid
+        }
+      });
+
+    } else {
+      return person = this.angFire.database.list(nameSpaceDb);
+    }
 
   }
 
 }
 
 export interface IUser {
-  email: string,
+  email?: string,
   uid?: string,
   password?: string,
   name?: string,

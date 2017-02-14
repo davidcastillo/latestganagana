@@ -20,42 +20,42 @@ import * as URL_BACK from '../../../img/back.png';
 export const CARDS: ICard[] = [{
     name: '8-ball',
     flipped: false,
-    url: 'assets/images/1bannertranajre.jpg'
+    url: 'assets/images/recargaslogo.png'
 },
 {
     name: 'baked-potato',
     flipped: false,
-    url: 'assets/images/bancobogota.jpg'
+    url: 'assets/images/seguros.png'
 },
 {
     name: 'dinosaur',
     flipped: false,
-    url: 'assets/images/logo2.png'
+    url: 'assets/images/logo3.png'
 },
 {
     name: 'kronos',
     flipped: false,
-    url: 'assets/images/recargas.jpg'
+    url: 'assets/images/pagos.png'
 },
 {
     name: 'rocket',
     flipped: false,
-    url: 'assets/images/yo_quiero_migiroseguro.jpg'
+    url: 'assets/images/juegos.png'
 },
 {
     name: 'skinny-unicorn',
     flipped: false,
-    url: 'assets/images/bannerganagana.png'
+    url: 'assets/images/girosdinero.png'
 },
 {
     name: 'that-guy',
     flipped: false,
-    url: 'assets/images/banner_liga14.jpg'
+    url: 'assets/images/corresponsalbancario.png'
 },
 {
     name: 'zeppelin',
     flipped: false,
-    url: 'assets/images/todoenunsololugar.jpg'
+    url: 'assets/images/chance.png'
 },
 {
     name: 'back',

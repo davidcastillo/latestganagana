@@ -42,11 +42,26 @@ import { GamecontrolService } from '../../../../../../app/services/gamecontrol.s
 export class StatusComponent {
     @select() status$: Observable<Number>;
     @select() elapsedMs$: Observable<Number>;
-
+    
     status: any;
     flag: boolean = true;
+    pass: any;
     constructor(private actions: GameActions, private gamecontrolService: GamecontrolService) {
         this.status = STATUS;
+        this.pass = this.status.PASS;
+    }
+
+    ngDoCheck() {
+        
+        this.status$.subscribe((result) => {
+            if (result === this.pass) {
+                console.log("Pendiente");
+                this.pass = null;
+                this.gamecontrolService.armaParejasWin();
+                this.gamecontrolService.armaParejasFlag = true;
+            }
+        })
+        
     }
 
     reset(e: Event) {
@@ -54,8 +69,9 @@ export class StatusComponent {
         this.actions.reset();
     }
 
-    win(){
-        this.gamecontrolService.armaParejasWin();
-        this.gamecontrolService.armaParejasFlag= true;
+    win() {
+        
+        /*this.gamecontrolService.armaParejasWin();
+        this.gamecontrolService.armaParejasFlag= true;*/
     }
 }

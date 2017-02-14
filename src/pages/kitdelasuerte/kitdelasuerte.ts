@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { FirebaseService } from '../../app/services/firebase.service';
-/*
-//pages 
-import { CompleteInfoPage } from './complete-info/complete-info';
-*/
+
+
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
 

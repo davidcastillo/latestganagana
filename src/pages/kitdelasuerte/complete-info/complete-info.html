@@ -17,16 +17,17 @@
 
   <ion-card>
     <ion-card-header>
-    Actualizacion de Informacion<ion-icon name="alert"></ion-icon>
+      Actualizacion de Informacion
+      <ion-icon name="alert"></ion-icon>
     </ion-card-header>
     <ion-card-content>
       <p>
         Para poder participar en este juego, primero debes actualizar tu informacion personal. Recuerda no dejar espacios en blanco
       </p>
-      
+
     </ion-card-content>
   </ion-card>
-  <form [formGroup]="register" (ngSubmit)="updateUser()">
+  <form [formGroup]="register" (ngSubmit)="presentConfirm()">
     <ion-item>
       <ion-label color="dark" stacked>Nombre</ion-label>
       <ion-input type="text" name="name" [(ngModel)]="User.name" placeholder="Nombre Completo" formControlName="name"></ion-input>
@@ -46,7 +47,8 @@
       <ion-label color="dark" stacked>Ciudad</ion-label>
       <ion-input type="text" name="city" [(ngModel)]="User.city" formControlName="city" placeholder="Ciudad donde Vive"></ion-input>
     </ion-item>
-    <button ion-button block type="submit" [disabled]="!register.valid">Actualizar Informacion</button>
+
+    <button ion-button block type="submit"  [disabled]="!register.valid">Actualizar Informacion</button>
   </form>
 
 </ion-content>

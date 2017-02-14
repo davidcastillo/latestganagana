@@ -23,9 +23,7 @@ export class HomePage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
 
   ngOnInit(){
-    this._firebaseService.displayData().subscribe((data)=>{
-      console.log(data.auth.uid);
-    })
+    
   }
 
   /*ionViewCanEnter(){
