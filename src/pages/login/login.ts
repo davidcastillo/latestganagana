@@ -39,29 +39,41 @@ export class LoginPage implements OnInit{
   }
 
   loginFb() {
-      if (this.platform.is('cordova')) {
-      return Facebook.login(['email', 'public_profile']).then(res => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        return firebase.auth().signInWithCredential(facebookCredential) ;
-         });
-    } else {
-      return  this.af.auth.login({
+    return this.af.auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
     })
-/*
-        NativeStorage.setItem('user', {
-        email: this.user.email,
-      })*/
-      
     .then(
-        (success) => {
+      (success) => {
         this.nav.setRoot(HomePage);
-      }).catch(
-        (err) => {
+      }
+    ).catch(
+      (err) => {
         this.error = err;
-      })
+      }
+    );
+    /*
+    if (this.platform.is('cordova')) {
+      return Facebook.login(['email', 'public_profile']).then(res => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        return firebase.auth().signInWithCredential(facebookCredential);
+      });
     }
+    else {
+      return this.af.auth.login({
+        provider: AuthProviders.Facebook,
+        method: AuthMethods.Popup,
+      })
+      .then(
+        (success) => {
+          this.nav.setRoot(HomePage);
+        }
+      ).catch(
+        (err) => {
+          this.error = err;
+        }
+      );
+    }*/
   }
 
   loginGoogle() {
