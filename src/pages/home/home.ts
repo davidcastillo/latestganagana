@@ -7,6 +7,7 @@ import { NumerologiaPage } from '../numerologia/numerologia';
 import { AstrologiaPage } from '../astrologia/astrologia';
 import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { GooglePlus, NativeStorage } from 'ionic-native';
 
@@ -30,21 +31,25 @@ export class HomePage {
   resultadosPage = ResultadosPage
   simuladorgirosPage = SimuladorgirosPage
   user: HomeModel = new HomeModel();
+  name: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public af: AngularFire, public navCtrl: NavController, public navParams: NavParams) {
 
-   ionViewCanEnter(){
-    let env = this;
-    NativeStorage.getItem('user')
-    .then(function (data){
-      env.user = {
-        email: data.email,
-      };
-    }, function(error){
-      console.log(error);
+    this.af.auth.subscribe(auth => {
+      if(auth) {
+        this.name = auth;
+      }
     });
+
+  }
+
+  logout() {
+     this.af.auth.logout();
+     this.navCtrl.setRoot(LoginPage);
   }
 
 
+  ngOnInit() {
+  }
 }

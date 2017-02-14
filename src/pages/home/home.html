@@ -83,9 +83,7 @@
   </ion-row>
 
     <ion-row>
-      <ion-col width-20 class= "mycol">
-      </ion-col>
-      <ion-col width-60 class= "mycol">
+      <ion-col width-50 class= "mycol">
          <button ion-button icon-only class= "ion-buttonic" block type="button" 
       [navPush]="simuladorgirosPage">
           <ion-icon name="logo-usd" class= "myicon"></ion-icon>
@@ -96,8 +94,13 @@
         </button>
     </ion-col>
 
-    <ion-col width-20 class= "mycol">
-
+    <ion-col width-50 class= "mycol">
+        <button ion-button icon-only class= "ion-buttonic" block type="button" 
+            (click)="logout()">
+            <ion-icon  class= "myicon"  md="md-log-out"></ion-icon>
+        </button>
+        <button ion-button block type="button" (click)="logout()" class="basic-btn">Logout
+        </button>
     </ion-col>
   </ion-row>
 </ion-grid>

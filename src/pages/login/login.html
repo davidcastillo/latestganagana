@@ -11,23 +11,21 @@
         <p>Bienvenido a la app de Gana Gana, ingresa o registrate para empezar a disfrutar todos nuestros beneficios para ti</p> 
 
   <form>
-    <ion-item>
-      <ion-input type="email" name="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
-    </ion-item>
- 
-    <ion-item>
-      <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
-    </ion-item>
+
  
    <span class="error" *ngIf="error">{{ error }}</span>
 
-  <button ion-button block outline (click)="loginFb()" id="fb">Login With Facebook</button>
-  <button ion-button block outline (click)="loginGoogle()" id="google">Login With Google</button>
-  <button ion-button block outline [navPush]="emailComponent" id="email">Email</button>
+  <button ion-button block outline icon-left (click)="loginFb()" id="fb">
+    <ion-icon md="logo-facebook"></ion-icon>
+    Ingresar con Facebook</button>
+  <button ion-button block outline icon-left (click)="loginGoogle()" id="google">
+    <ion-icon md="logo-google"></ion-icon>
+    Ingresar con Google</button>
+  <button ion-button block outline icon-left [navPush]="emailComponent" id="email">
+    <ion-icon md="md-mail"></ion-icon>
+    Ingresar con mi Email</button>
  
-  <a [navPush]="signupComponent" routerLinkActive="active" class="alc">No account? <strong>Create one here</strong></a>
-
-   <button ion-button block outline (click)="signInWithFacebook()">Facebook</button>
+  <a [navPush]="signupComponent" routerLinkActive="active" class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
 
   
   </form>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { SignupComponent } from '../signup/signup';
 
 @Component({
   selector: 'email-page',
@@ -12,6 +13,8 @@ export class EmailComponent implements OnInit {
 
     state: string = '';
     error: any;
+    signupComponent = SignupComponent;
+    
 
     constructor(public af: AngularFire, private nav: NavController,) {
       this.af.auth.subscribe(auth => { 

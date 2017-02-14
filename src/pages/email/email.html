@@ -1,15 +1,28 @@
-<div class="form-container">
-    <a routerLink="/login" id="goback">Go back</a>
-    <h2>Custom Login</h2>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Gana Gana App</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <span class="error" *ngIf="error" >{{ error }}</span>
 
-    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+<ion-content padding>
+    <img src="assets/images/logo2.png"/>
+    <p>Bienvenido a la app de Gana Gana, ingresa con tu correo para empezar a disfrutar todos nuestros beneficios para ti</p> 
 
-      <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
-      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
-
-      <button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
-      <a [navPush]="signupComponent" class="alc">Don't have an account?</a>
-  </form>
-</div>
+  <div class="form-container">
+      <span class="error" *ngIf="error" >{{ error }}</span>
+        <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+          <ion-item>
+            <ion-input type="text" placeholder="Email..." (ngModel)="email" name="email" class="txt" required> </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
+          </ion-item>
+          <button ion-button block outline type="submit" [disabled]="!formData.valid" class="basic-btn">Ingresar</button>
+          <a [navPush]="signupComponent"  class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
+      </form>
+  </div>
+</ion-content>
