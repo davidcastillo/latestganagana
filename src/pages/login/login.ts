@@ -42,9 +42,9 @@ export class LoginPage implements OnInit{
     if (this.platform.is('cordova')) {
       return Facebook.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        if(firebase.auth().signInWithCredential(facebookCredential)){
-          this.nav.setRoot(HomePage);
-        }
+        var authlog = firebase.auth().signInWithCredential(facebookCredential);
+        alert(authlog);
+        this.nav.setRoot(HomePage);
       });
     }
     else {
