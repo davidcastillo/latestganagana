@@ -29,6 +29,10 @@ export class kitsuerteService {
         return this.db.addAmulet(amulet);
     }
 
+    updateAmulte(key, changes){
+        return this.db.updateAmulet(key,changes);
+    }
+
     copyDbAmulets(){
         /*this.firebaseService.getAmulets().subscribe(
             (res) => {

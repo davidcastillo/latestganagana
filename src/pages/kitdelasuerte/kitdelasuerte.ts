@@ -17,6 +17,7 @@ import { BarcodeScanner } from 'ionic-native';
 })
 export class KitdelasuertePage {
   private instructionsRoot = InstruccionesKitSuertePage;
+  private amulets;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,9 +31,16 @@ export class KitdelasuertePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad KitdelasuertePage');
     this.kitService.copyDbAmulets();
+    this.kitService.getAllAmulets().then(
+      (ress)=>{
+        console.log(ress);
+        this.amulets = ress;
+      }
+    );
 
   }
 
+  
   validarQR() {
     BarcodeScanner.scan(barcodeScannerParams).then((barcodeData) => {
       this.data = {
@@ -44,7 +52,18 @@ export class KitdelasuertePage {
 
   }
 
-}
+  prueba(key){
+    let data = {
+      code: key.code,
+      find: true,
+      imgUrl: key.imgUrl,
+      name: key.name
+    }
+    this.kitService.updateAmulte(key.id, data);
+    
+  }
+
+} 
 
 const barcodeScannerParams = {
   preferFrontCamera: true,

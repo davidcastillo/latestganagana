@@ -1,3 +1,35 @@
 page-kitdelasuerte {
+    ion-card{
+        border: 2em;
+        border-color: red;
+        
+    }
+    img{
+        border: 20em;
+        
+        
 
+    }
+    
+    .amuletos{
+        width: 270px;
+        overflow: hidden;
+        padding-bottom: 30px;
+        padding: 10px;
+        float: left;
+        padding-left: 2em;
+        margin-left: 30px;
+    }
+
+    .azul{
+        border-style: solid;
+        border-width: 5px;
+        border-color: cornflowerblue;
+    }
+
+    .gris{
+        border-style: solid;
+        border-width: 5px;
+        border-color: grey;
+    }
 }
