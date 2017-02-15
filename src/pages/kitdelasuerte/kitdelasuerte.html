@@ -15,7 +15,7 @@
       Escanea el codigo QR y valida tus puntos
     </ion-card-header>
     <ion-card-content>
-      <button ion-button block color="ganagana" (click)="validarQR()">Escanear Ahora</button>
+      <button ion-button block color="ganagana" (click)="getQR()">Escanear Ahora</button>
       <ion-list *ngIf="data">
         <ion-item>data.result</ion-item>
       </ion-list>
@@ -27,9 +27,7 @@
     <ion-card>
     <img [ngClass]="amulet.find ? 'azul': 'gris'" src="{{amulet.imgUrl}}" alt="">
     <ion-card-header>
-      <button ion-button (click)="prueba(amulet)">
       {{amulet.name}}
-      </button>
     </ion-card-header>
     </ion-card>
     

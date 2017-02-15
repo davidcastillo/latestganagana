@@ -34,11 +34,6 @@ export class kitsuerteService {
     }
 
     copyDbAmulets(){
-        /*this.firebaseService.getAmulets().subscribe(
-            (res) => {
-                console.log(res);
-            }
-        );*/
         this.intanceGanaganaDb();
         this.getAllAmulets().then(
             (res)=>{
