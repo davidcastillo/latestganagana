@@ -74,7 +74,11 @@ export class KitdelasuertePage {
                   this.loadAmuletos();
                 }
               );
-              return this.showToast("Amuleto Capturado", "bottom");
+              this.showToast("Amuleto Capturado", "bottom");
+              setTimeout(() => {
+                this.validAllQR();
+              }, 3000);
+
             }
           } else {
             //Lo siento pero este codigo qr no pertenece a ningun amuleto
@@ -85,13 +89,31 @@ export class KitdelasuertePage {
     )
   }
 
-  showToast(message: string, position: string) {
+  validAllQR() {
+    var faltantes: number = 0;
+    this.kitService.getAllAmulets().then(
+      (res) => {
+        res.forEach(amulet => {
+          if (!amulet.find) {
+            faltantes++;
+          }
+        });
+        if (faltantes == 0) {
+          this.showToast("Has Terminado!", "bottom");
+        } else {
+          this.showToast("Te faltan: " + (faltantes) + "Amuletos por encontrar.", "bottom");
+        }
+      }
+    );
+  }
+  showToast(message: string, position: string, pixelsY: number = (-40)) {
     Toast.showWithOptions({
       message: message,
-      duration: 2000, // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+      duration: 2000,
       position: position,
-      addPixelsY: -40
+      addPixelsY: pixelsY
     }).subscribe(console.log);
+
   }
 
 
