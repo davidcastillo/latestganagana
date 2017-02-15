@@ -34,20 +34,21 @@ export class KitdelasuertePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad KitdelasuertePage');
-    this.kitService.copyDbAmulets();
+    //    this.kitService.copyDbAmulets();
+    this.fromFiretoFireSaves();
     this.loadAmuletos();
-    
+
   }
 
   loadAmuletos() {
     this.kitService.getAllAmulets().then(
       (ress) => {
         this.amulets = ress;
-        if(ress.length > 8) {
+        if (ress.length > 8) {
           this.controlDoubleAmulets().then(
-            (res)=>{
+            (res) => {
               this.navCtrl.pop().then(
-                ()=>{
+                () => {
                   this.navCtrl.push(KitdelasuertePage);
                 }
               );
@@ -58,7 +59,7 @@ export class KitdelasuertePage {
     );
   }
 
-  controlDoubleAmulets(){
+  controlDoubleAmulets() {
     return this.kitService.deleteTable('amulets');
   }
 
@@ -82,7 +83,7 @@ export class KitdelasuertePage {
   compararQR(qrText) {
     this.kitService.getAllAmulets().then(
       (amulets) => {
-          var flag: boolean = true;
+        var flag: boolean = true;
         amulets.forEach(amulet => {
           //comparo el amuleto con el code del amuleto
           if (qrText == amulet.code) {
@@ -104,12 +105,12 @@ export class KitdelasuertePage {
               }, 3000);
 
             }
-          } 
+          }
         });
         if (flag) {
-            //Lo siento pero este codigo qr no pertenece a ningun amuleto
-            return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
-          }
+          //Lo siento pero este codigo qr no pertenece a ningun amuleto
+          return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
+        }
       }
     )
   }
@@ -152,6 +153,73 @@ export class KitdelasuertePage {
     }
     return this.kitService.updateAmulte(key.id, data);
 
+  }
+
+  updateFromFireToLocal() {
+
+  }
+
+  fromFiretoFireSaves() {
+    //objeto para capturar los amuletos personales
+    var kitSuerteSaves = []
+    //cargue los amuletos
+    this.firebaseService.getKitSuerteSaves().subscribe(
+      (res) => {
+        //si no existe un espacio privado entonces creelo
+        if (res.length == 0) {
+          this.firebaseService.getAmulets().subscribe(
+            (amuletos) => {
+
+              amuletos.forEach(amulet => {
+                kitSuerteSaves.push({
+                  code: amulet.code,
+                  find: false
+                });
+              });
+              console.log(kitSuerteSaves);
+              this.firebaseService.pushKitSuerteSaves({
+                uid: this.getuid(),
+                amuletos: kitSuerteSaves
+              })
+            }
+          );
+
+          //por el contrario ya tiene uno, valida que exista el espacio local
+        } else {
+          console.log('ejecutacopydbamulets');
+          this.kitService.copyDbAmulets();
+        }
+      }
+    );
+  }
+
+  /* updateFromLocalToFire() {
+     var kitSuerteSaves = []
+     this.firebaseService.getKitSuerteSaves().subscribe(
+       (res) => {
+         if (res.length == 0) {
+           this.kitService.getAllAmulets().then(
+             (localAmulets) => {
+               localAmulets.forEach(amulet => {
+                 kitSuerteSaves.push({
+                   code: amulet.code,
+                   find: amulet.find
+                 });
+               });
+               this.firebaseService.pushKitSuerteSaves({
+                 uid: this.getuid(),
+                 amuletos: kitSuerteSaves
+               })
+             }
+           );
+         }
+       }
+     );
+ 
+   }*/
+
+  getuid() {
+    return this.firebaseService.auth.getAuth().uid;
   }
 
 }

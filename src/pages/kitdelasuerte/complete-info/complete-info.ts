@@ -48,10 +48,8 @@ export class CompleteInfoPage {
   }
 
   updateUser(): void {
-    this.firebaseService.displayData().subscribe((data)=>{
-      console.log(data.auth.uid);
-      this.User.uid = data.auth.uid;
-    });
+    this.User.uid = this.firebaseService.auth.getAuth().uid;
+
     console.log(this.User);
     this.firebaseService.updatePersonalInfo(this.User).then(
       () => {
@@ -59,39 +57,39 @@ export class CompleteInfoPage {
           () => {
             this.navCtrl.push(KitdelasuertePage);
           }
-        ).catch((err)=> {
-          console.log('Error navCtrl: ' +err);
+        ).catch((err) => {
+          console.log('Error navCtrl: ' + err);
         });
       }
     )
-    .catch(
+      .catch(
       (err) => {
         console.log('error ubdatePersonalInfo: ' + err);
       }
-    )
+      )
   }
 
   presentConfirm() {
-  let alert = this.alertCtrl.create({
-    title: 'Politicas y Seguridad',
-    message: 'Los datos ingresados seran utilizados unicamente en la aplicacion.',
-    buttons: [
-      {
-        text: 'Cancelar y salir',
-        role: 'cancel',
-        handler: () => {
-          this.navCtrl.pop();
+    let alert = this.alertCtrl.create({
+      title: 'Politicas y Seguridad',
+      message: 'Los datos ingresados seran utilizados unicamente en la aplicacion.',
+      buttons: [
+        {
+          text: 'Cancelar y salir',
+          role: 'cancel',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        },
+        {
+          text: 'Acepto',
+          handler: () => {
+            this.updateUser();
+          }
         }
-      },
-      {
-        text: 'Acepto',
-        handler: () => {
-          this.updateUser();
-        }
-      }
-    ]
-  });
-  alert.present();
-}
+      ]
+    });
+    alert.present();
+  }
 
 }

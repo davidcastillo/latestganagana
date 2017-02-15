@@ -94,15 +94,17 @@ export class FirebaseService {
     );
   }
 
-  displayData() {
+  /*displayData() {
     var data;
     this.angFire.auth.subscribe((ress)=>{
       data = ress;
       console.log('esto es data: '+ data);
     });
     return data;
+  }*/
+  getuid(){
+    return this.angFire.auth.getAuth().uid;
   }
-
 
   updatePersonalInfo(personalInfo) {
     return this.getSpecificPersonalInfo().push(personalInfo);
@@ -140,6 +142,30 @@ export class FirebaseService {
     }
   }
 
+  getKitSuerteSaves(id?: string){
+    let amulets: FirebaseListObservable<any>;
+    if(id != null || id != undefined){
+      return amulets = this.angFire.database.list(kitSuerteSavesDb, {
+        query: {
+          orderByChild: 'uid',
+          equalTo: id
+        }
+      })
+    }else{
+      return amulets = this.angFire.database.list(kitSuerteSavesDb);
+    }
+  }
+
+  pushKitSuerteSaves(amulet){
+    return this.getKitSuerteSaves().push(amulet);
+  }
+
+  updateKitSuerteSaves(key: string, data: any){
+    return this.getKitSuerteSaves().update(key, data);
+  }
+
+  
+
 }
 
 
@@ -162,3 +188,4 @@ export interface IUser {
 }
 
 export const amuletsDb: string = 'Amulets';
+export const kitSuerteSavesDb: string = 'kitSuerteSaves'; 

@@ -46,8 +46,9 @@ export class ganaganaDb {
             code: amulet.code,
             name: amulet.name,
             imgUrl: amulet.imgUrl,
-            find: false 
+            find: amulet.find
         }
+        console.log('Estoy en auletsDb metodo addAmulet');
         return this.db.table('amulets').put(item);
     }
 

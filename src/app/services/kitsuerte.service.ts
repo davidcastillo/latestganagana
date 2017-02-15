@@ -35,16 +35,55 @@ export class kitsuerteService {
 
     copyDbAmulets(){
         this.intanceGanaganaDb();
+        var data;
         this.getAllAmulets().then(
-            (res)=>{
-                if(res.length == 0){
+            (amulets)=>{
+                console.log(amulets.length);
+                if(amulets.length == 0){
                     this.firebaseService.getAmulets().subscribe(
-                        (res) => {
-                            res.forEach(element => {
-                               this.addAmulet(element);
+                        (amuletsFire) => {
+                            console.log('copydbAmulets - amuletFire');
+                            amuletsFire.forEach(elementFire => {
+                            console.log(elementFire);
+                                
+                               this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
+                                   (amuletSave) =>{
+                                       console.log("copydbamulets - amuletSave");
+                                       var amuletos;
+                                       amuletSave.forEach(element => {
+                                           console.log(element.amuletos);
+                                           amuletos = element.amuletos;
+                                           amuletos.forEach(elementos => {
+                                               if(elementos.code == elementFire.code){
+                                                console.log('yes');
+                                                data = {
+                                                  code: elementos.code,
+                                                  imgUrl: elementFire.imgUrl,
+                                                  name: elementFire.name,
+                                                  fin: elementos.find  
+                                                }
+                                                this.addAmulet(data);
+                                               }
+                                           });
+                                       });
+                                       /*amuletSave.forEach(element => {
+                                           data  = {
+                                            code: element.code,
+                                            imgUrl: elementFire.imgUrl,
+                                            name: elementFire.name,
+                                            find: element.find
+                                           }
+                                           this.addAmulet(data);
+                                       });*/
+                                   }
+                               );
+                               //this.addAmulet(element);
+
                             });
                         }
                     )
+                }else {
+                    console.log('hay amulets');
                 }
             }
         ).catch(

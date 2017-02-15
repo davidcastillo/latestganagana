@@ -74,8 +74,8 @@ export class JuegosPage {
   }
 
   getLenght() {
-    console.log(this.firebaseService.displayData().uid);
-    this.firebaseService.getSpecificPersonalInfo(this.firebaseService.displayData().uid)
+    
+    this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
       .subscribe(result => this.tamaño = result.length);
   }
 
