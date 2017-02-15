@@ -8,6 +8,9 @@ import { kitsuerteService } from '../../app/services/kitsuerte.service';
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
 
+//pages
+import { InstruccionesKitSuertePage } from './instrucciones-kit-suerte/instrucciones-kit-suerte';
+
 //native import 
 import { Toast } from 'ionic-native';
 
@@ -17,12 +20,14 @@ import { Toast } from 'ionic-native';
 })
 export class KitdelasuertePage {
   private amulets;
+  private instructionsRoot;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
     private kitService: kitsuerteService
   ) {
+    this.instructionsRoot = InstruccionesKitSuertePage;
   }
 
   private data;
@@ -49,9 +54,12 @@ export class KitdelasuertePage {
         this.data = {
           result: barcodeData.text
         };
-      }, (err) => {
+        this.compararQR(barcodeData.text);
+      }).catch(
+      (err) => {
         console.log('Algo salio mal' + err);
-      });
+      }
+      );
 
 
 
@@ -60,9 +68,11 @@ export class KitdelasuertePage {
   compararQR(qrText) {
     this.kitService.getAllAmulets().then(
       (amulets) => {
+          var flag: boolean = true;
         amulets.forEach(amulet => {
           //comparo el amuleto con el code del amuleto
           if (qrText == amulet.code) {
+            flag = false;
             //si el amuleto corresponde pero ya lo tiene
             if (amulet.find) {
               //Ya tenias este amuleto
@@ -80,11 +90,12 @@ export class KitdelasuertePage {
               }, 3000);
 
             }
-          } else {
+          } 
+        });
+        if (flag) {
             //Lo siento pero este codigo qr no pertenece a ningun amuleto
             return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
           }
-        });
       }
     )
   }
@@ -132,7 +143,6 @@ export class KitdelasuertePage {
 }
 
 const barcodeScannerParams = {
-  preferFrontCamera: true,
   showFlipCameraButton: true,
   prompt: "Suerte!",
   formats: "QR_CODE",
