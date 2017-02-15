@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
     //La variable newUser queda lista para almacenar en la base de datos con los correspondientes datos.
     console.log(this.newUser);
     this.showLoading();
-    let user = {email: this.newUser.email, password: this.newUser.password}
+    let user = { email: this.newUser.email, password: this.newUser.password }
     //Por ahora sigo creando la cuenta con email y password para satisfacer la credencial.
     this.auth.createUser(user).then((authData) => {
       setTimeout(() => {
@@ -63,6 +63,7 @@ export class LoginPage implements OnInit {
       prompt.present();
     }).catch((error) => {
       this.showError(error);
+      this.loader.dismiss();
     });
   }
 
@@ -78,7 +79,10 @@ export class LoginPage implements OnInit {
       this.loader.dismiss();
       console.log("antes de enviar a home");
       this.nav.setRoot(HomePage);
-    }).catch((error) => { this.showError(error); });
+    }).catch((error) => {
+      this.showError(error);
+      this.loader.dismiss();
+    });
   }
 
   loginAlert(): void {
@@ -150,7 +154,10 @@ export class LoginPage implements OnInit {
       }).then((authData) => {
         console.log("ya estaba logeado");
         this.nav.setRoot(HomePage);
-      }).catch((error) => { this.showError(error); });
+      }).catch((error) => { 
+        this.showError(error); 
+        this.loader.dismiss();
+      });
     }
 
   }

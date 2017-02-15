@@ -36,17 +36,31 @@ export class KitdelasuertePage {
     console.log('ionViewDidLoad KitdelasuertePage');
     this.kitService.copyDbAmulets();
     this.loadAmuletos();
-
+    
   }
 
   loadAmuletos() {
     this.kitService.getAllAmulets().then(
       (ress) => {
         this.amulets = ress;
+        if(ress.length > 8) {
+          this.controlDoubleAmulets().then(
+            (res)=>{
+              this.navCtrl.pop().then(
+                ()=>{
+                  this.navCtrl.push(KitdelasuertePage);
+                }
+              );
+            }
+          );
+        }
       }
     );
   }
 
+  controlDoubleAmulets(){
+    return this.kitService.deleteTable('amulets');
+  }
 
   getQR() {
     BarcodeScanner.scan(barcodeScannerParams).then(

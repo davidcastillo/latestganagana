@@ -58,4 +58,8 @@ export class kitsuerteService {
         );
     }
 
+    deleteTable(table: string){
+        return this.db.deleteTable(table);
+    }
+
 }

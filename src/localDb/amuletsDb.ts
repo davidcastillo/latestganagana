@@ -51,4 +51,8 @@ export class ganaganaDb {
         return this.db.table('amulets').put(item);
     }
 
+    deleteTable(table: string){
+        return this.db.table(table).clear();
+    }
+
 }
