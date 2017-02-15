@@ -1,3 +1,19 @@
 page-astrologia {
 
+
+
+
+}
+
+
+.picker-md .picker-button, .picker-md .picker-button.activated {
+    background-color: #FFED00;
+    color: #015643;
+    button{
+        color: #015643;
+    }
+}
+
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt.picker-opt-selected{
+    color: #015643;
 }

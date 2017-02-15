@@ -35,7 +35,7 @@
 
     <ion-item>
       <ion-label color="dark" stacked>Fecha de Nacimiento</ion-label>
-      <ion-input type="date" name="date" [(ngModel)]="User.date_of_birth" formControlName="date_of_birth"></ion-input>
+      <ion-datetime displayFormat="MMM DD, YYYY" name="date" [(ngModel)]="User.date_of_birth" formControlName="date_of_birth" doneText = "ok"></ion-datetime>
     </ion-item>
 
     <ion-item>
