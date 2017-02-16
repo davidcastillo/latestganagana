@@ -87,11 +87,7 @@ export class FirebaseService {
 
   logout() {
     localStorage.removeItem('currentUser');
-    this.auth.logout().then(
-      () => {
-        console.log("Ha cerrado sesion");
-      }
-    );
+    return this.auth.logout()
   }
 
   /*displayData() {

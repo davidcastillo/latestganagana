@@ -58,7 +58,12 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   cerrarSesion() {
-    this.firebaseService.logout();
+    this.firebaseService.logout().then(
+      ()=>{
+    console.log("debe mandar a login page");
     this.nav.setRoot(LoginPage);
+    
+      }
+    );
   }
 }
