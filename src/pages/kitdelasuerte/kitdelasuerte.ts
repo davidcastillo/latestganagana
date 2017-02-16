@@ -113,7 +113,7 @@ export class KitdelasuertePage implements OnInit {
     //objeto para capturar los amuletos personales
     var kitSuerteSaves = []
     //cargue los amuletos
-    this.firebaseService.getKitSuerteSaves().subscribe(
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
       (res) => {
         //si no existe un espacio privado entonces creelo
         if (res.length == 0) {
