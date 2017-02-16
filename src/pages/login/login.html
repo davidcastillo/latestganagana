@@ -6,20 +6,26 @@
 
 
 <ion-content padding>
-    <img src="assets/images/logo2.png"/>
-    <p>Bienvenido a la app de Gana Gana, ingresa con tu correo para empezar a disfrutar todos nuestros beneficios para ti</p> 
+  <div class="imagen">
+    <img src="assets/images/logo2.png" />
+  </div>
+  <p>Bienvenido a la app de Gana Gana, inicia sesión para disfrutar todos los servicios que tenemos para ti</p>
 
   <div class="form-container">
-      <span class="error" *ngIf="error" >{{ error }}</span>
-        <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-          <ion-item>
-            <ion-input type="text" placeholder="Email..." (ngModel)="email" name="email" class="txt" required> </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
-          </ion-item>
-          <button ion-button block outline type="submit" [disabled]="!formData.valid" class="basic-btn">Ingresar</button>
-          <a [navPush]="signupComponent"  class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
-      </form>
+    <span class="error" *ngIf="error">{{ error }}</span>
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+      <ion-item>
+        <ion-label stacked> Email</ion-label>
+        <ion-input type="text" placeholder="example@mail.com" (ngModel)="email" name="email" class="txt" required> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
+      </ion-item>
+      <button ion-button block type="submit" [color]="primary" [disabled]="!formData.valid">Ingresar</button>
+      <div class="registro">
+        <a [navPush]="signupComponent" class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
+      </div>
+    </form>
   </div>
 </ion-content>

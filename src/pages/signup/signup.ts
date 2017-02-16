@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-import {NavController, AlertController, LoadingController} from 'ionic-angular';
+import { AngularFire } from 'angularfire2';
+import {NavController} from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 @Component({

@@ -1,20 +1,10 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SignupComponent } from '../signup/signup';
 
-
-import { NativeStorage } from 'ionic-native';
-
-import { Facebook } from 'ionic-native';
 import { Platform } from 'ionic-angular';
-import { GooglePlus } from 'ionic-native';
-
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
 
 import { FirebaseService } from '../../app/services/firebase.service';
 
@@ -33,14 +23,9 @@ export class LoginPage implements OnInit {
     private nav: NavController,
     private platform: Platform,
     private firebaseService: FirebaseService
-  ) {
-    /*this.af.auth.subscribe(auth => { 
-    if(auth) {
-      this.nav.setRoot(HomePage);
-    }
-  });*/
+  ) { }
 
-  }
+
   onSubmit(formData) {
     if (formData.valid) {
       console.log(formData.value);
@@ -63,16 +48,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   ionViewDidLoad() {
-    if (localStorage.getItem(currentuser)){
+    if (localStorage.getItem(currentuser)) {
       this.nav.setRoot(HomePage);
     }
-    
   }
-
 }
 
 
