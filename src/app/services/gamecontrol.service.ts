@@ -3,8 +3,8 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class GamecontrolService {
 
-    armaParejasFlag: boolean = false;;
-
+    armaParejasFlag: boolean = false;
+    kitSuerteFlag: boolean = true;
     constructor(public alertCtrl: AlertController) {
 
     }

@@ -29,7 +29,7 @@ import { GameModule } from '../pages/armaparejas/ts/game/index';
 //services
 import { FirebaseService, firebaseConfig } from './services/firebase.service';
 import { GamecontrolService } from './services/gamecontrol.service';
-import { kitsuerteService } from './services/kitsuerte.service';
+;
 
 
 @NgModule({
@@ -77,15 +77,14 @@ import { kitsuerteService } from './services/kitsuerte.service';
     InstruccionesPage,
     NumresultadosPage,
     AstroresultadosPage,
-    ArmaparejasgamePage,
+    ArmaparejasgamePage, 
     CompleteInfoPage,
     InstruccionesKitSuertePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseService,
-    GamecontrolService,
-    kitsuerteService
+    GamecontrolService
   ]
 })
 export class AppModule {}

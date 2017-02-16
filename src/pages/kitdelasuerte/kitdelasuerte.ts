@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 //services
 import { FirebaseService } from '../../app/services/firebase.service';
-import { kitsuerteService } from '../../app/services/kitsuerte.service';
+import { GamecontrolService } from '../../app/services/gamecontrol.service';
 
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
@@ -18,154 +18,87 @@ import { Toast } from 'ionic-native';
   selector: 'page-kitdelasuerte',
   templateUrl: 'kitdelasuerte.html'
 })
-export class KitdelasuertePage {
+export class KitdelasuertePage implements OnInit {
   private amulets;
   private instructionsRoot;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
-    private kitService: kitsuerteService
+    private gameControlService: GamecontrolService
   ) {
     this.instructionsRoot = InstruccionesKitSuertePage;
+
   }
 
-  private data;
+  ngOnInit() {
+    this.fromFiretoFireSaves();
+
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad KitdelasuertePage');
-    //    this.kitService.copyDbAmulets();
-    this.fromFiretoFireSaves();
-    this.loadAmuletos();
-
   }
 
-  ngDoCheck(){
-    
-  }
+  ngDoCheck() {
 
-  loadAmuletos() {
-    this.kitService.intanceGanaganaDb();
-    this.kitService.getAllAmulets().then(
-      (ress) => {
-        this.amulets = ress;
-/*        if (ress.length > 8) {
-          this.controlDoubleAmulets().then(
-            (res) => {
-              this.navCtrl.pop().then(
-                () => {
-                  this.navCtrl.push(KitdelasuertePage);
-                }
-              );
-            }
-          );
-        }*/
-      }
-    );
-  }
-
-  controlDoubleAmulets() {
-    return this.kitService.deleteTable('amulets');
   }
 
   getQR() {
     BarcodeScanner.scan(barcodeScannerParams).then(
       (barcodeData) => {
-        this.data = {
-          result: barcodeData.text
-        };
-        this.compararQR(barcodeData.text);
+        this.validarQR(barcodeData.text);
       }).catch(
       (err) => {
         console.log('Algo salio mal' + err);
       }
       );
-
-
-
   }
 
-  compararQR(qrText) {
-    this.kitService.getAllAmulets().then(
-      (amulets) => {
-        var flag: boolean = true;
-        amulets.forEach(amulet => {
-          //comparo el amuleto con el code del amuleto
-          if (qrText == amulet.code) {
-            flag = false;
-            //si el amuleto corresponde pero ya lo tiene
-            if (amulet.find) {
-              //Ya tenias este amuleto
-              return this.showToast("ya tienes este Amuleto", "bottom");
-            } else {
-              //No tiene este amuleto, entonces actualice
-              this.updateFind(amulet).then(
-                (res) => {
-                  this.loadAmuletos();
-                }
-              );
-              var amuletosDescription
-              var amuletosUpdate = [];
-              this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
-                .subscribe(
-                (amuletoFire) => {
-                  //aqui ya tengo amuletos y uid
-                  amuletoFire.forEach(amuleto => {
-                    //entonces, solicito los amuletos locales
-                    this.kitService.getAllAmulets().then(
-                      (amuletosLocal) => {
-                        amuletosLocal.forEach(elementLocal => {
-                          amuletosUpdate.push({
-                            code: elementLocal.code,
-                            find: elementLocal.find
-                          });
-                        });
-                        this.firebaseService.updateKitSuerteSaves(amuleto.$key,{amuletos: amuletosUpdate});
-                      }
-                    );
-                    /*amuletosDescription = amuleto.amuletos;
-                    amuletosDescription.forEach(description => {
-                      if(description.code == qrText){
-                      //this.firebaseService.updateKitSuerteSaves(amuleto.$key,);
-                      }
-                    });*/
-
+  validarQR(qrText) {
+    var amuletosActualizados = [];
+    this.gameControlService.kitSuerteFlag = true;
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
+      (kitSuerteSave) => {
+        kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
+          if (this.gameControlService.kitSuerteFlag) {
+            (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosPersonales => {
+              if (amuletosPersonales.code == qrText) {
+                this.gameControlService.kitSuerteFlag = false;
+                if (amuletosPersonales.find) {
+                  return this.showToast("ya tienes este Amuleto", "bottom");
+                } else {
+                  (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosActualizar => {
+                    if (amuletosActualizar.code == qrText) {
+                      amuletosActualizados.push({
+                        code: amuletosActualizar.code,
+                        find: true,
+                        imgUrl: amuletosActualizar.imgUrl,
+                        name: amuletosActualizar.name
+                      });
+                    } else {
+                      amuletosActualizados.push({
+                        code: amuletosActualizar.code,
+                        find: amuletosActualizar.find,
+                        imgUrl: amuletosActualizar.imgUrl,
+                        name: amuletosActualizar.name
+                      });
+                    }
                   });
+                  this.firebaseService.updateKitSuerteSaves(kitSuerteSaveIdyAmuletos.$key, { amuletos: amuletosActualizados });//enviarle amuletos
+                  return this.showToast("Amuleto Capturado", "bottom");
                 }
-                );
-              this.showToast("Amuleto Capturado", "bottom");
-              setTimeout(() => {
-                this.validAllQR();
-              }, 3000);
-
-            }
+              }
+            });
+          }
+          if (this.gameControlService.kitSuerteFlag == true) {
+            return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
           }
         });
-        if (flag) {
-          //Lo siento pero este codigo qr no pertenece a ningun amuleto
-          return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
-        }
-      }
-    )
-  }
-
-  validAllQR() {
-    var faltantes: number = 0;
-    this.kitService.getAllAmulets().then(
-      (res) => {
-        res.forEach(amulet => {
-          if (!amulet.find) {
-            faltantes++;
-          }
-        });
-        if (faltantes == 0) {
-          this.showToast("Has Terminado!", "bottom");
-        } else {
-          this.showToast("Te faltan: " + (faltantes) + "Amuletos por encontrar.", "bottom");
-        }
       }
     );
   }
+
   showToast(message: string, position: string, pixelsY: number = (-40)) {
     Toast.showWithOptions({
       message: message,
@@ -173,23 +106,6 @@ export class KitdelasuertePage {
       position: position,
       addPixelsY: pixelsY
     }).subscribe(console.log);
-
-  }
-
-
-
-  updateFind(key) {
-    let data = {
-      code: key.code,
-      find: true,
-      imgUrl: key.imgUrl,
-      name: key.name
-    }
-    return this.kitService.updateAmulte(key.id, data);
-
-  }
-
-  updateFromFireToLocal() {
 
   }
 
@@ -207,56 +123,39 @@ export class KitdelasuertePage {
               amuletos.forEach(amulet => {
                 kitSuerteSaves.push({
                   code: amulet.code,
+                  imgUrl: amulet.imgUrl,
+                  name: amulet.name,
                   find: false
                 });
               });
-              console.log(kitSuerteSaves);
               this.firebaseService.pushKitSuerteSaves({
-                uid: this.getuid(),
+                uid: this.firebaseService.getuid(),
                 amuletos: kitSuerteSaves
-              })
+              }).then(
+                (res) => {
+                  this.cargarAmuletosDesdeFirebase();
+                }
+                );
             }
           );
-          this.kitService.copyDbAmulets();
-
           //por el contrario ya tiene uno, valida que exista el espacio local
         } else {
-          console.log('ejecutacopydbamulets');
-          this.kitService.copyDbAmulets();
+          this.cargarAmuletosDesdeFirebase();
         }
+
       }
     );
   }
 
-  /* updateFromLocalToFire() {
-     var kitSuerteSaves = []
-     this.firebaseService.getKitSuerteSaves().subscribe(
-       (res) => {
-         if (res.length == 0) {
-           this.kitService.getAllAmulets().then(
-             (localAmulets) => {
-               localAmulets.forEach(amulet => {
-                 kitSuerteSaves.push({
-                   code: amulet.code,
-                   find: amulet.find
-                 });
-               });
-               this.firebaseService.pushKitSuerteSaves({
-                 uid: this.getuid(),
-                 amuletos: kitSuerteSaves
-               })
-             }
-           );
-         }
-       }
-     );
- 
-   }*/
-
-  getuid() {
-    return this.firebaseService.auth.getAuth().uid;
+  cargarAmuletosDesdeFirebase() {
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
+      (kitSuerteSave) => {
+        kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
+          this.amulets = kitSuerteSaveIdyAmuletos.amuletos;
+        });
+      }
+    );
   }
-
 }
 
 const barcodeScannerParams = {
