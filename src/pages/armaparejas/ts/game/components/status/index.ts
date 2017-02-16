@@ -53,14 +53,14 @@ export class StatusComponent {
 
     ngDoCheck() {
         
-        this.status$.subscribe((result) => {
+        /*this.status$.subscribe((result) => {
             if (result === this.pass) {
                 console.log("Pendiente");
                 this.pass = null;
                 this.gamecontrolService.armaParejasWin();
                 this.gamecontrolService.armaParejasFlag = true;
             }
-        })
+        })*/
         
     }
 

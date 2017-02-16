@@ -6,9 +6,11 @@ import { IState } from '../model/state';
 import { STATUS } from '../model/status';
 import { ICard } from '../model/card';
 
+import {  GamecontrolService } from '../../../../../app/services/gamecontrol.service';
+
 @Injectable()
 export class GameActions {
-    constructor(private ngRedux: NgRedux<IState>) { }
+    constructor(private ngRedux: NgRedux<IState>,  private gamecontrolService: GamecontrolService) { }
 
     static RESET: string = 'RESET';
     static UPDATE_STATUS: string = 'UPDATE_STATUS';
@@ -33,6 +35,8 @@ export class GameActions {
         } else if (status === STATUS.PASS) {
             clearInterval(this.timerId);
             this.ngRedux.dispatch({ type: GameActions.UPDATE_HIGHESTSPEED, payload: this.ngRedux.getState().elapsedMs });
+            this.gamecontrolService.armaParejasWin();
+            this.gamecontrolService.armaParejasFlag = true;
         }
     }
 
