@@ -1,167 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
-import { AngularFireAuth, AuthProviders, AuthMethods } from 'angularfire2';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { FirebaseService, IUser } from '../../app/services/firebase.service';
+import { SignupComponent } from '../signup/signup';
 
 
-import 'rxjs/add/operator/map';
+import {NativeStorage} from 'ionic-native';
 
-//formulario de registro
-import { Validators, FormBuilder } from '@angular/forms';
+import { Facebook } from 'ionic-native';
+import { Platform } from 'ionic-angular';
+import {GooglePlus} from 'ionic-native';
 
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+ 
 @Component({
   selector: 'login-page',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+
+  
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit{
+  user = {email: '', password: ''};
+  signupComponent = SignupComponent;
+  state: string = '';
+  error: any;
+  constructor(public af: AngularFire, private nav: NavController, private platform: Platform) {
+      this.af.auth.subscribe(auth => { 
+      if(auth) {
+        this.nav.setRoot(HomePage);
+      }
+    });
 
-  //declaracion de variables
-  private loader: any;
-  private user: IUser = { email: '', password: '' };
-  private register;
-  private newUser: IUser = {
-    email: '',
-    password: '',
-
-  };
-  //Fin
-
-
-  constructor(public nav: NavController,
-    public auth: AngularFireAuth,
-    private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController,
-    private firebaseService: FirebaseService,
-    private formBuilder: FormBuilder) {
-    this.register = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    })
+  }
+ onSubmit(formData) {
+    if(formData.valid) {
+      console.log(formData.value);
+      this.af.auth.login({
+        email: formData.value.email,
+        password: formData.value.password
+      },
+      {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password,
+      }).then(
+        (success) => {
+        console.log(success);
+        this.nav.setRoot(HomePage);
+      }).catch(
+        (err) => {
+        this.error = 'Datos de inicio de sesión erroneos';
+      })
+    }
   }
 
   ngOnInit() {
-    this.isCurrentlyLogged();
-
-  }
-
-  registerUser(): void {
-    //La variable newUser queda lista para almacenar en la base de datos con los correspondientes datos.
-    console.log(this.newUser);
-    this.showLoading();
-    let user = { email: this.newUser.email, password: this.newUser.password }
-    //Por ahora sigo creando la cuenta con email y password para satisfacer la credencial.
-    this.auth.createUser(user).then((authData) => {
-      setTimeout(() => {
-        this.loader.dismiss();
-      });
-      let prompt = this.alertCtrl.create({
-        title: 'Felicidades',
-        subTitle: 'Tu cuenta fue creada exitosamente',
-        buttons: ['OK']
-      });
-      prompt.present();
-    }).catch((error) => {
-      this.showError(error);
-      this.loader.dismiss();
-    });
-  }
-
-
-  login(userData): void {
-    this.showLoading()
-    this.auth.login(userData, {
-      provider: AuthProviders.Password,
-      method: AuthMethods.Password,
-    }).then((authData) => {
-      this.localStorage(userData)
-      //this.FirebaseService.isAlreadyloggedin
-      this.loader.dismiss();
-      console.log("antes de enviar a home");
-      this.nav.setRoot(HomePage);
-    }).catch((error) => {
-      this.showError(error);
-      this.loader.dismiss();
-    });
-  }
-
-  loginAlert(): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Ingresa',
-      message: "Digita un usuario y contraseña.",
-      inputs: [
-        {
-          name: 'email',
-          placeholder: 'example@mail.com',
-          type: 'text'
-
-        },
-        {
-          name: 'password',
-          placeholder: '****',
-          type: 'password'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-           cssClass: 'alertDanger',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Entrar',
-          cssClass: 'alertDanger',
-          handler: data => {
-            this.login(data);
-          }
-        }
-
-      ]
-    });
-    prompt.present();
-  }
-
-
-  showLoading(): void {
-    this.loader = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loader.present();
-  }
-
-
-  showError(text): void {
-
-    let prompt = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    prompt.present();
-  }
-
-  localStorage(userData): void {
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-  }
-
-  isCurrentlyLogged(): void {
-    if (localStorage.getItem('currentUser') != null) {
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
-      let user = { email: this.user.email, password: this.user.password }
-      this.auth.login(user, {
-        provider: AuthProviders.Password,
-        method: AuthMethods.Password,
-      }).then((authData) => {
-        console.log("ya estaba logeado");
-        this.nav.setRoot(HomePage);
-      }).catch((error) => { 
-        this.showError(error); 
-        this.loader.dismiss();
-      });
-    }
-
   }
 
 }

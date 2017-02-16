@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Gana Gana App</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <img src="assets/images/logo2.png"/>
+    <p>Bienvenido a la app de Gana Gana, Crea una cuenta para empezar a disfrutar todos nuestros beneficios para ti</p> 
+
+  <div class="form-container">
+    <span class="error" *ngIf="error" >{{ error }}</span>
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+      <ion-item>
+        <ion-input type="text" placeholder="Email..." (ngModel)="email" name="email" class="txt" required> </ion-input>
+      </ion-item>
+      <ion-item>
+       <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
+      </ion-item>
+      <button ion-button block outline type="submit" [disabled]="!formData.valid" class="basic-btn">Crear mi cuenta</button>
+      </form>
+  </div>
+</ion-content>

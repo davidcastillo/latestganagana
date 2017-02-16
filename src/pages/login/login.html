@@ -1,28 +1,28 @@
 <ion-header>
-  <ion-title class='headerlogin'>Gana Gana App</ion-title>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Gana Gana App</ion-title>
+  </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+    <img src="assets/images/logo2.png"/>
+    <p>Bienvenido a la app de Gana Gana, ingresa con tu correo para empezar a disfrutar todos nuestros beneficios para ti</p> 
 
-<img src="assets/images/logo2.png">
-
-
-      <p>Bienvenido a la app de Gana Gana</p>
-      <p>Si ya tienes una cuenta,  ingresa aqui para empezar a disfrutar todos nuestros beneficios para ti.</p>
-
- <button ion-button block (click)="loginAlert()">Ingresar</button> 
- <br>
- <p>O, crea una cuenta aqui!!!! solo ingresa tu correo electronico y asigna una contraseña</p>
- <br>
-  <form [formGroup]="register" (ngSubmit)="registerUser()">
-    <ion-item>
-        <ion-input type="email" name="email" placeholder="Email..." [(ngModel)]="newUser.email" formControlName="email" focus></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" name="password" placeholder="Password" [(ngModel)]="newUser.password" formControlName="password"></ion-input>
-    </ion-item>
-    
-    <button ion-button block type="submit" [disabled]="!register.valid">Crear una cuenta</button>
-  </form>
- 
+  <div class="form-container">
+      <span class="error" *ngIf="error" >{{ error }}</span>
+        <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+          <ion-item>
+            <ion-input type="text" placeholder="Email..." (ngModel)="email" name="email" class="txt" required> </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
+          </ion-item>
+          <button ion-button block outline type="submit" [disabled]="!formData.valid" class="basic-btn">Ingresar</button>
+          <a [navPush]="signupComponent"  class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
+      </form>
+  </div>
 </ion-content>
