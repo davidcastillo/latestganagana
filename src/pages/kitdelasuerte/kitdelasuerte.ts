@@ -40,11 +40,16 @@ export class KitdelasuertePage {
 
   }
 
+  ngDoCheck(){
+    
+  }
+
   loadAmuletos() {
+    this.kitService.intanceGanaganaDb();
     this.kitService.getAllAmulets().then(
       (ress) => {
         this.amulets = ress;
-        if (ress.length > 8) {
+/*        if (ress.length > 8) {
           this.controlDoubleAmulets().then(
             (res) => {
               this.navCtrl.pop().then(
@@ -54,7 +59,7 @@ export class KitdelasuertePage {
               );
             }
           );
-        }
+        }*/
       }
     );
   }
@@ -99,6 +104,35 @@ export class KitdelasuertePage {
                   this.loadAmuletos();
                 }
               );
+              var amuletosDescription
+              var amuletosUpdate = [];
+              this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+                .subscribe(
+                (amuletoFire) => {
+                  //aqui ya tengo amuletos y uid
+                  amuletoFire.forEach(amuleto => {
+                    //entonces, solicito los amuletos locales
+                    this.kitService.getAllAmulets().then(
+                      (amuletosLocal) => {
+                        amuletosLocal.forEach(elementLocal => {
+                          amuletosUpdate.push({
+                            code: elementLocal.code,
+                            find: elementLocal.find
+                          });
+                        });
+                        this.firebaseService.updateKitSuerteSaves(amuleto.$key,{amuletos: amuletosUpdate});
+                      }
+                    );
+                    /*amuletosDescription = amuleto.amuletos;
+                    amuletosDescription.forEach(description => {
+                      if(description.code == qrText){
+                      //this.firebaseService.updateKitSuerteSaves(amuleto.$key,);
+                      }
+                    });*/
+
+                  });
+                }
+                );
               this.showToast("Amuleto Capturado", "bottom");
               setTimeout(() => {
                 this.validAllQR();
@@ -183,6 +217,7 @@ export class KitdelasuertePage {
               })
             }
           );
+          this.kitService.copyDbAmulets();
 
           //por el contrario ya tiene uno, valida que exista el espacio local
         } else {
