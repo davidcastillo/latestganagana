@@ -56,8 +56,8 @@ export class LoginPage implements OnInit {
         this.loader.dismiss();
       });
       let prompt = this.alertCtrl.create({
-        title: 'Success',
-        subTitle: 'Your new Account was created!',
+        title: 'Felicidades',
+        subTitle: 'Tu cuenta fue creada exitosamente',
         buttons: ['OK']
       });
       prompt.present();
@@ -87,7 +87,7 @@ export class LoginPage implements OnInit {
 
   loginAlert(): void {
     let prompt = this.alertCtrl.create({
-      title: 'login',
+      title: 'Ingresa',
       message: "Digita un usuario y contraseña.",
       inputs: [
         {
@@ -105,12 +105,14 @@ export class LoginPage implements OnInit {
       buttons: [
         {
           text: 'Cancel',
+           cssClass: 'alertDanger',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Entrar',
+          cssClass: 'alertDanger',
           handler: data => {
             this.login(data);
           }

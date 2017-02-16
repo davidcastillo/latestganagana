@@ -35,8 +35,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Juegos', component: JuegosPage },
-      { title: 'Numerologia', component: NumerologiaPage },
-      { title: 'Astrologia', component: AstrologiaPage },
+      { title: 'Numerología', component: NumerologiaPage },
+      { title: 'Astrología', component: AstrologiaPage },
       { title: 'Resultados', component: ResultadosPage },
       { title: 'Simulador de Giros', component: SimuladorgirosPage }
     ];

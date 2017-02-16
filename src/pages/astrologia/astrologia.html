@@ -13,23 +13,23 @@
 
         <p>Ingrese sus datos para consultar la suerte de los astros para Ud.</p> 
 
-  <form>           
-    <ion-list>  
+    <form [formGroup]="todo" (ngSubmit)="logForm()">
       <ion-item>
-          <ion-input  type="text" name="name" placeholder="Nombre"></ion-input>
+        <ion-label>Nombre</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-input type="date" name="date_of_birth" placeholder="Fecha de nacimiento"></ion-input>
+        <ion-label>Fecha de nacimiento</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY"  formControlName="date_of_birth" doneText = "ok"></ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-input  type="hour"  name="time" placeholder="Hora de nacimiento"></ion-input>
+        <ion-label>Hora de nacimiento</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time" doneText = "ok"></ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-input  type="text" name="city"  placeholder="Ciudad"></ion-input>
+        <ion-label>Ciudad</ion-label>
+        <ion-input type="text" formControlName="city"></ion-input>
       </ion-item>
-    </ion-list>
-    <button ion-button block type="button" 
-      [navPush]="astroresultadosPage" >Consultar
-    </button>
-  </form>
+      <button ion-button type="submit" [disabled]="!todo.valid"  [navPush]="astroresultadosPage">Consultar</button>
+    </form>
 </ion-content>
