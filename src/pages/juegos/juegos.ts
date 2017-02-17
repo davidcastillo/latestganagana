@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
 import { ArmaparejasPage } from '../armaparejas/armaparejas';
 import { KitdelasuertePage } from '../kitdelasuerte/kitdelasuerte';
 import { CompleteInfoPage } from '../kitdelasuerte/complete-info/complete-info';
+import { KitsuertewinPage } from '../kitdelasuerte/kitsuertewin/kitsuertewin';
 
 import { FirebaseService } from '../../app/services/firebase.service';
 
@@ -12,12 +13,15 @@ import { FirebaseService } from '../../app/services/firebase.service';
   selector: 'page-juegos',
   templateUrl: 'juegos.html'
 })
-export class JuegosPage {
+export class JuegosPage implements OnInit {
   selectedItem: any;
   icons: string[];
   items: Array<{ title: string, icon: string }>;
   games: Array<{ title: string, gameId: string, descripcion: string, }>;
   private tamaño;
+  private contadorAmuletos: number;
+  private totalAmuletos: number;
+  private gameToShow: any;
 
   constructor(
     public navCtrl: NavController,
@@ -41,7 +45,9 @@ export class JuegosPage {
       },
     ];
 
-    this.getLenght();
+  }
+
+  ngOnInit() {
   }
 
   gamesTapped(event, game) {
@@ -51,32 +57,45 @@ export class JuegosPage {
         gametoShow = ArmaparejasPage;
         break;
       case 'kitdelasuerte':
-        
-        gametoShow = this.validDatos();
+        this.kitSuerteSelected();
         break;
       default:
         console.log("none item selected");
     }
-    this.navCtrl.push(gametoShow, {
-      item: game
-    });
   }
 
-  validDatos(): any {
-    if (this.tamaño == 1) {
-      return KitdelasuertePage;
-    } else 
-    return CompleteInfoPage;
-    
-
-
-
-  }
-
-  getLenght() {
-    
+  kitSuerteSelected() {
     this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
-      .subscribe(result => this.tamaño = result.length);
+      .subscribe(result => {
+        if (result.length == 1) {
+          this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+            .subscribe(
+            (uidYamuletos) => {
+              uidYamuletos.forEach(amuletosEnFirebase => {
+                this.contadorAmuletos = 0;
+                this.totalAmuletos = 0;
+                (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
+                  if ((amuletosDescription.find) == true) {
+                    this.contadorAmuletos++;
+                  }
+                  this.totalAmuletos++;
+                });
+                console.log('Total amuletos: '+this.totalAmuletos + " AmuletosContados: " + this.contadorAmuletos);
+                if (this.contadorAmuletos == this.totalAmuletos) {
+                  this.navCtrl.push(KitsuertewinPage);
+                } else {
+                  this.navCtrl.push(KitdelasuertePage);
+                }
+              });
+            }
+            );
+        } else {
+          this.navCtrl.push(CompleteInfoPage);
+        }
+      }, (err) => {
+        //console.log("la cosa no sirvio");
+      }, () => {
+        //console.log("Proceso terminado");
+      });
   }
-
 }

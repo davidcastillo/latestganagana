@@ -37,7 +37,6 @@ export class KitdelasuertePage implements OnInit {
 
   ) {
     this.instructionsRoot = InstruccionesKitSuertePage;
-
   }
 
   ngOnInit() {
