@@ -11,6 +11,7 @@ import { BarcodeScanner } from 'ionic-native';
 
 //pages
 import { InstruccionesKitSuertePage } from './instrucciones-kit-suerte/instrucciones-kit-suerte';
+import { KitsuertewinPage } from './kitsuertewin/kitsuertewin';
 
 //native import 
 import { Toast } from 'ionic-native';
@@ -24,12 +25,16 @@ export class KitdelasuertePage implements OnInit {
   private instructionsRoot;
   private showLoading: boolean = true;
   private loading;
+  private contadorAmuletos: number;
+  private totalAmuletos: number;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
     private gameControlService: GamecontrolService,
     private loadingCtrl: LoadingController
+
   ) {
     this.instructionsRoot = InstruccionesKitSuertePage;
 
@@ -85,8 +90,14 @@ export class KitdelasuertePage implements OnInit {
                       });
                     }
                   });
-                  this.firebaseService.updateKitSuerteSaves(kitSuerteSaveIdyAmuletos.$key, { amuletos: amuletosActualizados });//enviarle amuletos
-                  return this.showToast("Amuleto Capturado", "bottom");
+                  this.firebaseService.updateKitSuerteSaves(
+                    kitSuerteSaveIdyAmuletos.$key,
+                    { amuletos: amuletosActualizados }
+                  );//enviarle amuletos
+                  this.showToast("Amuleto Capturado", "bottom");
+                  setTimeout(() => {
+                    this.validarCuantosAmuletosCapturados();
+                  }, 2000);
                 }
               }
             });
@@ -154,7 +165,6 @@ export class KitdelasuertePage implements OnInit {
         kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
           this.amulets = kitSuerteSaveIdyAmuletos.amuletos;
         });
-
         this.dismissLoadingAmulets();
       }
     );
@@ -173,10 +183,37 @@ export class KitdelasuertePage implements OnInit {
     this.loading.dismiss();
   }
 
+  validarCuantosAmuletosCapturados() {
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+      .subscribe(
+      (uidYamuletos) => {
+        uidYamuletos.forEach(amuletosEnFirebase => {
+          this.contadorAmuletos = 0;
+          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
+            if ((amuletosDescription.find) == true) {
+              this.contadorAmuletos++;
+            }
+            this.totalAmuletos++;
+          });
+          if (this.contadorAmuletos == this.totalAmuletos) {
+            this.esGanador();
+          } else {
+            this.showToast('Te faltan: ' + (this.totalAmuletos - this.contadorAmuletos), 'bottom');
+          }
+        });
+      }
+      );
+  }
+
+  esGanador() {
+    this.navCtrl.push(KitdelasuertePage);
+  }
+
+
+
 }
 
 const barcodeScannerParams = {
   showFlipCameraButton: true,
-  prompt: "Suerte!",
   formats: "QR_CODE",
 }
