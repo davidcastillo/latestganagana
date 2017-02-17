@@ -8,6 +8,7 @@ import { CompleteInfoPage } from '../kitdelasuerte/complete-info/complete-info';
 import { KitsuertewinPage } from '../kitdelasuerte/kitsuertewin/kitsuertewin';
 
 import { FirebaseService } from '../../app/services/firebase.service';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-juegos',
@@ -22,11 +23,12 @@ export class JuegosPage implements OnInit {
   private contadorAmuletos: number;
   private totalAmuletos: number;
   private gameToShow: any;
-
+  private loading;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private loadingCtrl: LoadingController
 
   ) {
     // If we navigated to this page, we will have an item available as a nav param
@@ -51,10 +53,10 @@ export class JuegosPage implements OnInit {
   }
 
   gamesTapped(event, game) {
-    let gametoShow: any;
+    
     switch (game.gameId) {
       case 'armaparejas':
-        gametoShow = ArmaparejasPage;
+        this.navCtrl.push(ArmaparejasPage);
         break;
       case 'kitdelasuerte':
         this.kitSuerteSelected();
@@ -64,7 +66,19 @@ export class JuegosPage implements OnInit {
     }
   }
 
+  showLoading(){
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: `Cargando Informacion`,
+    });
+    this.loading.present();
+  }
+  dismissLoading() {
+    this.loading.dismiss();
+  }
+
   kitSuerteSelected() {
+    this.showLoading();
     this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
       .subscribe(result => {
         if (result.length == 1) {
@@ -83,13 +97,16 @@ export class JuegosPage implements OnInit {
                 console.log('Total amuletos: '+this.totalAmuletos + " AmuletosContados: " + this.contadorAmuletos);
                 if (this.contadorAmuletos == this.totalAmuletos) {
                   this.navCtrl.push(KitsuertewinPage);
+                  this.dismissLoading();
                 } else {
+                  this.dismissLoading();
                   this.navCtrl.push(KitdelasuertePage);
                 }
               });
             }
             );
         } else {
+          this.dismissLoading();
           this.navCtrl.push(CompleteInfoPage);
         }
       }, (err) => {
