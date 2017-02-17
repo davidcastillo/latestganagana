@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 //services
 import { FirebaseService } from '../../app/services/firebase.service';
 import { GamecontrolService } from '../../app/services/gamecontrol.service';
+import { LoadingController } from 'ionic-angular';
 
 //border scanner
 import { BarcodeScanner } from 'ionic-native';
@@ -21,27 +22,26 @@ import { Toast } from 'ionic-native';
 export class KitdelasuertePage implements OnInit {
   private amulets;
   private instructionsRoot;
-
+  private showLoading: boolean = true;
+  private loading;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
-    private gameControlService: GamecontrolService
+    private gameControlService: GamecontrolService,
+    private loadingCtrl: LoadingController
   ) {
     this.instructionsRoot = InstruccionesKitSuertePage;
 
   }
 
   ngOnInit() {
+    this.presentLoadingAmulets();
     this.fromFiretoFireSaves();
 
   }
 
   ionViewDidLoad() {
-  }
-
-  ngDoCheck() {
-
   }
 
   getQR() {
@@ -133,6 +133,7 @@ export class KitdelasuertePage implements OnInit {
                 amuletos: kitSuerteSaves
               }).then(
                 (res) => {
+
                   this.cargarAmuletosDesdeFirebase();
                 }
                 );
@@ -153,9 +154,25 @@ export class KitdelasuertePage implements OnInit {
         kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
           this.amulets = kitSuerteSaveIdyAmuletos.amuletos;
         });
+
+        this.dismissLoadingAmulets();
       }
     );
   }
+
+  presentLoadingAmulets() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: `Cargando Amuletos`,
+    });
+    this.loading.present();
+    return true;
+  }
+
+  dismissLoadingAmulets() {
+    this.loading.dismiss();
+  }
+
 }
 
 const barcodeScannerParams = {

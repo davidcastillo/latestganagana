@@ -20,7 +20,7 @@ import { AngularFireModule } from 'angularfire2';
 import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
 import { CompleteInfoPage } from '../pages/kitdelasuerte/complete-info/complete-info';
 import { InstruccionesKitSuertePage } from '../pages/kitdelasuerte/instrucciones-kit-suerte/instrucciones-kit-suerte';
-
+import { KitsuertewinPage } from '../pages/kitdelasuerte/kitsuertewin/kitsuertewin';
 
 //Modules 
 import { FormsModule} from '@angular/forms';
@@ -50,7 +50,8 @@ import { GamecontrolService } from './services/gamecontrol.service';
     AstroresultadosPage,
     ArmaparejasgamePage,
     CompleteInfoPage,
-    InstruccionesKitSuertePage
+    InstruccionesKitSuertePage,
+    KitsuertewinPage
   ],
 
   imports: [
@@ -79,7 +80,8 @@ import { GamecontrolService } from './services/gamecontrol.service';
     AstroresultadosPage,
     ArmaparejasgamePage, 
     CompleteInfoPage,
-    InstruccionesKitSuertePage
+    InstruccionesKitSuertePage,
+    KitsuertewinPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
