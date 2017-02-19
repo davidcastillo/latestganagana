@@ -5,7 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ArmaparejasPage } from '../armaparejas/armaparejas';
 import { KitdelasuertePage } from '../kitdelasuerte/kitdelasuerte';
 import { CompleteInfoPage } from '../kitdelasuerte/complete-info/complete-info';
-import { KitsuertewinPage } from '../kitdelasuerte/kitsuertewin/kitsuertewin';
+/*import { KitsuertewinPage } from '../kitdelasuerte/kitsuertewin/kitsuertewin';*/
 
 import { FirebaseService } from '../../app/services/firebase.service';
 import { LoadingController } from 'ionic-angular';
@@ -19,10 +19,10 @@ export class JuegosPage implements OnInit {
   icons: string[];
   items: Array<{ title: string, icon: string }>;
   games: Array<{ title: string, gameId: string, descripcion: string, }>;
-  private tamaño;
+  /*private tamaño;
   private contadorAmuletos: number;
   private totalAmuletos: number;
-  private gameToShow: any;
+  private gameToShow: any;*/
   private loading;
   constructor(
     public navCtrl: NavController,
@@ -33,7 +33,6 @@ export class JuegosPage implements OnInit {
   ) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
-
     this.games = [
       {
         title: 'Armar Parejas',
@@ -53,7 +52,7 @@ export class JuegosPage implements OnInit {
   }
 
   gamesTapped(event, game) {
-    
+
     switch (game.gameId) {
       case 'armaparejas':
         this.navCtrl.push(ArmaparejasPage);
@@ -66,7 +65,7 @@ export class JuegosPage implements OnInit {
     }
   }
 
-  showLoading(){
+  showLoading() {
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: `Cargando Informacion`,
@@ -82,7 +81,9 @@ export class JuegosPage implements OnInit {
     this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
       .subscribe(result => {
         if (result.length == 1) {
-          this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+          this.dismissLoading();
+          this.navCtrl.push(KitdelasuertePage);
+          /*this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
             .subscribe(
             (uidYamuletos) => {
               uidYamuletos.forEach(amuletosEnFirebase => {
@@ -104,7 +105,7 @@ export class JuegosPage implements OnInit {
                 }
               });
             }
-            );
+            );*/
         } else {
           this.dismissLoading();
           this.navCtrl.push(CompleteInfoPage);

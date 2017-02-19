@@ -5,6 +5,8 @@ export class GamecontrolService {
 
     armaParejasFlag: boolean = false;
     kitSuerteFlag: boolean = true;
+    amuletosCapturados;
+    amuletosRestantes;
     constructor(public alertCtrl: AlertController) {
 
     }

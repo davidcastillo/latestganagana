@@ -1,0 +1,45 @@
+
+<!--  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-item detail-none icon-only (click)="change()"> 
+          <ion-icon name="help" item-right></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-item detail-none icon-only (click)="change()"> 
+          <ion-icon name="person" item-right></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>-->
+
+  <ion-segment [(ngModel)]="tapToShow" color="ganagana">
+    <ion-segment-button value="instrucciones">
+      <ion-icon name="help"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="opciones">
+      <ion-icon name="bookmark"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="tapToShow == 'instrucciones'">
+    <ion-card>
+      <ion-card-header>
+        Reglas del juego
+      </ion-card-header>
+      <ion-card-content>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, ducimus. Harum molestias nostrum fugit obcaecati, id quos architecto repudiandae, vero asperiores! Sint, repellat, blanditiis. Minima doloremque saepe obcaecati iste in!
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-item-group *ngIf="tapToShow == 'opciones'">
+    <!--Avances del jugador-->
+    <ion-item-divider color="ganagana">Amuletos</ion-item-divider>
+    <ion-item>Capturados<div item-right>{{amuletosCapturados}}</div></ion-item>
+    <ion-item>Restantes<div item-right>{{amuletosRestantes}}</div></ion-item>
+    <!--Opciones avanzadas-->
+    <ion-item-divider color="ganagana">Juego</ion-item-divider>
+    <ion-item (click)="showConfirmReset()">Reiniar</ion-item>
+  </ion-item-group>

@@ -4,17 +4,15 @@ import { NavController, NavParams } from 'ionic-angular';
 //services
 import { FirebaseService } from '../../app/services/firebase.service';
 import { GamecontrolService } from '../../app/services/gamecontrol.service';
-import { LoadingController } from 'ionic-angular';
-
-//border scanner
-import { BarcodeScanner } from 'ionic-native';
+import { LoadingController, PopoverController } from 'ionic-angular';
 
 //pages
 import { InstruccionesKitSuertePage } from './instrucciones-kit-suerte/instrucciones-kit-suerte';
 import { KitsuertewinPage } from './kitsuertewin/kitsuertewin';
+import { KitSuertePopoverPage } from './kit-suerte-popover/kit-suerte-popover';
 
 //native import 
-import { Toast } from 'ionic-native';
+import { Toast, BarcodeScanner } from 'ionic-native';
 
 @Component({
   selector: 'page-kitdelasuerte',
@@ -23,17 +21,18 @@ import { Toast } from 'ionic-native';
 export class KitdelasuertePage implements OnInit {
   private amulets;
   private instructionsRoot;
-  private showLoading: boolean = true;
+  /*private showLoading: boolean = true;*/
   private loading;
-  private contadorAmuletos: number;
-  private totalAmuletos: number;
+  private contadorAmuletos: any;
+  private totalAmuletos: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
     private gameControlService: GamecontrolService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private popoverCtrl: PopoverController
 
   ) {
     this.instructionsRoot = InstruccionesKitSuertePage;
@@ -182,12 +181,32 @@ export class KitdelasuertePage implements OnInit {
     this.loading.dismiss();
   }
 
+  contarAmuletos() {
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+      .subscribe(
+      (uidYamuletos) => {
+        uidYamuletos.forEach(amuletosEnFirebase => {
+          this.contadorAmuletos = 0;
+          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
+            if ((amuletosDescription.find) == true) {
+              this.contadorAmuletos++;
+            }
+            this.totalAmuletos++;
+          });
+          this.gameControlService.amuletosCapturados = this.contadorAmuletos;
+          this.gameControlService.amuletosRestantes = (this.totalAmuletos - this.contadorAmuletos)
+        });
+      }
+      );
+  }
+
   validarCuantosAmuletosCapturados() {
     this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
       .subscribe(
       (uidYamuletos) => {
         uidYamuletos.forEach(amuletosEnFirebase => {
           this.contadorAmuletos = 0;
+          this.totalAmuletos = 0;
           (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
             if ((amuletosDescription.find) == true) {
               this.contadorAmuletos++;
@@ -205,7 +224,38 @@ export class KitdelasuertePage implements OnInit {
   }
 
   esGanador() {
-    this.navCtrl.push(KitdelasuertePage);
+    this.navCtrl.push(KitsuertewinPage);
+  }
+
+  openPopover(event) {
+    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+      .subscribe(
+      (uidYamuletos) => {
+        uidYamuletos.forEach(amuletosEnFirebase => {
+          this.contadorAmuletos = 0;
+          this.totalAmuletos = 0;
+          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
+            if ((amuletosDescription.find) == true) {
+              this.contadorAmuletos++;
+            }
+            this.totalAmuletos++;
+          });
+          this.gameControlService.amuletosCapturados = this.contadorAmuletos;
+          this.gameControlService.amuletosRestantes = (this.totalAmuletos - this.contadorAmuletos)
+          let popover = this.popoverCtrl.create(KitSuertePopoverPage,
+            {},
+            {
+              showBackdrop: true,
+            }
+          );
+          popover.present({
+            ev: event
+          });
+          
+        });
+      }
+      );
+
   }
 
 
