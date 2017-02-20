@@ -13,4 +13,7 @@ export class KitsuertewinPage {
     console.log('ionViewDidLoad KitsuertewinPage');
   }
 
+  volverAlHome(){
+    this.navCtrl.pop();
+  }
 }

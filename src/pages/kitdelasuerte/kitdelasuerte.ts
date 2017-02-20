@@ -7,7 +7,7 @@ import { GamecontrolService } from '../../app/services/gamecontrol.service';
 import { LoadingController, PopoverController } from 'ionic-angular';
 
 //pages
-import { InstruccionesKitSuertePage } from './instrucciones-kit-suerte/instrucciones-kit-suerte';
+
 import { KitsuertewinPage } from './kitsuertewin/kitsuertewin';
 import { KitSuertePopoverPage } from './kit-suerte-popover/kit-suerte-popover';
 
@@ -35,7 +35,7 @@ export class KitdelasuertePage implements OnInit {
     private popoverCtrl: PopoverController
 
   ) {
-    this.instructionsRoot = InstruccionesKitSuertePage;
+    
   }
 
   ngOnInit() {

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 //pages for Root
-import { InstruccionesKitSuertePage } from '../instrucciones-kit-suerte/instrucciones-kit-suerte';
-import { KitsuertewinPage } from '../kitsuertewin/kitsuertewin';
 
 import { GamecontrolService } from '.././../../app/services/gamecontrol.service';
 import { FirebaseService } from '.././../../app/services/firebase.service';
@@ -13,7 +11,7 @@ import { FirebaseService } from '.././../../app/services/firebase.service';
   templateUrl: 'kit-suerte-popover.html'
 })
 export class KitSuertePopoverPage {
-  private tapToShow: string = 'instrucciones';
+  private tapToShow: string;
   amuletosCapturados;
   amuletosRestantes;
   amuletos = [];
@@ -24,14 +22,11 @@ export class KitSuertePopoverPage {
   ) {
     this.amuletosCapturados = this.gamecontrolService.amuletosCapturados;
     this.amuletosRestantes = this.gamecontrolService.amuletosRestantes;
+    this.tapToShow = 'instrucciones';
   }
   
   ionViewDidLoad() {
     
-  }
-
-  change(){
-
   }
 
   showConfirmReset(){

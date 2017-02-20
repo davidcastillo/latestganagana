@@ -27,7 +27,7 @@
 
     </ion-card-content>
   </ion-card>
-  <form [formGroup]="register" (ngSubmit)="presentConfirm()">
+  <form [formGroup]="register" (ngSubmit)="updateUser()">
     <ion-item>
       <ion-label color="dark" stacked>Nombre</ion-label>
       <ion-input type="text" name="name" [(ngModel)]="User.name" placeholder="Nombre Completo" formControlName="name"></ion-input>
@@ -35,7 +35,7 @@
 
     <ion-item>
       <ion-label color="dark" stacked>Fecha de Nacimiento</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" name="date" [(ngModel)]="User.date_of_birth" formControlName="date_of_birth" doneText = "ok"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD, YYYY" name="date" [(ngModel)]="User.date_of_birth" formControlName="date_of_birth" doneText="ok"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -47,8 +47,12 @@
       <ion-label color="dark" stacked>Ciudad</ion-label>
       <ion-input type="text" name="city" [(ngModel)]="User.city" formControlName="city" placeholder="Ciudad donde Vive"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label>Acepto <a (click)="o">Terminos</a></ion-label>
+      <ion-toggle formControlName="politicas" [(ngModel)]="aceptaTerminos"></ion-toggle>
+    </ion-item>
 
-    <button ion-button block type="submit"  [disabled]="!register.valid">Actualizar Informacion</button>
+    <button ion-button block type="submit" [disabled]="!register.valid">Actualizar Informacion</button>
   </form>
 
 </ion-content>

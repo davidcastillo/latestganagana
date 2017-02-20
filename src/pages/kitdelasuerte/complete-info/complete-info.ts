@@ -8,7 +8,7 @@ import { KitdelasuertePage } from '../kitdelasuerte';
 
 //service 
 import { FirebaseService, IUser } from '../../../app/services/firebase.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController, PopoverController } from 'ionic-angular';
 
 //formulario de registro
 import { Validators, FormBuilder } from '@angular/forms';
@@ -20,6 +20,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class CompleteInfoPage {
   private register;
+  private aceptaTerminos = true;
   private User: IUser = {
     uid: '',
     name: '',
@@ -33,13 +34,15 @@ export class CompleteInfoPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     private firebaseService: FirebaseService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController
   ) {
     this.register = this.formBuilder.group({
       name: ['', Validators.required],
       mobile: ['', Validators.required],
       date_of_birth: ['', Validators.required],
-      city: ['', Validators.required]
+      city: ['', Validators.required],
+      politicas: [false, Validators.pattern('true')]
     })
   }
 
@@ -69,6 +72,8 @@ export class CompleteInfoPage {
       )
   }
 
+  
+
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Politicas y Seguridad',
@@ -90,6 +95,10 @@ export class CompleteInfoPage {
       ]
     });
     alert.present();
+  }
+
+  openTerminosyCondiciones(){
+    window.open('http://www.ganagana.com.co/index.php/la-empresa/politica-de-calidad');
   }
 
 }

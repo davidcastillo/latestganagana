@@ -19,13 +19,18 @@
     </ion-card-content>
   </ion-card>
   <!--Impresion de Cards-->
-  <span class="amuletos" *ngFor="let amulet of amulets">
-    <ion-card>
+
+
+
+  <ion-card *ngFor="let amulet of amulets" class="amuletos">
     <img [ngClass]="amulet.find ? 'azul': 'gris'" src="{{amulet.imgUrl}}" alt="">
     <ion-card-header>
       {{amulet.name}}
     </ion-card-header>
-    </ion-card>
-    
-  </span>
+  </ion-card>
+
+
+
+
+
 </ion-content>
