@@ -31,12 +31,26 @@ export class SignupComponent implements OnInit {
         this.nav.setRoot(HomePage);
       }).catch(
         (err) => {
-        this.error = err;
+        this.error = this.returnError(err.message);
       })
     }
+  }
+
+  returnError(message){
+    let badlyEmail: string = "The email address is badly formatted.";
+    let AlreadyUse: string = "The email address is already in use by another account.";
+    if(message == badlyEmail){
+      return 'La direccion de correo electronico esta mal escrita';
+    }else if (message == AlreadyUse) {
+      return 'La dirección de correo electrónico ya está en uso por otra cuenta.';
+    }else{
+      return 'Hay un error, por favor verifique la informacion';
+    }
+
   }
 
   ngOnInit() {
   }
 
 }
+

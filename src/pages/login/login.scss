@@ -23,8 +23,14 @@ login-page {
   }
 
   p{
-    margin-left: 2em;
-    margin-right: 2em;
+    
+    text-align: center;
+  }
+
+  .error{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: .5em;
   }
 
 }

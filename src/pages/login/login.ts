@@ -7,6 +7,7 @@ import { SignupComponent } from '../signup/signup';
 import { Platform } from 'ionic-angular';
 
 import { FirebaseService } from '../../app/services/firebase.service';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'login-page',
@@ -19,32 +20,35 @@ export class LoginPage implements OnInit {
   signupComponent = SignupComponent;
   state: string = '';
   error: any;
+  private todo : FormGroup;
   constructor(public af: AngularFire,
     private nav: NavController,
     private platform: Platform,
-    private firebaseService: FirebaseService
-  ) { }
+    private firebaseService: FirebaseService,
+    private formBuilder: FormBuilder
+  ) {
+    this.todo = this.formBuilder.group({
+      email: ['', Validators.required],
+      contraseña: ['', Validators.required],
+    });
+   }
 
-
-  onSubmit(formData) {
-    if (formData.valid) {
-      console.log(formData.value);
+  logForm(){
+      
       this.af.auth.login({
-        email: formData.value.email,
-        password: formData.value.password
+        email: this.todo.value.email,
+        password: this.todo.value.contraseña
       },
         {
           provider: AuthProviders.Password,
           method: AuthMethods.Password,
         }).then(
         (success) => {
-          console.log(success);
           this.nav.setRoot(HomePage);
         }).catch(
         (err) => {
           this.error = 'Datos de inicio de sesión erroneos';
         })
-    }
   }
 
   ngOnInit() {

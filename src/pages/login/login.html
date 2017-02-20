@@ -11,21 +11,19 @@
   </div>
   <p>Bienvenido a la app de Gana Gana, inicia sesión para disfrutar todos los servicios que tenemos para ti</p>
 
-  <div class="form-container">
-    <span class="error" *ngIf="error">{{ error }}</span>
-    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-      <ion-item>
-        <ion-label stacked> Email</ion-label>
-        <ion-input type="text" placeholder="example@mail.com" (ngModel)="email" name="email" class="txt" required> </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
-      </ion-item>
-      <button ion-button block type="submit" [color]="primary" [disabled]="!formData.valid">Ingresar</button>
-      <div class="registro">
-        <a [navPush]="signupComponent" class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
-      </div>
-    </form>
+  <div class="error" *ngIf="error"><strong>{{ error }}</strong></div>
+  <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label stacked>Correo</ion-label>
+      <ion-input type="text" formControlName="email" placeholder="ejemplo@mail.com" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>contraseña</ion-label>
+      <ion-input type="password" formControlName="contraseña" placeholder="Contraseña" required></ion-input>
+    </ion-item>
+    <button ion-button block type="submit" [disabled]="!todo.valid">Ingresar</button>
+  </form>
+  <div class="registro">
+    <a [navPush]="signupComponent" class="alc">No tienes cuenta? <strong>Registrate aqui</strong></a>
   </div>
 </ion-content>

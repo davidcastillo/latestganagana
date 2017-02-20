@@ -15,7 +15,7 @@
   <p>Completa el siguiente formulario para crear tu cuenta GanaGana App</p>
 
   <div class="form-container">
-    <span class="error" *ngIf="error">{{ error }}</span>
+    <div class="error" *ngIf="error"><strong>{{ error }}</strong></div>
     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
       <ion-item>
         <ion-label stacked>Email</ion-label>
