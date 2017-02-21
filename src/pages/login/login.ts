@@ -7,7 +7,7 @@ import { SignupComponent } from '../signup/signup';
 import { Platform } from 'ionic-angular';
 
 import { FirebaseService } from '../../app/services/firebase.service';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'login-page',
@@ -16,49 +16,44 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 })
 export class LoginPage implements OnInit {
-  user = { email: '', password: '' };
+  user = [];
   signupComponent = SignupComponent;
   state: string = '';
   error: any;
-  private todo : FormGroup;
+  private todo: FormGroup;
   constructor(public af: AngularFire,
     private nav: NavController,
     private platform: Platform,
     private firebaseService: FirebaseService,
     private formBuilder: FormBuilder
   ) {
+
     this.todo = this.formBuilder.group({
       email: ['', Validators.required],
       contraseña: ['', Validators.required],
     });
-   }
+  }
 
-  logForm(){
-      
-      this.af.auth.login({
-        email: this.todo.value.email,
-        password: this.todo.value.contraseña
-      },
-        {
-          provider: AuthProviders.Password,
-          method: AuthMethods.Password,
-        }).then(
-        (success) => {
-          this.nav.setRoot(HomePage);
-        }).catch(
-        (err) => {
-          this.error = 'Datos de inicio de sesión erroneos';
-        })
+  logForm() {
+    this.firebaseService.login(this.todo.value.email, this.todo.value.contraseña).then(
+      (success) => {
+        this.nav.setRoot(HomePage);
+      }).catch(
+      (err) => {
+        this.error = 'Datos de inicio de sesión erroneos';
+      })
+
   }
 
   ngOnInit() {
-
+    this.user.push({ email: '', password: '' });
   }
 
   ionViewDidLoad() {
     if (localStorage.getItem(currentuser)) {
       this.nav.setRoot(HomePage);
-    }
+    };
+
   }
 }
 

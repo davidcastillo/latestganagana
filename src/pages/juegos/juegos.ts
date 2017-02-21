@@ -78,6 +78,7 @@ export class JuegosPage implements OnInit {
 
   kitSuerteSelected() {
     this.showLoading();
+    console.log("kitsuertelected");
     this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
       .subscribe(result => {
         if (result.length == 1) {

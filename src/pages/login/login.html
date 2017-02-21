@@ -12,14 +12,15 @@
   <p>Bienvenido a la app de Gana Gana, inicia sesión para disfrutar todos los servicios que tenemos para ti</p>
 
   <div class="error" *ngIf="error"><strong>{{ error }}</strong></div>
-  <form [formGroup]="todo" (ngSubmit)="logForm()">
+  
+  <form [formGroup]="todo" (ngSubmit)="logForm()" *ngFor="let usuario of user">
     <ion-item>
       <ion-label stacked>Correo</ion-label>
-      <ion-input type="text" formControlName="email" placeholder="ejemplo@mail.com" required></ion-input>
+      <ion-input type="text" formControlName="email" [(ngModel)]="usuario.email" placeholder="ejemplo@mail.com" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>contraseña</ion-label>
-      <ion-input type="password" formControlName="contraseña" placeholder="Contraseña" required></ion-input>
+      <ion-input type="password" formControlName="contraseña" [(ngModel)]="usuario.password" placeholder="Contraseña" required></ion-input>
     </ion-item>
     <button ion-button block type="submit" [disabled]="!todo.valid">Ingresar</button>
   </form>

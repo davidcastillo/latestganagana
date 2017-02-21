@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, AuthProviders,AuthMethods } from 'angularfire2';
 import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
 import 'rxjs/add/operator/map';
 
@@ -102,6 +102,8 @@ export class FirebaseService {
     return this.angFire.auth.getAuth().uid;
   }
 
+
+
   updatePersonalInfo(personalInfo) {
     return this.getSpecificPersonalInfo().push(personalInfo);
   }
@@ -158,6 +160,17 @@ export class FirebaseService {
 
   updateKitSuerteSaves(key: string, data: any){
     return this.getKitSuerteSaves().update(key, data);
+  }
+
+  login(email, contraseña){
+    return this.angFire.auth.login({
+        email: email,
+        password: contraseña
+      },
+        {
+          provider: AuthProviders.Password,
+          method: AuthMethods.Password,
+        });
   }
 
   

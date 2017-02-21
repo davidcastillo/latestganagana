@@ -30,5 +30,7 @@ export class HomePage implements OnInit{
     return this._firebaseService.authenticated;
   }*/
 
-
+  pruebaUid(){
+    
+  }
 }

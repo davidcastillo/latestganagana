@@ -14,7 +14,7 @@ import { FirebaseService } from '../../app/services/firebase.service';
 export class AstrologiaPage implements OnInit {
   astroresultadosPage = AstroresultadosPage
   todo: FormGroup;
-  private informacionUsuario: Iinformacionusuario;
+  private informacionUsuario = [];
 
   constructor(
     public navParams: NavParams,
@@ -37,7 +37,18 @@ export class AstrologiaPage implements OnInit {
       (personalInfo) => {
         if (personalInfo.length == 1) {
           this.informacionUsuario = personalInfo;
+        } else {
+          this.informacionUsuario.push({
+            name: '',
+            date_of_birth: '',
+            time: '',
+            city: ''
+
+          });
         }
+      }, (err) => {
+
+
       }
     );
   }
