@@ -50,7 +50,9 @@ export class KitdelasuertePage implements OnInit {
   getQR() {
     BarcodeScanner.scan(barcodeScannerParams).then(
       (barcodeData) => {
+        
         this.validarQR(barcodeData.text);
+        
       }).catch(
       (err) => {
         console.log('Algo salio mal' + err);
@@ -265,4 +267,6 @@ export class KitdelasuertePage implements OnInit {
 const barcodeScannerParams = {
   showFlipCameraButton: true,
   formats: "QR_CODE",
+  prompt:'Listo para escanear',
+  resultDisplayDuration: 0
 }

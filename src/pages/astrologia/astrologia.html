@@ -11,25 +11,27 @@
 <ion-content padding>
   <h3>Astrologia</h3>
 
-        <p>Ingrese sus datos para consultar la suerte de los astros para Ud.</p> 
+        <p>Ingrese sus datos para consultar la suerte de los astros para Usted.</p> 
+<div *ngFor="let infoUser of informacionUsuario">
 
-    <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <form [formGroup]="todo" (ngSubmit)="logForm()" >
       <ion-item>
         <ion-label>Nombre</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
+        <ion-input type="text" formControlName="nombre" name="name"  [(ngModel)]="infoUser.name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Fecha de nacimiento</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY"  formControlName="date_of_birth" doneText = "ok"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY" name="date" [(ngModel)]="infoUser.date_of_birth" formControlName="fechaNacimiento" doneText="ok"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Hora de nacimiento</ion-label>
-        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="time" doneText = "ok"></ion-datetime>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="hora" doneText = "ok"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Ciudad</ion-label>
-        <ion-input type="text" formControlName="city"></ion-input>
+        <ion-input type="text" formControlName="ciudad" [(ngModel)]="infoUser.city"></ion-input>
       </ion-item>
-      <button ion-button type="submit" [disabled]="!todo.valid"  [navPush]="astroresultadosPage">Consultar</button>
+      <button ion-button type="submit" [disabled]="todo.invalid"  [navPush]="astroresultadosPage" [navParams]="infoUser">Consultar</button>
     </form>
+</div>
 </ion-content>
