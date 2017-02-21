@@ -18,12 +18,12 @@
     <div class="error" *ngIf="error"><strong>{{ error }}</strong></div>
     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
       <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input type="text" placeholder="example@mail.com" (ngModel)="email" name="email" class="txt" required> </ion-input>
+        <ion-label stacked>Correo</ion-label>
+        <ion-input type="text" placeholder="ejemplo@mail.com" (ngModel)="email" name="email" class="txt"  required> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required> </ion-input>
+        <ion-label stacked>Contraseña</ion-label>
+        <ion-input type="password" placeholder="contraseña" (ngModel)="password" name="password" class="txt" required> </ion-input>
       </ion-item>
       <button ion-button block outline type="submit" [disabled]="!formData.valid" class="basic-btn">Crear mi cuenta</button>
     </form>
