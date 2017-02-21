@@ -8,29 +8,24 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      <strong>
-      <h1 class='title'>Simulador de Giros</h1>
-      </strong>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-      <h2 class='title'>Seleccione el valor a enviar</h2>
+<ion-content padding class='centering'>
 
+      <h1 class='title'>Simulador de Giros</h1>
+
+      <ion-item class='centering'>     
+      <h2>Seleccione el valor a enviar</h2>
       </ion-item>
 
 
-      <ion-item class='selector'>
-        <ion-label>Seleccione el monto</ion-label>
-        <p> </p>
-        <ion-select type="number" [(ngModel)]="selectedOption">
-          <ion-option *ngFor="let option of options" [value]="option.cost">{{option.range}}</ion-option>
+      <ion-item class='selector' >
+        <ion-label class='item-block' >Desde</ion-label>
+          <ion-select class='ion-select' type="number" [(ngModel)]="selectedOption" >
+            
+          <ion-option *ngFor="let option of options" [value]="option.cost" placeholder="ejemplo@mail.com">{{option.range}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-item class='centering'>
         <ion-row>
           <ion-col width-100>
             <h3 class=numero>
@@ -40,7 +35,6 @@
           
         </ion-row>
       </ion-item>
+</ion-content >
 
-    </ion-card-content>
 
-  </ion-card>

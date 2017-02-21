@@ -17,16 +17,27 @@ simuladorgiros-page {
     max-width: 200px;
     padding-top: 0.3em;
     padding-bottom: 0.3em;
-    
-    
-    
- }
+     }
+
+
+     .centering{
+       text-align: -webkit-center;
+
+     }
 
  ion-card-header{
    text-align: center;
    background: color($colors, ganagana, primary);
-
  }
+
+.ion-select{
+  max-width: 100%;
+
+}
+
+item-block{
+  width: 36%;
+}
 
  
 }
