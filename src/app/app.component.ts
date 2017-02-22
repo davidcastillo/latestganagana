@@ -11,6 +11,7 @@ import { AstrologiaPage } from '../pages/astrologia/astrologia';
 import { ResultadosPage } from '../pages/resultados/resultados';
 import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
 import { LoginPage } from '../pages/login/login';
+import { PortafolioServiciosPage } from '../pages/portafolio-servicios/portafolio-servicios';
 
 //services
 import { FirebaseService } from './services/firebase.service';
@@ -32,9 +33,9 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-    
-        Splashscreen.hide();
-    
+
+      Splashscreen.hide();
+
     });
 
     // used for an example of ngFor and navigation
@@ -44,6 +45,7 @@ export class MyApp {
       { title: 'Numerología', component: NumerologiaPage },
       { title: 'Astrología', component: AstrologiaPage },
       { title: 'Resultados', component: ResultadosPage },
+      { title: 'Portafolio', component: PortafolioServiciosPage },
       { title: 'Simulador de Giros', component: SimuladorgirosPage }
     ];
 
@@ -65,10 +67,10 @@ export class MyApp {
   }
   cerrarSesion() {
     this.firebaseService.logout().then(
-      ()=>{
-    console.log("debe mandar a login page");
-    this.nav.setRoot(LoginPage);
-    
+      () => {
+        console.log("debe mandar a login page");
+        this.nav.setRoot(LoginPage);
+
       }
     );
   }

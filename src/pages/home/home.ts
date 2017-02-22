@@ -6,18 +6,19 @@ import { NumerologiaPage } from '../numerologia/numerologia';
 import { AstrologiaPage } from '../astrologia/astrologia';
 import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
-
+import { PortafolioServiciosPage } from '../portafolio-servicios/portafolio-servicios';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit{
-  juegosPage = JuegosPage
-  numerologiaPage = NumerologiaPage
-  astrologiaPage = AstrologiaPage
-  resultadosPage = ResultadosPage
-  simuladorgirosPage = SimuladorgirosPage
+  juegosPage = JuegosPage;
+  numerologiaPage = NumerologiaPage;
+  astrologiaPage = AstrologiaPage;
+  resultadosPage = ResultadosPage;
+  simuladorgirosPage = SimuladorgirosPage;
+  potafolioServiciosPage = PortafolioServiciosPage;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}

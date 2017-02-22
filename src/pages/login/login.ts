@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SignupComponent } from '../signup/signup';
@@ -8,6 +8,8 @@ import { Platform } from 'ionic-angular';
 
 import { FirebaseService } from '../../app/services/firebase.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+import { Toast, Network } from 'ionic-native';
 
 @Component({
   selector: 'login-page',
@@ -35,13 +37,17 @@ export class LoginPage implements OnInit {
   }
 
   logForm() {
-    this.firebaseService.login(this.todo.value.email, this.todo.value.contraseña).then(
-      (success) => {
-        this.nav.setRoot(HomePage);
-      }).catch(
-      (err) => {
-        this.error = 'Datos de inicio de sesión erroneos';
-      })
+    if (Network.type != 'none') {
+      this.firebaseService.login(this.todo.value.email, this.todo.value.contraseña).then(
+        (success) => {
+          this.nav.setRoot(HomePage);
+        }).catch(
+        (err) => {
+          this.error = 'Datos de inicio de sesión erroneos';
+        })
+    }else {
+      this.showToast('Debe tener conexión a Internet', 'bottom');
+    }
 
   }
 
@@ -53,6 +59,15 @@ export class LoginPage implements OnInit {
     if (localStorage.getItem(currentuser)) {
       this.nav.setRoot(HomePage);
     };
+
+  }
+  showToast(message: string, position: string, pixelsY: number = (-40)) {
+    Toast.showWithOptions({
+      message: message,
+      duration: 2000,
+      position: position,
+      addPixelsY: pixelsY
+    }).subscribe(console.log);
 
   }
 }

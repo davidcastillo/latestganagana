@@ -20,7 +20,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class CompleteInfoPage {
   private register;
-  private aceptaTerminos = true;
   private User: IUser = {
     uid: '',
     name: '',

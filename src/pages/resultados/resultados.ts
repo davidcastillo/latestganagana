@@ -23,4 +23,8 @@ export class ResultadosPage implements OnInit{
    window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos');
   }
 
+  redirectTo(){
+    window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos');
+  }
+
 }

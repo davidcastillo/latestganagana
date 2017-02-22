@@ -8,7 +8,10 @@ import { CompleteInfoPage } from '../kitdelasuerte/complete-info/complete-info';
 /*import { KitsuertewinPage } from '../kitdelasuerte/kitsuertewin/kitsuertewin';*/
 
 import { FirebaseService } from '../../app/services/firebase.service';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
+
+import { Network, Toast } from 'ionic-native';
+
 
 @Component({
   selector: 'page-juegos',
@@ -28,7 +31,8 @@ export class JuegosPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseService: FirebaseService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
 
   ) {
     // If we navigated to this page, we will have an item available as a nav param
@@ -48,8 +52,7 @@ export class JuegosPage implements OnInit {
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   gamesTapped(event, game) {
 
@@ -77,44 +80,34 @@ export class JuegosPage implements OnInit {
   }
 
   kitSuerteSelected() {
-    this.showLoading();
-    console.log("kitsuertelected");
-    this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
-      .subscribe(result => {
-        if (result.length == 1) {
-          this.dismissLoading();
-          this.navCtrl.push(KitdelasuertePage);
-          /*this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
-            .subscribe(
-            (uidYamuletos) => {
-              uidYamuletos.forEach(amuletosEnFirebase => {
-                this.contadorAmuletos = 0;
-                this.totalAmuletos = 0;
-                (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
-                  if ((amuletosDescription.find) == true) {
-                    this.contadorAmuletos++;
-                  }
-                  this.totalAmuletos++;
-                });
-                console.log('Total amuletos: '+this.totalAmuletos + " AmuletosContados: " + this.contadorAmuletos);
-                if (this.contadorAmuletos == this.totalAmuletos) {
-                  this.navCtrl.push(KitsuertewinPage);
-                  this.dismissLoading();
-                } else {
-                  this.dismissLoading();
-                  this.navCtrl.push(KitdelasuertePage);
-                }
-              });
-            }
-            );*/
-        } else {
-          this.dismissLoading();
-          this.navCtrl.push(CompleteInfoPage);
-        }
-      }, (err) => {
-        //console.log("la cosa no sirvio");
-      }, () => {
-        //console.log("Proceso terminado");
-      });
+
+    if (Network.type != 'none') {
+      this.showLoading();
+      this.firebaseService.getSpecificPersonalInfo(this.firebaseService.auth.getAuth().uid)
+        .subscribe(result => {
+          if (result.length == 1) {
+            this.dismissLoading();
+            this.navCtrl.push(KitdelasuertePage);
+          } else {
+            this.dismissLoading();
+            this.navCtrl.push(CompleteInfoPage);
+          }
+        }, (err) => {
+          //console.log("la cosa no sirvio");
+        }, () => {
+          //console.log("Proceso terminado");
+        });
+    } else {
+      this.showToast('Debe tener conexión a Internet', 'bottom');
+    }
+  }
+  showToast(message: string, position: string, pixelsY: number = (-40)) {
+    Toast.showWithOptions({
+      message: message,
+      duration: 2000,
+      position: position,
+      addPixelsY: pixelsY
+    }).subscribe(console.log);
+
   }
 }

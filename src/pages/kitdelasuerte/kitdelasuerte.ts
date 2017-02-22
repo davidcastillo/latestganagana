@@ -20,8 +20,6 @@ import { Toast, BarcodeScanner } from 'ionic-native';
 })
 export class KitdelasuertePage implements OnInit {
   private amulets;
-  private instructionsRoot;
-  /*private showLoading: boolean = true;*/
   private loading;
   private contadorAmuletos: any;
   private totalAmuletos: any;

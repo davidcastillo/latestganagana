@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { Network } from 'ionic-native';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FirebaseService } from '../../app/services/firebase.service';
+
 
 import { AstroresultadosPage } from '../astroresultados/astroresultados';
 
-import { FirebaseService } from '../../app/services/firebase.service';
 
 @Component({
   selector: 'page-astrologia',
@@ -33,24 +34,36 @@ export class AstrologiaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.firebaseService.getSpecificPersonalInfo(this.firebaseService.getuid()).subscribe(
-      (personalInfo) => {
-        if (personalInfo.length == 1) {
-          this.informacionUsuario = personalInfo;
-        } else {
-          this.informacionUsuario.push({
-            name: '',
-            date_of_birth: '',
-            time: '',
-            city: ''
+    if (Network.type != 'none') {
+      this.firebaseService.getSpecificPersonalInfo(this.firebaseService.getuid()).subscribe(
+        (personalInfo) => {
+          if (personalInfo.length == 1) {
+            this.informacionUsuario = personalInfo;
+          } else {
+            this.informacionUsuario.push({
+              name: '',
+              date_of_birth: '',
+              time: '',
+              city: ''
 
-          });
+            });
+          }
+        }, (err) => {
+
+
         }
-      }, (err) => {
+      );
+    }else {
+      this.informacionUsuario.push({
+              name: '',
+              date_of_birth: '',
+              time: '',
+              city: ''
+
+            });
+    }
 
 
-      }
-    );
   }
 
 }

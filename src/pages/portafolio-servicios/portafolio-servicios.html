@@ -1,0 +1,44 @@
+<!--
+  Generated template for the PortafolioServicios page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Portafolio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header color="ganagana"><h1>Servicios</h1></ion-list-header>
+    <ion-item [navPush]="mostrarServicioPage" [navParams]="{show: 'juegosAzar'}">
+      Juegos de Azar
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item [navPush]="mostrarServicioPage" [navParams]="{show: 'recargas'}">
+      Recargas
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item  [navPush]="mostrarServicioPage" [navParams]="{show: 'giros'}">
+      Giros
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item  [navPush]="mostrarServicioPage" [navParams]="{show: 'pagos'}">
+      Pagos
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item [navPush]="mostrarServicioPage" [navParams]="{show: 'recaudos'}">
+      Recaudos
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+    <ion-item [navPush]="mostrarServicioPage" [navParams]="{show: 'seguros'}">
+      Seguros
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

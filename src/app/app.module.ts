@@ -21,6 +21,8 @@ import { ArmaparejasgamePage } from '../pages/armaparejasgame/armaparejasgame';
 import { CompleteInfoPage } from '../pages/kitdelasuerte/complete-info/complete-info';
 import { KitsuertewinPage } from '../pages/kitdelasuerte/kitsuertewin/kitsuertewin';
 import { KitSuertePopoverPage } from '../pages/kitdelasuerte/kit-suerte-popover/kit-suerte-popover';
+import { PortafolioServiciosPage } from '../pages/portafolio-servicios/portafolio-servicios';
+import { MostrarServicioPage } from '../pages/portafolio-servicios/mostrar-servicio/mostrar-servicio';
 //Modules 
 import { FormsModule} from '@angular/forms';
 import { GameModule } from '../pages/armaparejas/ts/game/index'; 
@@ -50,7 +52,9 @@ import { GamecontrolService } from './services/gamecontrol.service';
     ArmaparejasgamePage,
     CompleteInfoPage,
     KitsuertewinPage,
-    KitSuertePopoverPage
+    KitSuertePopoverPage,
+    PortafolioServiciosPage,
+    MostrarServicioPage
   ],
 
   imports: [
@@ -80,7 +84,9 @@ import { GamecontrolService } from './services/gamecontrol.service';
     ArmaparejasgamePage, 
     CompleteInfoPage,
     KitsuertewinPage,
-    KitSuertePopoverPage
+    KitSuertePopoverPage,
+    PortafolioServiciosPage,
+    MostrarServicioPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
