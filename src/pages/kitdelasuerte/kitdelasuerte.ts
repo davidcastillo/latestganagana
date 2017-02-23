@@ -214,9 +214,9 @@ export class KitdelasuertePage implements OnInit {
             this.totalAmuletos++;
           });
           if (this.contadorAmuletos == this.totalAmuletos) {
-            this.esGanador();
+            return this.navCtrl.push(KitsuertewinPage).catch(console.log);
           } else {
-            this.showToast('Te faltan: ' + (this.totalAmuletos - this.contadorAmuletos), 'bottom');
+            return this.showToast('Te faltan: ' + (this.totalAmuletos - this.contadorAmuletos), 'bottom');
           }
         });
       }
@@ -224,7 +224,7 @@ export class KitdelasuertePage implements OnInit {
   }
 
   esGanador() {
-    this.navCtrl.push(KitsuertewinPage);
+    
   }
 
   openPopover(event) {

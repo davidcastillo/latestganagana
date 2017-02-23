@@ -36,7 +36,9 @@ import { NavController, NavParams } from 'ionic-angular';
     `]
 })
 export class MemoryGameComponent implements OnInit {
-    constructor(private actions: GameActions, public navCtrl: NavController, public navParams: NavParams) { }
+    constructor(private actions: GameActions, public navCtrl: NavController, public navParams: NavParams) {
+        console.log("Inicia el juego");
+     }
 
     ngOnInit() {
         this.actions.updateStatus(STATUS.READY);

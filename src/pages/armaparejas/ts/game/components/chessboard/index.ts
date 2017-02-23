@@ -14,8 +14,8 @@ import { ICard } from '../../../store/model/card';
     `,
     styles: [`
     :host {
-        margin-top: 50px;
-        margin-bottom: 5%;
+        margin-top: 15px;
+        
         width: 100%;
         background-color: #fff;
         height: 100%;
@@ -26,8 +26,8 @@ import { ICard } from '../../../store/model/card';
         justify-content: center;
         align-items: center;
         align-content: space-around;
-        position: absolute;
-        padding-bottom: 40px;
+        position: relative;
+        
     }
     card:nth-child(4n) {
         

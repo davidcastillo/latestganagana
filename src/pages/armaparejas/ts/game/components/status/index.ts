@@ -22,7 +22,6 @@ import { GamecontrolService } from '../../../../../../app/services/gamecontrol.s
         position: relative;
         margin-top: 10px;
         width: 100%;
-        height: 100%;
         text-align: center;
         font-size: 18px;
         font-weight: bold;

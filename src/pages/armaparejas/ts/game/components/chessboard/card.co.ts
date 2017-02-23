@@ -12,13 +12,15 @@ import { ICard, CARDS } from '../../../store/model/card';
     `,
     styles: [`
     :host {
-        width: 120px;
-        height: 121px;
-        margin-right: 3px;
+        width: 115px;
+        height: 140px;
+        margin-left: 10px;
+        margin-right: 10px;
         cursor: pointer;
         position: relative;
         perspective: 800px;
     }
+    
     .card {
         width: 100%;
         height: 100%;
@@ -43,27 +45,88 @@ import { ICard, CARDS } from '../../../store/model/card';
         background: blue;
         transform: rotateY( 180deg );
     }
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 1110px) {
         :host {
-            width: 92px;
-            height: 111px;
+            width: 100px;
+            height: 115px;
+            margin-right: 3px;
+            cursor: pointer;
+            position: relative;
+            perspective: 800px;
+        }
+    }
+    @media screen and (max-width: 969px) {
+        :host {
+                width: 130px;
+                height: 75px;
+                margin-right: 58px;
+                cursor: pointer;
+                position: relative;
+                perspective: 800px;
+        }
+    }
+    @media screen and (max-width: 846px) {
+        :host {
+            width: 103px;
+            height: 70px;
+            margin-right: 59px;
+            cursor: pointer;
+            position: relative;
+            perspective: 800px;
+        }
+    }
+    @media screen and (max-width: 717px) {
+        :host {
+                width: 113px;
+                height: 70px;
+                margin-right: 15px;
+                cursor: pointer;
+                position: relative;
+                perspective: 800px;
+        }
+    }
+    @media screen and (max-width: 579px) {
+        :host {
+            width: 99px;
+            height: 70px;
             margin-right: 1px;
         }
     }
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 534px) {
         :host {
-            width: 85px;
-            height: 102px;
+            width: 90px;
+            height: 69px;
+            margin-right: 1px;
+        }
+    }
+    @media screen and (max-width: 470px) {
+        :host {
+            width: 80px;
+            height: 60px;
+            margin-right: 1px;
+        }
+    }
+    @media screen and (max-width: 396px) {
+        :host {
+            width: 70px;
+            height: 60px;
             margin-right: 1px;
         }
     }
     @media screen and (max-width: 360px) {
         :host {
-            width: 70px;
-            height: 84px;
+            width: 60px;
+            height: 70px;
             margin-right: 1px;
         }
     }
+    @media screen and (max-width: 313px) {
+        :host {
+            width: 60px;
+            height: 55px;
+            margin-right: -1px;
+            margin-left: -1px;
+     
     `]
 })
 export class CardComponent {
