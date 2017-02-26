@@ -22,6 +22,7 @@ export class FirebaseService {
   player = {};
   status = {}
   isLogged: boolean = false;
+  uidVar: string;
 
 
   constructor(private angFire: AngularFire, public auth: AngularFireAuth) {
@@ -54,6 +55,19 @@ export class FirebaseService {
 
   get authenticated(): boolean {
     return this.authState !== null;
+  }
+
+  
+  iudMethod(){
+    this.angFire.auth.subscribe(
+      (ress)=>{
+        this.uidVar = ress.uid;
+      },
+      (err) => {console.log('error en uid' + err);},
+      () => {
+        console.log("Uid Capturado");
+      }
+    );
   }
 
 

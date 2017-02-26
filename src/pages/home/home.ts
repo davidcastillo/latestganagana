@@ -7,7 +7,7 @@ import { AstrologiaPage } from '../astrologia/astrologia';
 import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
 import { PortafolioServiciosPage } from '../portafolio-servicios/portafolio-servicios';
-
+import { GoogleAnalytics } from 'ionic-native';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -24,7 +24,11 @@ export class HomePage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
 
   ngOnInit(){
-    
+    GoogleAnalytics.startTrackerWithId('UA-92560068-1')
+   .then(() => {
+     console.log('Google analytics is ready now');
+   })
+   .catch(e => console.log('Error starting GoogleAnalytics', e));
   }
 
   /*ionViewCanEnter(){

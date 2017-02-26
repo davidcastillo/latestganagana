@@ -1,16 +1,34 @@
-import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { Injectable, OnInit } from '@angular/core';
+import { AlertController, PopoverController } from 'ionic-angular';
+import { FirebaseService } from './firebase.service';
+
+import { KitSuertePopoverPage } from '../../pages/kitdelasuerte/kit-suerte-popover/kit-suerte-popover';
+
 @Injectable()
 export class GamecontrolService {
 
     armaParejasFlag: boolean = false;
-    kitSuerteFlag: boolean = true;
+    kitSuerteFlag: boolean;
     amuletosCapturados;
     amuletosRestantes;
-    constructor(public alertCtrl: AlertController) {
-
+    contadorAmuletos: number;
+    totalAmuletos: number;
+    popover: any;
+    flagEsGanador: boolean;
+    amuletos = [];
+    pruebaKey;
+    amuletosDelUsuario = [];
+    constructor(public alertCtrl: AlertController,
+        public popoverCtrl: PopoverController,
+        private firebaseService: FirebaseService
+    ) {
+this.flagEsGanador = false;
     }
+    ngOnInit() {
+        
 
+        this.flagEsGanador = false;
+    }
     armaParejasWin() {
         let alert = this.alertCtrl.create({
             title: '¡Ganaste!',
@@ -19,5 +37,6 @@ export class GamecontrolService {
         });
         alert.present();
     }
+
 
 }
