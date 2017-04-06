@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 
@@ -12,6 +12,7 @@ import { ResultadosPage } from '../pages/resultados/resultados';
 import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
 import { LoginPage } from '../pages/login/login';
 import { PortafolioServiciosPage } from '../pages/portafolio-servicios/portafolio-servicios';
+import { GoogleAnalytics } from 'ionic-native';
 
 //services
 import { FirebaseService } from './services/firebase.service';
@@ -33,11 +34,29 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
+      StatusBar.styleDefault();
       Splashscreen.hide();
 
-    });
+      //google
+      
+      return GoogleAnalytics.startTrackerWithId('UA-92560068-1')
+        .then((_success) => {
+          console.log('Google analytics is ready now');
+          alert("Google analytics is ready now");
+          // Tracker is ready
+          // You can now track pages or set additional information such as AppVersion or UserId
+          return GoogleAnalytics.enableUncaughtExceptionReporting(true)
+        }).then((_success) => {
+          alert("starttrackerwithid success");
+        })
+        .catch(e => {
+          console.log('Error starting GoogleAnalytics', e);
+          alert("Error starting GoogleAnalytics " + e);
+        });
+        
 
+    });
+    
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
@@ -55,6 +74,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

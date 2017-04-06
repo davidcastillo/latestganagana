@@ -13,7 +13,7 @@ import { NumerologiaPage } from '../pages/numerologia/numerologia';
 import { AstrologiaPage } from '../pages/astrologia/astrologia';
 import { ResultadosPage } from '../pages/resultados/resultados';
 import { SimuladorgirosPage } from '../pages/simuladorgiros/simuladorgiros';
-import { InstruccionesPage } from '../pages/instrucciones/instrucciones';
+import { InstruccionesPage } from '../pages/armaparejas/instrucciones/instrucciones';
 import { NumresultadosPage } from '../pages/numresultados/numresultados';
 import { AstroresultadosPage } from '../pages/astroresultados/astroresultados';
 import { AngularFireModule } from 'angularfire2';

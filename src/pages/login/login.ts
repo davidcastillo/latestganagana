@@ -9,7 +9,9 @@ import { Platform } from 'ionic-angular';
 import { FirebaseService } from '../../app/services/firebase.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { Toast, Network } from 'ionic-native';
+import { Toast, Network, GoogleAnalytics } from 'ionic-native';
+
+const name_view_login:string = 'login';
 
 @Component({
   selector: 'login-page',
@@ -52,6 +54,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    GoogleAnalytics.trackView(name_view_login);
     this.user.push({ email: '', password: '' });
   }
 

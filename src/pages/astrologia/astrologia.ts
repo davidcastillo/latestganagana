@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Network } from 'ionic-native';
+import { Network, GoogleAnalytics } from 'ionic-native';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseService } from '../../app/services/firebase.service';
 
 
 import { AstroresultadosPage } from '../astroresultados/astroresultados';
 
+const name_view_astrologia: string = 'astrologia';
 
 @Component({
   selector: 'page-astrologia',
@@ -34,6 +35,7 @@ export class AstrologiaPage implements OnInit {
   }
 
   ngOnInit() {
+    GoogleAnalytics.trackView(name_view_astrologia);
     if (Network.type != 'none') {
       this.firebaseService.getSpecificPersonalInfo(this.firebaseService.getuid()).subscribe(
         (personalInfo) => {

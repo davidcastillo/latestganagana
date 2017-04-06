@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GoogleAnalytics } from 'ionic-native';
+
+const name_view_simuladorgiros: string = 'simuladorgiros';
 
 @Component({
   selector: 'simuladorgiros-page',
   templateUrl: 'simuladorgiros.html'
 })
-export class SimuladorgirosPage {
+export class SimuladorgirosPage implements OnInit {
+
+  ngOnInit(){
+    GoogleAnalytics.trackView(name_view_simuladorgiros);
+  }
+
   selectedOption: string;
   options:Array<Object> = [
       {cost: '$4.700', range: "$0 a $50.000"},

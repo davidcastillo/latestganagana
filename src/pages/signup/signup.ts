@@ -3,7 +3,10 @@ import { AngularFire } from 'angularfire2';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
-import { Toast, Network } from 'ionic-native';
+import { Toast, Network, GoogleAnalytics } from 'ionic-native';
+
+
+const name_view_signup: string = 'signup';
 
 @Component({
   selector: 'signup-page',
@@ -57,6 +60,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    GoogleAnalytics.trackView(name_view_signup);
   }
 
   showToast(message: string, position: string, pixelsY: number = (-40)) {

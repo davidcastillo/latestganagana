@@ -8,6 +8,7 @@ import { ResultadosPage } from '../resultados/resultados';
 import { SimuladorgirosPage } from '../simuladorgiros/simuladorgiros';
 import { PortafolioServiciosPage } from '../portafolio-servicios/portafolio-servicios';
 import { GoogleAnalytics } from 'ionic-native';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -21,14 +22,12 @@ export class HomePage implements OnInit{
   potafolioServiciosPage = PortafolioServiciosPage;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _firebaseService: FirebaseService) {
+    GoogleAnalytics.trackView(name_view_home,'ganagana/home',true);
+  }
 
   ngOnInit(){
-    GoogleAnalytics.startTrackerWithId('UA-92560068-1')
-   .then(() => {
-     console.log('Google analytics is ready now');
-   })
-   .catch(e => console.log('Error starting GoogleAnalytics', e));
+  
   }
 
   /*ionViewCanEnter(){
@@ -39,3 +38,5 @@ export class HomePage implements OnInit{
     
   }
 }
+
+const name_view_home: string = 'home';

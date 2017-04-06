@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { GoogleAnalytics } from 'ionic-native';
 
-/*
-  Generated class for the Resultados page.
+const name_view_resultados: string = 'Resultados';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-resultados',
   templateUrl: 'resultados.html',
@@ -17,14 +14,16 @@ import { HomePage } from '../home/home';
 export class ResultadosPage implements OnInit{
   homePage : HomePage
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    GoogleAnalytics.trackView(name_view_resultados);
+  }
 
   ngOnInit(){
-   window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos');
+   window.open('http://www.ganagana.com.co/index.php/resultados');
   }
 
   redirectTo(){
-    window.open('http://www.ganagana.com.co/index.php/resultados/resultados-loterias-y-sorteos');
+    window.open('http://www.ganagana.com.co/index.php/resultados');
   }
 
 }

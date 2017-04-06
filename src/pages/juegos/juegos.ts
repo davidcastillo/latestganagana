@@ -10,8 +10,9 @@ import { CompleteInfoPage } from '../kitdelasuerte/complete-info/complete-info';
 import { FirebaseService } from '../../app/services/firebase.service';
 import { LoadingController, AlertController } from 'ionic-angular';
 
-import { Network, Toast } from 'ionic-native';
+import { Network, Toast, GoogleAnalytics } from 'ionic-native';
 
+const name_view_juegos: string = 'juegos';
 
 @Component({
   selector: 'page-juegos',
@@ -52,7 +53,9 @@ export class JuegosPage implements OnInit {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    GoogleAnalytics.trackView(name_view_juegos);
+   }
 
   gamesTapped(event, game) {
 

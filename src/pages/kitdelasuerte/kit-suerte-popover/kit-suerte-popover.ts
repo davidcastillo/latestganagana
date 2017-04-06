@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController, LoadingController } from 'ionic-angular';
 
 //pages for Root
-
 import { GamecontrolService } from '.././../../app/services/gamecontrol.service';
 import { FirebaseService } from '.././../../app/services/firebase.service';
 import { PopoverController } from 'ionic-angular';
 import { JuegosPage } from '../../juegos/juegos';
-import {Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { GoogleAnalytics } from 'ionic-native';
+
+const name_view_kitsuertepopover: string = 'Kit_Suerte_Popover';
+
 @Component({
   selector: 'page-kit-suerte-popover',
   templateUrl: 'kit-suerte-popover.html'
@@ -28,6 +31,7 @@ export class KitSuertePopoverPage {
     this.amuletosCapturados = this.gamecontrolService.amuletosCapturados;
     this.amuletosRestantes = this.gamecontrolService.amuletosRestantes;
     this.tapToShow = 'instrucciones';
+    GoogleAnalytics.trackView(name_view_kitsuertepopover);
   }
 
   ionViewDidLoad() {

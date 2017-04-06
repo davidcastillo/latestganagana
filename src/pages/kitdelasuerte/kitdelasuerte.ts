@@ -12,7 +12,9 @@ import { KitsuertewinPage } from './kitsuertewin/kitsuertewin';
 import { KitSuertePopoverPage } from './kit-suerte-popover/kit-suerte-popover';
 
 //native import 
-import { Toast, BarcodeScanner } from 'ionic-native';
+import { Toast, BarcodeScanner, GoogleAnalytics } from 'ionic-native';
+
+const name_view_kitdelasuerte: string = 'Kit_Suerte';
 
 @Component({
   selector: 'page-kitdelasuerte',
@@ -34,7 +36,7 @@ export class KitdelasuertePage implements OnInit {
     private popoverCtrl: PopoverController
 
   ) {
-
+    GoogleAnalytics.trackView(name_view_kitdelasuerte);
   }
 
   ngOnInit() {

@@ -12,7 +12,8 @@ import { AlertController, PopoverController } from 'ionic-angular';
 
 //formulario de registro
 import { Validators, FormBuilder } from '@angular/forms';
-
+import { GoogleAnalytics } from 'ionic-native';
+const name_view_kitsuerte_completeInfo: string = 'Kit_Suerte_Complete_info';
 
 @Component({
   selector: 'page-complete-info',
@@ -36,6 +37,9 @@ export class CompleteInfoPage {
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController
   ) {
+
+    GoogleAnalytics.trackView(name_view_kitsuerte_completeInfo);
+
     this.register = this.formBuilder.group({
       name: ['', Validators.required],
       mobile: ['', Validators.required],
