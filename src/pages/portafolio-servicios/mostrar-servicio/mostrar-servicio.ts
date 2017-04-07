@@ -33,17 +33,17 @@ export class MostrarServicioPage {
     switch (this.navParams.get('show')) {
       case 'juegosAzar':
         this.showService = [
-          { nombre: 'Chance', imgUrl: 'assets/servicios/juegosAzar/chance.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/chance' },
-          { nombre: 'Astro', imgUrl: 'assets/servicios/juegosAzar/astro.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/super-astro' },
-          { nombre: 'Loteria Virtual', imgUrl: 'assets/servicios/juegosAzar/loteriaVirtual.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/loteria-virtual' },
-          { nombre: 'Loteria Fisica', imgUrl: 'assets/servicios/juegosAzar/loteriaFisica.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/loteria-fisica' },
-          { nombre: 'Los Gorditos', imgUrl: 'assets/servicios/juegosAzar/losGorditos.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/los-gorditos' },
-          { nombre: 'Las Deportivas', imgUrl: 'assets/servicios/juegosAzar/lasDeportivas.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/las-deportivas' },
-          { nombre: 'Super Chance', imgUrl: 'assets/servicios/juegosAzar/superChance.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/super-chance' },
-          { nombre: 'Gana Sueños', imgUrl: 'assets/servicios/juegosAzar/ganaSueños.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/ganasueno-6000' },
-          { nombre: 'Semanario', imgUrl: 'assets/servicios/juegosAzar/semanario.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/el-semanario' },
-          { nombre: 'Doble Play', imgUrl: 'assets/servicios/juegosAzar/doblePlay.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/doble-play' },
-          { nombre: 'Chance+', imgUrl: 'assets/servicios/juegosAzar/chanceMas.png', url: 'http://www.ganagana.com.co/index.php/portafolio/juegos-de-azar/chance-mas' },
+          { nombre: 'Chance', imgUrl: 'assets/servicios/juegosAzar/chance.png', url: 'http://www.ganagana.com.co/index.php/chance' },
+          { nombre: 'Astro', imgUrl: 'assets/servicios/juegosAzar/astro.png', url: 'http://www.ganagana.com.co/index.php/super-astro' },
+          { nombre: 'Loteria Virtual', imgUrl: 'assets/servicios/juegosAzar/loteriaVirtual.png', url: 'http://www.ganagana.com.co/index.php/loteria-virtual' },
+          { nombre: 'Loteria Fisica', imgUrl: 'assets/servicios/juegosAzar/loteriaFisica.png', url: 'http://www.ganagana.com.co/index.php/loteria-fisica' },
+          { nombre: 'Los Gorditos', imgUrl: 'assets/servicios/juegosAzar/losGorditos.png', url: 'http://www.ganagana.com.co/index.php/los-gorditos' },
+          { nombre: 'Las Deportivas', imgUrl: 'assets/servicios/juegosAzar/lasDeportivas.png', url: 'http://www.ganagana.com.co/index.php/las-deportivas' },
+          { nombre: 'Super Chance', imgUrl: 'assets/servicios/juegosAzar/superChance.png', url: 'http://www.ganagana.com.co/index.php/super-chance' },
+          { nombre: 'Gana Sueños', imgUrl: 'assets/servicios/juegosAzar/ganaSueños.png', url: 'http://www.ganagana.com.co/index.php/gana-sueno' },
+          { nombre: 'Semanario', imgUrl: 'assets/servicios/juegosAzar/semanario.png', url: 'http://www.ganagana.com.co/index.php/semanario' },
+          { nombre: 'Doble Play', imgUrl: 'assets/servicios/juegosAzar/doblePlay.png', url: 'http://www.ganagana.com.co/index.php/doble-play' },
+          { nombre: 'Chance+', imgUrl: 'assets/servicios/juegosAzar/chanceMas.png', url: 'http://www.ganagana.com.co/index.php/chance-mas' },
         ];
         this.title = 'Juegos de Azar';
         break;
@@ -69,8 +69,8 @@ export class MostrarServicioPage {
         break;
       case 'pagos':
         this.showService = [
-          { nombre: 'ComfaTolima', imgUrl: 'assets/servicios/pagos/comfaTolima.png', url: 'http://www.ganagana.com.co/index.php/portafolio/pagos-y-recaudos/comfatolima-comfenalco' },
-          { nombre: 'Comfenalco', imgUrl: 'assets/servicios/pagos/comfenalco.png', url: 'http://www.ganagana.com.co/index.php/portafolio/pagos-y-recaudos/comfatolima-comfenalco' },
+          { nombre: 'ComfaTolima', imgUrl: 'assets/servicios/pagos/comfaTolima.png', url: 'http://www.ganagana.com.co/index.php/portafolio/pagos/223-comfatolima' },
+          { nombre: 'Comfenalco', imgUrl: 'assets/servicios/pagos/comfenalco.png', url: 'http://www.ganagana.com.co/index.php/portafolio/pagos/222-comfenalco' },
           { nombre: 'Colombia Mayor', imgUrl: 'assets/servicios/pagos/colombiaMayor.png', url: 'https://colombiamayor.co/' }
         ];
         this.title = 'Pagos';
@@ -93,9 +93,9 @@ export class MostrarServicioPage {
         break;
       case 'seguros':
         this.showService = [
-          { nombre: 'La Fe', imgUrl: 'assets/servicios/seguros/lafe.png', url: 'http://www.ganagana.com.co/index.php/portafolio/seguros/planes-exequiales' },
-          { nombre: 'misoat', imgUrl: 'assets/servicios/seguros/misoat.png', url: 'http://www.ganagana.com.co/index.php/portafolio/seguros/soat' },
-          { nombre: 'migiro', imgUrl: 'assets/servicios/seguros/migiroseguro.png', url: 'http://www.ganagana.com.co/index.php/portafolio/seguros/migiro-seguro' },
+          { nombre: 'La Fe', imgUrl: 'assets/servicios/seguros/lafe.png', url: 'http://www.ganagana.com.co/index.php/portafolio/seguros' },
+          { nombre: 'misoat', imgUrl: 'assets/servicios/seguros/misoat.png', url: 'http://www.ganagana.com.co/index.php/mi-soat' },
+          { nombre: 'migiro', imgUrl: 'assets/servicios/seguros/migiroseguro.png', url: 'http://www.ganagana.com.co/index.php/mi-giro-seguro' },
         ];
         this.title = 'Seguros';
         break;

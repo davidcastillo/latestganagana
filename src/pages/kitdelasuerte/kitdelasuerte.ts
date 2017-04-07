@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from '';
 //services
@@ -13,19 +13,19 @@ import { KitSuertePopoverPage } from './kit-suerte-popover/kit-suerte-popover';
 
 //native import 
 import { Toast, BarcodeScanner, GoogleAnalytics } from 'ionic-native';
-
+import { Subscription } from 'rxjs/Subscription';
 const name_view_kitdelasuerte: string = 'Kit_Suerte';
 
 @Component({
   selector: 'page-kitdelasuerte',
   templateUrl: 'kitdelasuerte.html'
 })
-export class KitdelasuertePage implements OnInit {
+export class KitdelasuertePage implements OnInit, OnDestroy {
   private amulets;
   private loading;
   private contadorAmuletos: any;
   private totalAmuletos: any;
-  private amuletosSubscribe;
+  private amuletosSubscribe: Subscription = new Subscription();;
   private contarAmuletosSubscribe;
   constructor(
     public navCtrl: NavController,
@@ -42,10 +42,25 @@ export class KitdelasuertePage implements OnInit {
   ngOnInit() {
     this.presentLoadingAmulets();
     this.fromFiretoFireSaves();
-    this.firebaseService.iudMethod();
+    
   }
 
   ionViewDidLoad() {
+  }
+  private sub_validQr: Subscription = new Subscription();
+  private sub_validAmuCap: Subscription = new Subscription();
+  private sub_toast: Subscription = new Subscription();
+  private sub_getAmulets: Subscription = new Subscription();
+  private sub_fromfiretofiresaves: Subscription = new Subscription();
+  private sub_getAmulets_reset: Subscription = new Subscription();
+  ngOnDestroy() {
+    this.sub_validQr.unsubscribe();
+    this.sub_validAmuCap.unsubscribe();
+    this.sub_toast.unsubscribe();
+    this.sub_getAmulets.unsubscribe();
+    this.sub_fromfiretofiresaves.unsubscribe();
+    this.sub_getAmulets_reset.unsubscribe();
+    this.dismissLoadingAmulets();
   }
 
   getQR() {
@@ -64,67 +79,69 @@ export class KitdelasuertePage implements OnInit {
   validarQR(qrText) {
     var amuletosActualizados = [];
     this.gameControlService.kitSuerteFlag = true;
-    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
-      (kitSuerteSave) => {
-        kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
-          if (this.gameControlService.kitSuerteFlag) {
-            (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosPersonales => {
-              if (amuletosPersonales.code == qrText) {
-                this.gameControlService.kitSuerteFlag = false;
-                if (amuletosPersonales.find) {
-                  return this.showToast("ya tienes este Amuleto", "bottom");
-                } else {
-                  (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosActualizar => {
-                    if (amuletosActualizar.code == qrText) {
-                      amuletosActualizados.push({
-                        code: amuletosActualizar.code,
-                        find: true,
-                        imgUrl: amuletosActualizar.imgUrl,
-                        name: amuletosActualizar.name,
-                        capturedDate: new Date().getTime()
-                      });
-                    } else {
-                      amuletosActualizados.push({
-                        code: amuletosActualizar.code,
-                        find: amuletosActualizar.find,
-                        imgUrl: amuletosActualizar.imgUrl,
-                        name: amuletosActualizar.name,
-                        capturedDate: amuletosActualizar.capturedDate
-                      });
-                    }
-                  });
+    this.sub_validQr.unsubscribe();
+    this.sub_validQr =
+      this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
+        (kitSuerteSave) => {
+          kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
+            if (this.gameControlService.kitSuerteFlag) {
+              (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosPersonales => {
+                if (amuletosPersonales.code == qrText) {
+                  this.gameControlService.kitSuerteFlag = false;
+                  if (amuletosPersonales.find) {
+                    return this.showToast("ya tienes este Amuleto", "bottom");
+                  } else {
+                    (kitSuerteSaveIdyAmuletos.amuletos).forEach(amuletosActualizar => {
+                      if (amuletosActualizar.code == qrText) {
+                        amuletosActualizados.push({
+                          code: amuletosActualizar.code,
+                          find: true,
+                          imgUrl: amuletosActualizar.imgUrl,
+                          name: amuletosActualizar.name,
+                          capturedDate: new Date().getTime()
+                        });
+                      } else {
+                        amuletosActualizados.push({
+                          code: amuletosActualizar.code,
+                          find: amuletosActualizar.find,
+                          imgUrl: amuletosActualizar.imgUrl,
+                          name: amuletosActualizar.name,
+                          capturedDate: amuletosActualizar.capturedDate
+                        });
+                      }
+                    });
 
-                  this.firebaseService.updateKitSuerteSaves(
-                    kitSuerteSaveIdyAmuletos.$key,
-                    { amuletos: amuletosActualizados }
-                  ).then(
-                    () => {
+                    this.firebaseService.updateKitSuerteSaves(
+                      kitSuerteSaveIdyAmuletos.$key,
+                      { amuletos: amuletosActualizados }
+                    ).then(() => {
                       this.showToast("Amuleto Capturado", "bottom");
                       setTimeout(() => {
                         this.verificarCuantosAmuletosCapturados();
                       }, 2000);
                     }
-                    );//enviarle amuletos
+                      );//enviarle amuletos
 
+                  }
                 }
-              }
-            });
-          }
-          if (this.gameControlService.kitSuerteFlag == true) {
-            return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
-          }
+              });
+            }
+            if (this.gameControlService.kitSuerteFlag == true) {
+              return this.showToast("Lo sentimos pero no corresponde a ningun amuleto", "bottom");
+            }
+          });
         });
-      }
-    );
   }
 
   showToast(message: string, position: string, pixelsY: number = (-40)) {
-    Toast.showWithOptions({
-      message: message,
-      duration: 2000,
-      position: position,
-      addPixelsY: pixelsY
-    }).subscribe(console.log);
+    this.sub_toast.unsubscribe();
+    this.sub_toast =
+      Toast.showWithOptions({
+        message: message,
+        duration: 2000,
+        position: position,
+        addPixelsY: pixelsY
+      }).subscribe(console.log);
 
   }
 
@@ -132,48 +149,53 @@ export class KitdelasuertePage implements OnInit {
     //objeto para capturar los amuletos personales
     var kitSuerteSaves = []
     //cargue los amuletos
+    this.sub_fromfiretofiresaves.unsubscribe();
+    this.sub_fromfiretofiresaves =
+      this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
+        (res) => {
+          //si no existe un espacio privado entonces creelo
+          if (res.length == 0) {
+            this.sub_getAmulets.unsubscribe();
+            this.sub_getAmulets =
+              this.firebaseService.getAmulets().subscribe(
+                (amuletos) => {
 
-    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
-      (res) => {
-        //si no existe un espacio privado entonces creelo
-        if (res.length == 0) {
-          this.firebaseService.getAmulets().subscribe(
-            (amuletos) => {
+                  amuletos.forEach(amulet => {
+                    kitSuerteSaves.push({
+                      code: amulet.code,
+                      imgUrl: amulet.imgUrl,
+                      name: amulet.name,
+                      find: false,
+                      capturedDate: 0
+                    });
+                  });
+                  this.firebaseService.pushKitSuerteSaves({
+                    uid: this.firebaseService.getuid(),
+                    amuletos: kitSuerteSaves
+                  }).then(
+                    (res) => {
 
-              amuletos.forEach(amulet => {
-                kitSuerteSaves.push({
-                  code: amulet.code,
-                  imgUrl: amulet.imgUrl,
-                  name: amulet.name,
-                  find: false,
-                  capturedDate: 0
-                });
-              });
-              this.firebaseService.pushKitSuerteSaves({
-                uid: this.firebaseService.getuid(),
-                amuletos: kitSuerteSaves
-              }).then(
-                (res) => {
-
-                  this.cargarAmuletosDesdeFirebase();
+                      this.cargarAmuletosDesdeFirebase();
+                    }
+                    );
                 }
-                );
-            }
-          );
-          //por el contrario ya tiene uno, valida que exista el espacio local
-        } else {
-          res.forEach(element => {
-            this.gameControlService.pruebaKey = element.$key;
-          });
+              );
+            //por el contrario ya tiene uno, valida que exista el espacio local
+          } else {
+            res.forEach(element => {
+              this.gameControlService.pruebaKey = element.$key;
+            });
 
-          this.cargarAmuletosDesdeFirebase();
+            this.cargarAmuletosDesdeFirebase();
+          }
+
         }
-
-      }
-    );
+      );
   }
 
   cargarAmuletosDesdeFirebase() {
+
+    this.amuletosSubscribe.unsubscribe();
     this.amuletosSubscribe = this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid()).subscribe(
       (kitSuerteSave) => {
         kitSuerteSave.forEach(kitSuerteSaveIdyAmuletos => {
@@ -181,6 +203,7 @@ export class KitdelasuertePage implements OnInit {
           this.gameControlService.amuletosDelUsuario = kitSuerteSaveIdyAmuletos.amuletos;
         });
         this.dismissLoadingAmulets();
+
       }
     );
   }
@@ -196,27 +219,6 @@ export class KitdelasuertePage implements OnInit {
 
   dismissLoadingAmulets() {
     this.loading.dismiss();
-  }
-
-  contarAmuletos() {
-
-    this.contarAmuletosSubscribe = this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
-      .subscribe(
-      (uidYamuletos) => {
-        uidYamuletos.forEach(amuletosEnFirebase => {
-          this.contadorAmuletos = 0;
-          this.totalAmuletos = 0;
-          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
-            if ((amuletosDescription.find) == true) {
-              this.contadorAmuletos++;
-            }
-            this.totalAmuletos++;
-          });
-          this.gameControlService.amuletosCapturados = this.contadorAmuletos;
-          this.gameControlService.amuletosRestantes = (this.totalAmuletos - this.contadorAmuletos)
-        });
-      }
-      );
   }
 
   verificarCuantosAmuletosCapturados() {
@@ -237,48 +239,33 @@ export class KitdelasuertePage implements OnInit {
   }
 
   validarCuantosAmuletosCapturados() {
-    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
-      .subscribe(
-      (uidYamuletos) => {
-        uidYamuletos.forEach(amuletosEnFirebase => {
-          this.contadorAmuletos = 0;
-          this.totalAmuletos = 0;
-          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
-            if ((amuletosDescription.find) == true) {
-              this.contadorAmuletos++;
-            }
-            this.totalAmuletos++;
-          });
-          if (this.contadorAmuletos == this.totalAmuletos) {
-            /*return this.gameControlService.flagEsGanador = true;*/
-            this.navCtrl.push(KitsuertewinPage)
-          } /*else {
+    this.sub_validAmuCap.unsubscribe();
+    this.sub_validAmuCap =
+      this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
+        .subscribe(
+        (uidYamuletos) => {
+          uidYamuletos.forEach(amuletosEnFirebase => {
+            this.contadorAmuletos = 0;
+            this.totalAmuletos = 0;
+            (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
+              if ((amuletosDescription.find) == true) {
+                this.contadorAmuletos++;
+              }
+              this.totalAmuletos++;
+            });
+            if (this.contadorAmuletos == this.totalAmuletos) {
+              /*return this.gameControlService.flagEsGanador = true;*/
+              this.navCtrl.push(KitsuertewinPage)
+            } /*else {
             return this.showToast('Te faltan: ' + (this.totalAmuletos - this.contadorAmuletos), 'bottom');
           }*/
-        });
-      }
-      );
+          });
+        }
+        );
   }
 
+  
   openPopover(event) {
-
-    this.firebaseService.getKitSuerteSaves(this.firebaseService.getuid())
-      .subscribe(
-      (uidYamuletos) => {
-        uidYamuletos.forEach(amuletosEnFirebase => {
-          this.contadorAmuletos = 0;
-          this.totalAmuletos = 0;
-          (amuletosEnFirebase.amuletos).forEach(amuletosDescription => {
-            if ((amuletosDescription.find) == true) {
-              this.contadorAmuletos++;
-            }
-            this.totalAmuletos++;
-          });
-          this.gameControlService.amuletosCapturados = this.contadorAmuletos;
-          this.gameControlService.amuletosRestantes = (this.totalAmuletos - this.contadorAmuletos)
-        });
-      }
-      );
     let popover = this.popoverCtrl.create(KitSuertePopoverPage,
       {},
       {
@@ -293,24 +280,30 @@ export class KitdelasuertePage implements OnInit {
         console.log("onDidDismiss")
         var amuletosLocal = [];
         if (this.gameControlService.kitSuerteFlag) {
-          this.firebaseService.getAmulets().subscribe(
-            (amuletos) => {
+          this.sub_getAmulets_reset.unsubscribe();
+          this.sub_getAmulets_reset =
+            this.firebaseService.getAmulets().subscribe(
+              (amuletos) => {
 
-              amuletos.forEach(amulet => {
-                amuletosLocal.push({
-                  code: amulet.code,
-                  imgUrl: amulet.imgUrl,
-                  name: amulet.name,
-                  find: false,
-                  capturedDate: 0
+                amuletos.forEach(amulet => {
+                  amuletosLocal.push({
+                    code: amulet.code,
+                    imgUrl: amulet.imgUrl,
+                    name: amulet.name,
+                    find: false,
+                    capturedDate: 0
+                  });
                 });
-              });
-              this.firebaseService.updateKitSuerteSaves(this.gameControlService.pruebaKey, { amuletos: amuletosLocal }).catch(() => {
-                console.log("update fallo");
-              });
+                this.firebaseService
+                  .updateKitSuerteSaves(this.gameControlService.pruebaKey, {
+                    amuletos: amuletosLocal
+                  })
+                  .catch(() => {
+                    console.log("update fallo");
+                  });
 
-            }
-          );
+              }
+            );
 
 
 

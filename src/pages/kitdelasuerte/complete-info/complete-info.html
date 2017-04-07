@@ -51,7 +51,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Acepto <a (click)="o">Terminos</a></ion-label>
-      <ion-toggle formControlName="politicas" [(ngModel)]="aceptaTerminos"></ion-toggle>
+      <ion-toggle formControlName="politicas" [(ngModel)]="User.terms"></ion-toggle>
     </ion-item>
 
     <button ion-button block type="submit" [disabled]="!register.valid">Actualizar Informacion</button>

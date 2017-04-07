@@ -42,12 +42,12 @@ export class MyApp {
       return GoogleAnalytics.startTrackerWithId('UA-92560068-1')
         .then((_success) => {
           console.log('Google analytics is ready now');
-          alert("Google analytics is ready now");
+          
           // Tracker is ready
           // You can now track pages or set additional information such as AppVersion or UserId
           return GoogleAnalytics.enableUncaughtExceptionReporting(true)
         }).then((_success) => {
-          alert("starttrackerwithid success");
+          
         })
         .catch(e => {
           console.log('Error starting GoogleAnalytics', e);

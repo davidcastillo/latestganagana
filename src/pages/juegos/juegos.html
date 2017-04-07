@@ -22,4 +22,11 @@
       You navigated here from <b>{{selectedGame.title}}</b>
     </div>
   </ion-card>
+  <ion-card *ngIf="firebaseService.message">
+    <ion-list>
+      <ion-list-header color="ganagana">
+        {{firebaseService.message}}
+      </ion-list-header>
+    </ion-list>
+  </ion-card>
 </ion-content>

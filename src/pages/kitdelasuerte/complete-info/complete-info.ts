@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-
-
 //page
+import { JuegosPage } from '../../juegos/juegos';
 import { KitdelasuertePage } from '../kitdelasuerte';
-
 //service 
 import { FirebaseService, IUser } from '../../../app/services/firebase.service';
 import { AlertController, PopoverController } from 'ionic-angular';
@@ -26,7 +24,8 @@ export class CompleteInfoPage {
     name: '',
     mobile: '',
     city: '',
-    date_of_birth: ''
+    date_of_birth: '',
+    terms: false
   };
 
   constructor(
@@ -59,13 +58,8 @@ export class CompleteInfoPage {
     console.log(this.User);
     this.firebaseService.updatePersonalInfo(this.User).then(
       () => {
-        this.navCtrl.pop().then(
-          () => {
-            this.navCtrl.push(KitdelasuertePage);
-          }
-        ).catch((err) => {
-          console.log('Error navCtrl: ' + err);
-        });
+        this.firebaseService.message = 'Información Registrada';
+        this.navCtrl.pop();
       }
     )
       .catch(

@@ -23,14 +23,12 @@ export class FirebaseService {
   status = {}
   isLogged: boolean = false;
   uidVar: string;
+  message: string;
 
 
   constructor(private angFire: AngularFire, public auth: AngularFireAuth) {
     console.log("se ha instanciado firebaseservice");
     this.authState = auth.getAuth();
-    auth.subscribe((state: FirebaseAuthState) => {
-      this.authState = state;
-    });
     // If we navigated to this page, we will have an item available as a nav param
     this.player = {
       name: "",
@@ -202,6 +200,7 @@ export interface IUser {
   mobile?: string,
   city?: string,
   date_of_birth?: string,
+  terms?: boolean;
   amulet_0?: string,
   amulet_1?: string,
   amulet_2?: string,

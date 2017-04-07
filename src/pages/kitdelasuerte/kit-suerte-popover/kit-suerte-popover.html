@@ -1,4 +1,3 @@
-
 <!--  <ion-grid>
     <ion-row>
       <ion-col width-50>
@@ -14,38 +13,43 @@
     </ion-row>
   </ion-grid>-->
 
-  <ion-segment [(ngModel)]="tapToShow" color="ganagana">
-    <ion-segment-button value="instrucciones">
-      <ion-icon name="help"></ion-icon>
-    </ion-segment-button>
-    <ion-segment-button value="opciones">
-      <ion-icon name="bookmark"></ion-icon>
-    </ion-segment-button>
-  </ion-segment>
+<ion-segment [(ngModel)]="tapToShow" color="ganagana">
+  <ion-segment-button value="instrucciones">
+    <ion-icon name="help"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="opciones">
+    <ion-icon name="bookmark"></ion-icon>
+  </ion-segment-button>
+</ion-segment>
 
-  <div *ngIf="tapToShow == 'instrucciones'">
-    <ion-card>
-      <ion-card-header>
-        Reglas del juego
-      </ion-card-header>
-      <ion-card-content>
-        <p>
-              Ganar éste juego es muy fácil, lo único que debes hacer es acercarte a cualquiera de nuestros puntos GanaGana 
-y escanear con tu celular el código QR en los posters promocionales de nuestra app, así capturarás un amuleto 
-de la suerte, debes capturar todos los amuletos que están distribuidos en distintos puntos de la ciudad, una 
-vez hayas capturado todos los amuletos serás el feliz ganador de "1.000 millones de pesos". ¡Ánimo! Sal y 
-captura todos los amuletos.
-        </p>
-      </ion-card-content>
-    </ion-card>
-  </div>
+<div *ngIf="tapToShow == 'instrucciones'">
+  <ion-card>
+    <ion-card-header>
+      Reglas del juego
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Ganar éste juego es muy fácil, lo único que debes hacer es acercarte a cualquiera de nuestros puntos GanaGana y escanear
+        con tu celular el código QR en los posters promocionales de nuestra app, así capturarás un amuleto de la suerte,
+        debes capturar todos los amuletos que están distribuidos en distintos puntos de la ciudad, una vez hayas capturado
+        todos los amuletos serás el feliz ganador. ¡Ánimo! Sal y captura todos los amuletos.
+      </p>
+    </ion-card-content>
+  </ion-card>
+</div>
 
-  <ion-item-group *ngIf="tapToShow == 'opciones'">
-    <!--Avances del jugador-->
-    <ion-item-divider color="ganagana">Amuletos</ion-item-divider>
-    <ion-item>Capturados<div item-right>{{amuletosCapturados}}</div></ion-item>
-    <ion-item>Restantes<div item-right>{{amuletosRestantes}}</div></ion-item>
-    <!--Opciones avanzadas-->
-    <ion-item-divider color="ganagana">Juego</ion-item-divider>
-    <ion-item (click)="showConfirmReset()">Reiniciar</ion-item>
-  </ion-item-group>
+<ion-item-group *ngIf="tapToShow == 'opciones'">
+  <!--Avances del jugador-->
+  <ion-item-divider color="ganagana">Amuletos</ion-item-divider>
+  <ion-item>Capturados
+    <div item-right>
+      {{amuletosCapturados}}
+    </div>
+  </ion-item>
+  <ion-item>Restantes
+    <div item-right>{{amuletosRestantes}}</div>
+  </ion-item>
+  <!--Opciones avanzadas-->
+  <ion-item-divider color="ganagana">Juego</ion-item-divider>
+  <ion-item (click)="showConfirmReset()">Reiniciar</ion-item>
+</ion-item-group>
